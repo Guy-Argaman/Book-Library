@@ -1,0 +1,546 @@
+body {
+    background: url(https://tinyurl.com/5axytknj);
+    background-size: cover;
+}
+
+.title {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    background-color: black;
+    height: 50px;
+    font-size: 35px;
+    text-align: left;
+    letter-spacing: 4px;
+    user-select: none;
+}
+
+header {
+    background-color: grey;
+    color: white;
+    font-family: fantasy;
+    font-size: 25px;
+    text-align: center;
+    height: 35px;
+    transition: all 0.8s ease-in-out;
+}
+
+/* PLUS ADD BUTTON START */
+
+.plus {
+    display: grid;
+    transition: all 0.8s ease-in-out;
+    background-color: rgb(218, 197, 197);
+    border: solid;
+    height: 150px;
+    width: 150px;
+    box-shadow: 0 0 5px 5px rgb(128, 110, 128);
+    cursor: pointer;
+}
+
+/* INNER TEXT OF ADD BUTTON */
+
+.plus span {
+    transition-duration: 1s;
+    align-self: center;
+    justify-self: center;
+    font-size: 100px;
+    font-family: sans-serif;
+    user-select: none;
+}
+
+/* HOVERING OVER THE .PLUS DIV CHANGES THE SCALE ETC */
+
+.plus:hover {
+    border-color: rgb(78, 69, 78);
+    border-radius: 10px;
+    box-shadow: 0 0 4px 5px rgb(128, 110, 128);
+    transform: scale(1.5);
+    /* height: 300px; */
+    /* width: 300px; */
+    background-color: purple;
+}
+
+/* HOVERING OVER THE .PLUS DIV CHANGES THE INNER TEXT AS WELL */
+
+.plus:hover span {
+    transition-duration: 1s;
+    transform: rotateZ(90deg);
+}
+
+.sidenav {
+    transition: all 1.5s ease-in-out;
+    height: 100%;
+    margin-top: 58px;
+    /* Full-height: remove this if you want "auto" height */
+    width: 35px;
+    color: transparent;
+    /* Set the width of the sidebar */
+    position: fixed;
+    float: left;
+    /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1;
+    /* Stay on top */
+    top: 0;
+    /* Stay at the top */
+    right: 0;
+    background-color: transparent;
+    /* Black */
+    overflow-x: hidden;
+    /* Disable horizontal scroll */
+    padding-top: 20px;
+    user-select: none;
+}
+
+.sidenav header {
+    text-align: left;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.sidenav:hover {
+    transition: all 1s ease-in-out;
+    width: 160px;
+    background-color: #111;
+    color: grey;
+    cursor: default;
+}
+
+/* The navigation menu links */
+
+.sidenav .item {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    text-align: left;
+    font-size: 20px;
+}
+
+.sidenav .item:hover {
+    color: red;
+}
+
+.sidenav .hr {
+    display: none;
+}
+
+.sidenav #item4 {
+    margin-top: 500px;
+}
+
+/* NEW BOOK ELEMENTS / PARAMETERS */
+
+.book-head {
+    text-align: center;
+    font-family: fantasy;
+    font-size: 40px;
+    background-color: purple;
+    border: solid;
+    user-select: none;
+    border-radius: 10px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.book-container {
+    position: fixed;
+    z-index: 20;
+    transform: scale(1.5);
+    margin-top: 150px;
+    margin-left: 500px;
+    box-shadow: 0 0 4px 5px rgb(129, 62, 129);
+    border: solid;
+    border-radius: 15px;
+    block-size: 10rem;
+    height: 346px;
+    width: 300px;
+    box-sizing: content-box;
+    background-color: rgba(0, 0, 0, 0.876);
+    transition: all .5s;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.opacity {
+    transition: all .5s;
+    opacity: 1;
+    visibility: visible;
+}
+
+#date-label {
+    margin-left: 100px;
+    color: grey;
+    transform: translate(0.25rem, -3.45rem);
+}
+
+#book-label {
+    font-size: 15px;
+}
+
+#pages-label {
+    font-size: 15px;
+}
+
+#max-pages-label {
+    font-size: 15px;
+}
+
+label {
+    display: block;
+    font-family: fantasy;
+    transform: translate(0, -2.75rem);
+    color: #999;
+    transform: translate(0.25rem, -1.5rem);
+    font-size: 19px;
+    transition: all 0.2s ease-out;
+    transition-duration: 0.5s;
+    user-select: none;
+}
+
+#book-name {
+    margin-top: 30px;
+    border: 0;
+    font-size: 20px;
+    margin-left: 10px;
+    color: rgb(173, 86, 101);
+    background: transparent;
+    border-bottom: 2px solid rgb(15, 14, 15)
+}
+
+#pages {
+    margin-top: 10px;
+    border: 0;
+    color: rgb(173, 86, 101);
+    width: 150px;
+    background: transparent;
+    border-bottom: 2px solid rgb(15, 14, 15)
+}
+
+#max-pages {
+    margin-top: 10px;
+    border: 0;
+    width: 150px;
+    color: rgb(173, 86, 101);
+    background: transparent;
+    border-bottom: 2px solid rgb(15, 14, 15)
+}
+
+#date {
+    margin-top: 30px;
+    border: 0;
+    color: rgb(173, 86, 101);
+    font-size: 20px;
+    margin-left: 50px;
+    background: transparent;
+    border-bottom: 2px solid rgb(15, 14, 15)
+}
+
+#date:focus+label, input:not(:placeholder-shown)+label {
+    color: pink;
+}
+
+.blur {
+    transition: all .5s ease-in-out;
+    filter: blur(3px)
+}
+
+input:focus+label, input:not(:placeholder-shown)+label {
+    color: pink;
+    transform: rotateX(90deg);
+    transform: translate(0.25rem, -3rem);
+}
+
+.btn-add {
+    box-sizing: border-box;
+    padding: 8px 8px;
+    font-size: 14px;
+    cursor: pointer;
+    width: 146px;
+    color: #fff;
+    background-color: rgb(20, 75, 37);
+    box-shadow: 0 -4px 0 green;
+    border: 0;
+    border-radius: 12px;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.btn-cancel {
+    box-sizing: border-box;
+    padding: 8px 8px;
+    width: 150px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    color: #fff;
+    background-color: rgb(104, 18, 18);
+    box-shadow: 0 -4px 0 brown;
+    border: 0;
+    border-radius: 12px;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.btn-add:hover {
+    background-color: rgb(20, 144, 41);
+}
+
+.btn-cancel:hover {
+    background-color: rgb(241, 19, 19);
+}
+
+.btn-element {
+    margin-top: 10.5px;
+    /* margin-left: -2px; */
+    user-select: none;
+}
+
+/* NEW CARD ELEMENTS / PARAMETERS */
+
+.card {
+    display: grid;
+    transform: scale(1.3);
+    box-shadow: 0 0 4px 5px rgb(128, 110, 128);
+    border: solid;
+    border-radius: 15px;
+    height: 300px;
+    width: 300px;
+    box-sizing: content-box;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.876);
+    transition: all .5s;
+}
+
+.btn-edit {
+    box-sizing: border-box;
+    padding: 8px 8px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    width: 146px;
+    color: #fff;
+    background-color: rgb(233, 101, 13);
+    box-shadow: 0 -4px 0 orange;
+    border: none;
+    border-radius: 11px;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.btn-remove {
+    margin-top: 45px;
+    box-sizing: border-box;
+    padding: 8px 8px;
+    width: 150px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    color: #fff;
+    background-color: rgb(104, 18, 18);
+    box-shadow: 0 -4px 0 brown;
+    border: none;
+    border-radius: 11px;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.btn-remove:active {
+    transition: all .5s;
+    box-shadow: 1px 0px 1px 0px rgb(71, 39, 39);
+    color: red;
+    background-color: brown;
+}
+
+h1 {
+    background-color: purple;
+    text-align: center;
+    font-size: 25px;
+    margin-top: 0;
+    border: 0;
+    border-radius: 10px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.card-pages-head {
+    border-radius: 0;
+}
+
+.card-max-pages-head {
+    border-radius: 0;
+    margin-top: 10px;
+}
+
+.card-date {
+    position: fixed;
+    font-size: 15px;
+    text-align: left;
+    margin-top: -2px;
+    text-shadow: 1px 1px 1px purple;
+}
+
+.card-title {
+    font-size: 15px;
+    text-shadow: 1px 1px 1px white;
+    text-align: center;
+}
+
+.card-pages {
+    position: fixed;
+    margin-left: 135px;
+    margin-top: -5px;
+}
+
+.card-max-pages {
+    position: fixed;
+    margin-left: 135px;
+    margin-top: -5px;
+}
+
+.btn-add-max-pages {
+    margin-left: 60px;
+    background-color: green;
+    border: 0;
+    cursor: pointer;
+}
+
+.btn-remove-max-pages {
+    background-color: red;
+    margin-left: 100px;
+    border: 0;
+    cursor: pointer;
+}
+
+.btn-add-pages {
+    margin-left: 60px;
+    background-color: green;
+    border: 0;
+    cursor: pointer;
+}
+
+.btn-remove-pages {
+    background-color: red;
+    margin-left: 100px;
+    border: 0;
+    cursor: pointer;
+}
+
+.btn-container {
+    margin-top: -5px;
+}
+
+.wrapper {
+    transition: all 2s;
+    display: grid;
+    margin: 100px 100px;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: space-around;
+    gap: 200px;
+    opacity: 1;
+}
+
+.wrapper div:nth-child(1) {
+    grid-column: 3;
+    grid-row: 1;
+}
+
+.btn-add:active {
+    background-color: rgb(19, 255, 19);
+}
+
+.btn-cancel:active {
+    background-color: red;
+}
+
+.delete-msg {
+    transition: all 2s ease-in-out;
+    font-size: 15px;
+    color: red;
+    text-align: center;
+    margin-top: -60px;
+    opacity: 1;
+    border: double;
+    width: 250px;
+}
+
+/* CONFIRMATION FOR DELETION MESSAGE */
+
+.msg-container {
+    transition: all .5s;
+    position: fixed;
+    z-index: 20;
+    transform: scale(1.5);
+    margin-top: 150px;
+    margin-left: 500px;
+    box-shadow: 0 0 4px 5px rgb(192, 15, 15);
+    border: solid;
+    border-radius: 15px;
+    block-size: 10rem;
+    height: 98px;
+    width: 300px;
+    box-sizing: content-box;
+    background-color: rgba(61, 22, 22, 0.876);
+    opacity: 0;
+    visibility: hidden;
+    cursor: default;
+    user-select: none;
+}
+
+.msg-head {
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+}
+
+.btn-yes {
+    transition: all .5s;
+    box-sizing: border-box;
+    padding: 8px 8px;
+    font-size: 14px;
+    cursor: pointer;
+    width: 146px;
+    color: #fff;
+    background-color: rgb(20, 75, 37);
+    box-shadow: 0 -4px 0 green;
+    border: 0;
+    border-radius: 12px;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.btn-no {
+    transition: all .5s;
+    box-sizing: border-box;
+    padding: 8px 8px;
+    width: 150px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    color: #fff;
+    background-color: rgb(104, 18, 18);
+    box-shadow: 0px -4px 0px 0px brown;
+    border: 0;
+    border-radius: 12px;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.btn-no:active {
+    transition: all .5s;
+    box-shadow: 1px 0px 1px 2px rgb(71, 39, 39);
+    color: red;
+    background-color: brown;
+}
+
+.btn-yes:active {
+    transition: all .2s;
+    box-shadow: 1px 0px 1px 2px green;
+    color: rgb(1, 255, 1);
+    background-color: rgb(36, 87, 52);
+}
+
+.msg-btns {
+    margin-top: 50px;
+}

@@ -1,0 +1,69 @@
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="./css/stylesheet.css">
+    <title>Book Library</title>
+</head>
+
+<body>
+    <header class="title">
+        Library
+    </header>
+    <div class="sidenav">
+        <header></header>
+        <div id="item1" class="item">Books:
+            <hr class="hr">
+        </div>
+        <div id="item2" class="item">Completed Books:
+            <hr class="hr">
+        </div>
+        <div id="item3" class="item">Total Pages:
+            <hr class="hr">
+        </div>
+
+        <div id="item4" class="item">MADE BY GUY ARGAMAN</div>
+    </div>
+    <div class="book-container">
+        <div class="book-head">ADD NEW BOOK</div>
+        <div class="content">
+            <div>
+                <input type="text" maxlength="28" id="book-name" placeholder=" " required>
+                <label id="book-label" for="book-name">Book Title</label>
+            </div>
+            <div>
+                <input type="number" onkeydown="return event.keyCode !== 69" id="pages" placeholder=" " required>
+                <label id="pages-label" for="pages" min="1">Number of Pages</label>
+            </div>
+            <div>
+                <input type="number" onkeydown="return event.keyCode !== 69" id="max-pages" placeholder=" " required>
+                <label id="max-pages-label" for="max-pages" min="1">Total Pages</label>
+            </div>
+            <div>
+                <input type="date" id="date" placeholder=" " required>
+                <label id="date-label">Last Updated</label>
+            </div>
+            <div class="btn-element">
+                <button class="btn-add" onclick="addCard()">ADD</button>
+                <button class="btn-cancel">CANCEL</button>
+            </div>
+        </div>
+    </div>
+    <div class="msg-container">
+        <div class="msg-head">Would you like to remove this book?</div>
+        <div class="msg-content">
+            <div class="msg-btns">
+                <button class="btn-yes" onclick="removeCardConfirm()">Oh, yes</button>
+                <button class="btn-no" onclick="exitModal()">NO!</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <div class="plus" onclick="showModal(this)"><span>+</span></div>
+    </div>
+    <script src="./js/main.js"></script>
+</body>
+
+</html>
+
+<!-- WHEN YOU PRESS ADD, MAKE A FUNCTION TO FIRST MAKE A CARD, AND ONLY THEN INSERT THE INFORMATION -->
