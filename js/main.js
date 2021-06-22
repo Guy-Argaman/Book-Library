@@ -36,27 +36,15 @@ header.innerText = '<<';
 exitModal();
 
 function adjustCursor() {
-    let addBtn = document.querySelector('.plus');
     let modal = document.querySelector('.book-container');
-    let removeBtn = document.querySelectorAll('.btn-remove');
-    let editBtn = document.querySelectorAll('.btn-edit');
     let msg = document.querySelector('.msg-container');
+    let body = document.querySelector('body');
     if (modal.classList.contains('opacity') || msg.style.visibility === 'visible') {
-        addBtn.style.cursor = 'default';
-        for (let i = 0; i < removeBtn.length; i++) {
-            removeBtn[i].style.cursor = 'default';
-        }
-        for (let j = 0; j < editBtn.length; j++) {
-            editBtn[j].style.cursor = 'default';
-        }
+        body.style.pointerEvents = 'none';
+        modal.style.pointerEvents = 'all';
+        msg.style.pointerEvents = 'all';
     } else {
-        addBtn.style.cursor = 'pointer';
-        for (let i = 0; i < removeBtn.length; i++) {
-            removeBtn[i].style.cursor = 'pointer';
-        }
-        for (let j = 0; j < editBtn.length; j++) {
-            editBtn[j].style.cursor = 'pointer';
-        }
+        body.style.pointerEvents = 'all';
     }
 }
 
@@ -89,7 +77,7 @@ function exitModal() {
         if (event.target === addBook && addBook.innerText !== '') {
             return;
         }
-        if (event.target == wrapper || event.target == msgBtnNo || event.target == btnCancel || event.target == document.body || event.target == elTitle || event.target == addBook) {
+        if (event.target == msgBtnNo || event.target == btnCancel) {
             elTitle.classList.remove('blur');
             modal.classList.remove('opacity');
             sidenav.classList.remove('blur');
@@ -251,14 +239,14 @@ function createCard(book) {
             <h1 class="card-head">BOOK TITLE</h1>
             <h2 class="card-title">${book.title}</h2>
         </div>
-        <div>
+        <div class="card-btns-pages">
             <h1 class="card-pages-head">PAGE</h1>
             <h2 class="card-pages">${book.pages}</h2>
             <button class="btn-add-pages" onclick="addPages()">➕</button>
             <button class="btn-remove-pages" onclick="reducePages()">➖</button>
 
         </div>
-        <div>
+        <div class="card-btns-max-pages">
             <h1 class="card-max-pages-head">MAX PAGES</h1>
             <h2 class="card-max-pages">${book.maxPages}</h2>
             <button class="btn-add-max-pages" onclick="addMaxPages()">➕</button>

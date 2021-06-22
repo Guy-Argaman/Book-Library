@@ -307,6 +307,7 @@ input:focus+label, input:not(:placeholder-shown)+label {
     color: white;
     background-color: rgba(0, 0, 0, 0.876);
     transition: all .5s;
+    user-select: none;
 }
 
 .btn-edit {
@@ -327,6 +328,7 @@ input:focus+label, input:not(:placeholder-shown)+label {
 }
 
 .btn-remove {
+    transition: all .2s;
     margin-top: 45px;
     box-sizing: border-box;
     padding: 8px 8px;
@@ -345,7 +347,7 @@ input:focus+label, input:not(:placeholder-shown)+label {
 }
 
 .btn-remove:active {
-    transition: all .5s;
+    transition: all .2s;
     box-shadow: 1px 0px 1px 0px rgb(71, 39, 39);
     color: red;
     background-color: brown;
