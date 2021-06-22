@@ -57,6 +57,7 @@ function showModal() {
     if (msg.style.visibility === 'visible') {
         return;
     }
+    modal.classList.remove('blur');
     sidenav.classList.add('blur');
     elTitle.classList.add('blur');
     wrapper.classList.add('blur');
@@ -65,26 +66,15 @@ function showModal() {
 }
 
 function exitModal() {
-    let msg = document.querySelector('.msg-container');
     let msgBtnNo = document.querySelector('.btn-no');
-    let modal = document.querySelector('.book-container');
     let btnCancel = document.querySelector('.btn-cancel');
-    let sidenav = document.querySelector('.sidenav');
-    let elTitle = document.querySelector('.title');
     let addBook = document.querySelector('.btn-add');
-    let wrapper = document.querySelector('.wrapper');
     window.onclick = function (event) {
         if (event.target === addBook && addBook.innerText !== '') {
             return;
         }
         if (event.target == msgBtnNo || event.target == btnCancel) {
-            elTitle.classList.remove('blur');
-            modal.classList.remove('opacity');
-            sidenav.classList.remove('blur');
-            wrapper.classList.remove('blur');
-            msg.style.visibility = 'hidden';
-            msg.style.opacity = '0';
-            adjustCursor();
+            removeBlur();
         }
     }
 }
@@ -92,31 +82,38 @@ function exitModal() {
 function removeBlur() {
     let modal = document.querySelector('.book-container');
     let sidenav = document.querySelector('.sidenav');
+    let msg = document.querySelector('.msg-container');
     let elTitle = document.querySelector('.title');
     let wrapper = document.querySelector('.wrapper');
     elTitle.classList.remove('blur');
     modal.classList.remove('opacity');
     sidenav.classList.remove('blur');
     wrapper.classList.remove('blur');
+    msg.style.visibility = 'hidden';
+    msg.style.opacity = '0';
     adjustCursor();
 }
 
-function removeCard(btn) {
+function addBlur() {
     let msg = document.querySelector('.msg-container');
     let modal = document.querySelector('.book-container');
     let sidenav = document.querySelector('.sidenav');
     let elTitle = document.querySelector('.title');
     let wrapper = document.querySelector('.wrapper');
-    let addBook = document.querySelector('.btn-add');
-    if (modal.classList.contains('opacity')) {
-        return;
-    }
     elTitle.classList.add('blur');
     sidenav.classList.add('blur');
     wrapper.classList.add('blur');
     msg.style.visibility = 'visible';
     msg.style.opacity = '1';
     adjustCursor();
+}
+
+function removeCard(btn) {
+    let modal = document.querySelector('.book-container');
+    if (modal.classList.contains('opacity')) {
+        return;
+    }
+    addBlur();
     // let newDiv = document.createElement('div');
     // let btnParent = btn.parentNode;
     // btnParent.appendChild(newDiv);
