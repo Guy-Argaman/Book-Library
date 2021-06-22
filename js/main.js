@@ -35,24 +35,14 @@ header.innerText = '<<';
 // functions called
 exitModal();
 
-function switchCursor() {
+function adjustCursor() {
     let addBtn = document.querySelector('.plus');
-    let modal = document.querySelector('.book-container');
-    if (modal.classList.contains('opacity')) {
-        addBtn.style.cursor = 'default';
-    } else {
-        addBtn.style.cursor = 'pointer';
-    }
-}
-
-function adjustCursorCards() {
     let modal = document.querySelector('.book-container');
     let removeBtn = document.querySelectorAll('.btn-remove');
     let editBtn = document.querySelectorAll('.btn-edit');
-    if (removeBtn === null || editBtn === null) {
-        return;
-    }
-    if (modal.classList.contains('opacity')) {
+    let msg = document.querySelector('.msg-container');
+    if (modal.classList.contains('opacity') || msg.style.visibility === 'visible') {
+        addBtn.style.cursor = 'default';
         for (let i = 0; i < removeBtn.length; i++) {
             removeBtn[i].style.cursor = 'default';
         }
@@ -60,6 +50,7 @@ function adjustCursorCards() {
             editBtn[j].style.cursor = 'default';
         }
     } else {
+        addBtn.style.cursor = 'pointer';
         for (let i = 0; i < removeBtn.length; i++) {
             removeBtn[i].style.cursor = 'pointer';
         }
@@ -68,12 +59,6 @@ function adjustCursorCards() {
         }
     }
 }
-
-function pointerCursor() {
-    let addBtn = document.querySelector('.plus');
-    addBtn.style.cursor = 'pointer';
-}
-
 
 function showModal() {
     let modal = document.querySelector('.book-container');
@@ -88,8 +73,7 @@ function showModal() {
     elTitle.classList.add('blur');
     wrapper.classList.add('blur');
     modal.classList.add('opacity');
-    switchCursor();
-    adjustCursorCards();
+    adjustCursor();
 }
 
 function exitModal() {
@@ -112,8 +96,7 @@ function exitModal() {
             wrapper.classList.remove('blur');
             msg.style.visibility = 'hidden';
             msg.style.opacity = '0';
-            switchCursor();
-            adjustCursorCards();
+            adjustCursor();
         }
     }
 }
@@ -127,7 +110,7 @@ function removeBlur() {
     modal.classList.remove('opacity');
     sidenav.classList.remove('blur');
     wrapper.classList.remove('blur');
-    switchCursor();
+    adjustCursor();
 }
 
 function removeCard(btn) {
@@ -145,6 +128,7 @@ function removeCard(btn) {
     wrapper.classList.add('blur');
     msg.style.visibility = 'visible';
     msg.style.opacity = '1';
+    adjustCursor();
     // let newDiv = document.createElement('div');
     // let btnParent = btn.parentNode;
     // btnParent.appendChild(newDiv);
@@ -257,7 +241,6 @@ function addCard() {
     modal.classList.remove('opacity');
     removeBlur();
     resetInputs();
-    adjustCursorCards();
 }
 
 function createCard(book) {
