@@ -142,8 +142,8 @@ header {
     position: fixed;
     z-index: 20;
     transform: scale(1.5);
-    margin-top: 150px;
-    margin-left: 500px;
+    margin-top: 200px;
+    margin-left: 700px;
     box-shadow: 0 0 4px 5px rgb(129, 62, 129);
     border: solid;
     border-radius: 15px;
@@ -472,8 +472,8 @@ h1 {
     position: fixed;
     z-index: 20;
     transform: scale(1.5);
-    margin-top: 150px;
-    margin-left: 500px;
+    margin-top: 250px;
+    margin-left: 750px;
     box-shadow: 0 0 4px 5px rgb(192, 15, 15);
     border: solid;
     border-radius: 15px;
@@ -491,7 +491,7 @@ h1 {
 .msg-head {
     margin: 0 auto;
     text-align: center;
-    color: white;
+    color: whitesmoke;
 }
 
 .btn-yes {
@@ -529,18 +529,18 @@ h1 {
     border-top-right-radius: 0;
 }
 
-.btn-no:active {
-    transition: all .5s;
-    box-shadow: 1px 0px 1px 2px rgb(71, 39, 39);
-    color: red;
-    background-color: brown;
-}
-
 .btn-yes:active {
     transition: all .2s;
     box-shadow: 1px 0px 1px 2px green;
     color: rgb(1, 255, 1);
     background-color: rgb(36, 87, 52);
+}
+
+.btn-no:active {
+    transition: all .2s;
+    box-shadow: 1px 0px 1px 2px rgb(71, 39, 39);
+    color: red;
+    background-color: brown;
 }
 
 .msg-btns {

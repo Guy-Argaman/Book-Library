@@ -32,9 +32,6 @@ class Book {
 let header = document.querySelector('.sidenav header');
 header.innerText = '<<';
 
-// functions called
-exitModal();
-
 function adjustCursor() {
     let modal = document.querySelector('.book-container');
     let msg = document.querySelector('.msg-container');
@@ -57,7 +54,6 @@ function showModal() {
     if (msg.style.visibility === 'visible') {
         return;
     }
-    modal.classList.remove('blur');
     sidenav.classList.add('blur');
     elTitle.classList.add('blur');
     wrapper.classList.add('blur');
@@ -68,11 +64,7 @@ function showModal() {
 function exitModal() {
     let msgBtnNo = document.querySelector('.btn-no');
     let btnCancel = document.querySelector('.btn-cancel');
-    let addBook = document.querySelector('.btn-add');
     window.onclick = function (event) {
-        if (event.target === addBook && addBook.innerText !== '') {
-            return;
-        }
         if (event.target == msgBtnNo || event.target == btnCancel) {
             removeBlur();
         }
@@ -96,7 +88,6 @@ function removeBlur() {
 
 function addBlur() {
     let msg = document.querySelector('.msg-container');
-    let modal = document.querySelector('.book-container');
     let sidenav = document.querySelector('.sidenav');
     let elTitle = document.querySelector('.title');
     let wrapper = document.querySelector('.wrapper');
@@ -131,7 +122,6 @@ function removeCard(btn) {
 }
 
 function removeCardConfirm() {
-
 
 }
 
