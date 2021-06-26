@@ -122,11 +122,13 @@ header {
 
 .sidenav #item4 {
     margin-top: 500px;
+    font-size: 15px;
 }
 
 /* NEW BOOK ELEMENTS / PARAMETERS */
 
 .book-head {
+    display: grid;
     text-align: center;
     font-family: fantasy;
     font-size: 40px;
@@ -139,8 +141,9 @@ header {
 }
 
 .book-container {
+    display: grid;
     position: fixed;
-    z-index: 20;
+    z-index: 1;
     transform: scale(1.5);
     margin-top: 200px;
     margin-left: 700px;
@@ -157,37 +160,19 @@ header {
     visibility: hidden;
 }
 
-.opacity {
-    transition: all .5s;
-    opacity: 1;
-    visibility: visible;
-}
-
 #date-label {
-    margin-left: 100px;
+    margin: 0 auto;
     color: grey;
-    transform: translate(0.25rem, -3.45rem);
-}
-
-#book-label {
-    font-size: 15px;
-}
-
-#pages-label {
-    font-size: 15px;
-}
-
-#max-pages-label {
-    font-size: 15px;
+    transform: translate(0.25rem, -3.25rem);
 }
 
 label {
-    display: block;
+    display: grid;
     font-family: fantasy;
     transform: translate(0, -2.75rem);
     color: #999;
     transform: translate(0.25rem, -1.5rem);
-    font-size: 19px;
+    font-size: 15px;
     transition: all 0.2s ease-out;
     transition-duration: 0.5s;
     user-select: none;
@@ -226,7 +211,9 @@ label {
     border: 0;
     color: rgb(173, 86, 101);
     font-size: 20px;
-    margin-left: 50px;
+    margin: 0 auto;
+    /* margin-top: 10px; */
+    /* margin-right: 20px; */
     background: transparent;
     border-bottom: 2px solid rgb(15, 14, 15)
 }
@@ -251,7 +238,7 @@ input:focus+label, input:not(:placeholder-shown)+label {
     padding: 8px 8px;
     font-size: 14px;
     cursor: pointer;
-    width: 146px;
+    width: 150px;
     color: #fff;
     background-color: rgb(20, 75, 37);
     box-shadow: 0 -4px 0 green;
@@ -288,8 +275,8 @@ input:focus+label, input:not(:placeholder-shown)+label {
 }
 
 .btn-element {
-    margin-top: 10.5px;
-    /* margin-left: -2px; */
+    display: flex;
+    align-items: flex-end;
     user-select: none;
 }
 
@@ -310,13 +297,18 @@ input:focus+label, input:not(:placeholder-shown)+label {
     user-select: none;
 }
 
+.content {
+    display: grid;
+}
+
 .btn-edit {
+    transition: all .2s;
     box-sizing: border-box;
     padding: 8px 8px;
     font-size: 14px;
     cursor: pointer;
     text-align: center;
-    width: 146px;
+    width: 150px;
     color: #fff;
     background-color: rgb(233, 101, 13);
     box-shadow: 0 -4px 0 orange;
@@ -329,7 +321,6 @@ input:focus+label, input:not(:placeholder-shown)+label {
 
 .btn-remove {
     transition: all .2s;
-    margin-top: 45px;
     box-sizing: border-box;
     padding: 8px 8px;
     width: 150px;
@@ -353,8 +344,17 @@ input:focus+label, input:not(:placeholder-shown)+label {
     background-color: brown;
 }
 
+.btn-edit:active {
+    transition: all .2s;
+    box-shadow: 1px 0px 1px 0px rgb(71, 39, 39);
+    color: orange;
+    background-color: rgb(100, 74, 25);
+}
+
 h1 {
-    background-color: purple;
+    display: grid;
+    background-color: black;
+    color: white;
     text-align: center;
     font-size: 25px;
     margin-top: 0;
@@ -364,43 +364,70 @@ h1 {
     border-bottom-right-radius: 0;
 }
 
+.card-head {
+    align-items: center;
+}
+
 .card-pages-head {
     border-radius: 0;
+    align-items: center;
 }
 
 .card-max-pages-head {
     border-radius: 0;
-    margin-top: 10px;
+    align-items: center;
 }
 
 .card-date {
     position: fixed;
     font-size: 15px;
-    text-align: left;
-    margin-top: -2px;
+    justify-self: right;
+    margin-top: 39px;
     text-shadow: 1px 1px 1px purple;
 }
 
 .card-title {
-    font-size: 15px;
+    display: grid;
+    font-size: 20px;
     text-shadow: 1px 1px 1px white;
     text-align: center;
 }
 
+.card-btns-pages {
+    display: flex;
+    gap: 10px;
+    justify-items: center;
+    justify-content: center;
+    justify-self: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.card-btns-max-pages {
+    display: flex;
+    gap: 10px;
+    justify-items: center;
+    justify-content: center;
+    justify-self: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
 .card-pages {
-    position: fixed;
-    margin-left: 135px;
-    margin-top: -5px;
+    justify-items: center;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
 }
 
 .card-max-pages {
-    position: fixed;
-    margin-left: 135px;
-    margin-top: -5px;
+    justify-items: center;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
 }
 
 .btn-add-max-pages {
-    margin-left: 60px;
     background-color: green;
     border: 0;
     cursor: pointer;
@@ -408,13 +435,11 @@ h1 {
 
 .btn-remove-max-pages {
     background-color: red;
-    margin-left: 100px;
     border: 0;
     cursor: pointer;
 }
 
 .btn-add-pages {
-    margin-left: 60px;
     background-color: green;
     border: 0;
     cursor: pointer;
@@ -422,13 +447,16 @@ h1 {
 
 .btn-remove-pages {
     background-color: red;
-    margin-left: 100px;
     border: 0;
     cursor: pointer;
 }
 
 .btn-container {
-    margin-top: -5px;
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    align-content: center;
+    align-items: flex-end;
 }
 
 .wrapper {
@@ -439,11 +467,6 @@ h1 {
     justify-content: space-around;
     gap: 200px;
     opacity: 1;
-}
-
-.wrapper div:nth-child(1) {
-    grid-column: 3;
-    grid-row: 1;
 }
 
 .btn-add:active {
@@ -468,7 +491,6 @@ h1 {
 /* CONFIRMATION FOR DELETION MESSAGE */
 
 .msg-container {
-    transition: all .5s;
     position: fixed;
     z-index: 20;
     transform: scale(1.5);
@@ -478,20 +500,27 @@ h1 {
     border: solid;
     border-radius: 15px;
     block-size: 10rem;
-    height: 98px;
+    height: 90px;
     width: 300px;
     box-sizing: content-box;
     background-color: rgba(61, 22, 22, 0.876);
-    opacity: 0;
-    visibility: hidden;
     cursor: default;
     user-select: none;
+    transition: all .5s;
+    opacity: 0;
+    visibility: hidden;
 }
 
 .msg-head {
-    margin: 0 auto;
     text-align: center;
-    color: whitesmoke;
+    font-family: fantasy;
+    font-size: 20px;
+    background-color: rgb(119, 4, 4);
+    border: solid;
+    user-select: none;
+    border-radius: 10px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
 .btn-yes {
@@ -529,20 +558,123 @@ h1 {
     border-top-right-radius: 0;
 }
 
-.btn-yes:active {
+.btn-yes:hover {
     transition: all .2s;
-    box-shadow: 1px 0px 1px 2px green;
     color: rgb(1, 255, 1);
     background-color: rgb(36, 87, 52);
 }
 
-.btn-no:active {
+.btn-no:hover {
     transition: all .2s;
-    box-shadow: 1px 0px 1px 2px rgb(71, 39, 39);
     color: red;
-    background-color: brown;
+    background-color: rgb(112, 38, 38);
 }
 
 .msg-btns {
-    margin-top: 50px;
+    margin-top: 5px;
+}
+
+/* EDIT ELEMENTS */
+
+.edit-container {
+    position: fixed;
+    display: grid;
+    z-index: 20;
+    transform: scale(1.5);
+    margin-top: 200px;
+    margin-left: 700px;
+    box-shadow: 0 0 4px 5px rgb(168, 120, 42);
+    border: solid;
+    border-radius: 15px;
+    block-size: 10rem;
+    height: 346px;
+    width: 300px;
+    box-sizing: content-box;
+    background-color: rgba(0, 0, 0, 0.876);
+    transition: all .5s;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.edit-head {
+    display: grid;
+    text-align: center;
+    font-family: fantasy;
+    font-size: 40px;
+    background-color: rgb(175, 126, 35);
+    border: solid;
+    user-select: none;
+    border-radius: 10px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#edit-name {
+    margin-top: 30px;
+    border: 0;
+    font-size: 20px;
+    margin-left: 10px;
+    color: rgb(173, 86, 101);
+    background: transparent;
+    border-bottom: 2px solid rgb(15, 14, 15)
+}
+
+#edit-pages {
+    margin-top: 10px;
+    border: 0;
+    color: rgb(173, 86, 101);
+    width: 150px;
+    background: transparent;
+    border-bottom: 2px solid rgb(15, 14, 15)
+}
+
+#edit-max-pages {
+    margin-top: 10px;
+    border: 0;
+    width: 150px;
+    color: rgb(173, 86, 101);
+    background: transparent;
+    border-bottom: 2px solid rgb(15, 14, 15)
+}
+
+.edit-btns {
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    align-content: center;
+    align-items: flex-end;
+}
+
+#edit-date {
+    margin-top: 30px;
+    border: 0;
+    color: rgb(173, 86, 101);
+    font-size: 20px;
+    margin-left: 50px;
+    background: transparent;
+    border-bottom: 2px solid rgb(15, 14, 15)
+}
+
+#edit-date-label {
+    margin-left: 100px;
+    color: grey;
+    transform: translate(0.25rem, -3.45rem);
+}
+
+#edit-book-label {
+    font-size: 15px;
+}
+
+#edit-pages-label {
+    font-size: 15px;
+}
+
+#edit-max-pages-label {
+    font-size: 15px;
+}
+
+.opacity {
+    transition: all .5s;
+    opacity: 1;
+    visibility: visible;
 }
