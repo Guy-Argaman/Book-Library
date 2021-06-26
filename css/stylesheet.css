@@ -121,15 +121,26 @@ header {
 }
 
 .sidenav #item4 {
-    margin-top: 500px;
+    margin-top: 540px;
     font-size: 15px;
 }
 
 /* NEW BOOK ELEMENTS / PARAMETERS */
 
+input {
+    outline: none;
+    margin-left: 5px;
+    font-size: 20px;
+}
+
+.book-input {
+    border-bottom: 2px solid rgb(98, 95, 95) !important;
+}
+
 .book-head {
     display: grid;
     text-align: center;
+    height: 50px;
     font-family: fantasy;
     font-size: 40px;
     background-color: purple;
@@ -138,6 +149,7 @@ header {
     border-radius: 10px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+    margin-bottom: 15px;
 }
 
 .book-container {
@@ -160,7 +172,11 @@ header {
     visibility: hidden;
 }
 
-#date-label {
+.book-content {
+    display: grid;
+}
+
+#date-label-book {
     margin: 0 auto;
     color: grey;
     transform: translate(0.25rem, -3.25rem);
@@ -179,47 +195,39 @@ label {
 }
 
 #book-name {
-    margin-top: 30px;
     border: 0;
-    font-size: 20px;
-    margin-left: 10px;
+    width: 250px;
     color: rgb(173, 86, 101);
     background: transparent;
-    border-bottom: 2px solid rgb(15, 14, 15)
+    border-bottom: 2px solid rgb(15, 14, 15);
 }
 
 #pages {
-    margin-top: 10px;
     border: 0;
     color: rgb(173, 86, 101);
-    width: 150px;
+    width: 100px;
     background: transparent;
-    border-bottom: 2px solid rgb(15, 14, 15)
+    border-bottom: 2px solid rgb(15, 14, 15);
 }
 
 #max-pages {
-    margin-top: 10px;
     border: 0;
-    width: 150px;
+    width: 100px;
     color: rgb(173, 86, 101);
     background: transparent;
-    border-bottom: 2px solid rgb(15, 14, 15)
+    border-bottom: 2px solid rgb(15, 14, 15);
 }
 
 #date {
-    margin-top: 30px;
     border: 0;
     color: rgb(173, 86, 101);
-    font-size: 20px;
     margin: 0 auto;
-    /* margin-top: 10px; */
-    /* margin-right: 20px; */
     background: transparent;
     border-bottom: 2px solid rgb(15, 14, 15)
 }
 
 #date:focus+label, input:not(:placeholder-shown)+label {
-    color: pink;
+    color: rgb(148, 37, 199);
 }
 
 .blur {
@@ -227,8 +235,8 @@ label {
     filter: blur(3px)
 }
 
-input:focus+label, input:not(:placeholder-shown)+label {
-    color: pink;
+.book-input:focus+label, .book-input:not(:placeholder-shown)+label {
+    color: rgb(148, 37, 199);
     transform: rotateX(90deg);
     transform: translate(0.25rem, -3rem);
 }
@@ -590,7 +598,7 @@ h1 {
     height: 346px;
     width: 300px;
     box-sizing: content-box;
-    background-color: rgba(0, 0, 0, 0.876);
+    background-color: rgba(124, 84, 10, 0.938);
     transition: all .5s;
     opacity: 0;
     visibility: hidden;
@@ -599,78 +607,92 @@ h1 {
 .edit-head {
     display: grid;
     text-align: center;
+    height: 50px;
     font-family: fantasy;
     font-size: 40px;
-    background-color: rgb(175, 126, 35);
+    background-color: rgb(194, 137, 31);
     border: solid;
     user-select: none;
     border-radius: 10px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+    margin-bottom: 15px;
 }
 
 #edit-name {
-    margin-top: 30px;
     border: 0;
-    font-size: 20px;
-    margin-left: 10px;
-    color: rgb(173, 86, 101);
+    width: 250px;
+    color: rgb(104, 29, 29);
     background: transparent;
-    border-bottom: 2px solid rgb(15, 14, 15)
+    border-bottom: 2px solid rgb(15, 14, 15);
 }
 
 #edit-pages {
-    margin-top: 10px;
     border: 0;
-    color: rgb(173, 86, 101);
-    width: 150px;
+    color: rgb(104, 29, 29);
+    width: 100px;
     background: transparent;
-    border-bottom: 2px solid rgb(15, 14, 15)
+    border-bottom: 2px solid rgb(15, 14, 15);
 }
 
 #edit-max-pages {
-    margin-top: 10px;
     border: 0;
-    width: 150px;
-    color: rgb(173, 86, 101);
+    width: 100px;
+    color: rgb(104, 29, 29);
     background: transparent;
-    border-bottom: 2px solid rgb(15, 14, 15)
+    border-bottom: 2px solid rgb(15, 14, 15);
+}
+
+#edit-date {
+    border: 0;
+    color: rgb(104, 29, 29);
+    margin: 0 auto;
+    background: transparent;
+    border-bottom: 2px solid rgb(15, 14, 15);
+}
+
+.btn-save {
+    display: grid;
+    transition: all .2s;
+    box-sizing: content-box;
+    padding: 8px 8px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    width: 134px;
+    color: #fff;
+    background-color: rgb(233, 101, 13);
+    box-shadow: 0 -4px 0 orange;
+    border: none;
+    border-radius: 11px;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
 .edit-btns {
     display: flex;
-    justify-items: center;
-    justify-content: center;
-    align-content: center;
     align-items: flex-end;
 }
 
-#edit-date {
-    margin-top: 30px;
-    border: 0;
-    color: rgb(173, 86, 101);
-    font-size: 20px;
-    margin-left: 50px;
-    background: transparent;
-    border-bottom: 2px solid rgb(15, 14, 15)
+#edit-date:focus+label, input:not(:placeholder-shown)+label {
+    color: rgb(187, 202, 20);
 }
 
-#edit-date-label {
-    margin-left: 100px;
-    color: grey;
-    transform: translate(0.25rem, -3.45rem);
+input:focus+label, input:not(:placeholder-shown)+label {
+    color: rgb(187, 202, 20);
+    transform: rotateX(90deg);
+    transform: translate(0.25rem, -3rem);
 }
 
-#edit-book-label {
-    font-size: 15px;
+.edit-labels {
+    color: rgb(5, 3, 4);
 }
 
-#edit-pages-label {
-    font-size: 15px;
-}
-
-#edit-max-pages-label {
-    font-size: 15px;
+#date-label-edit {
+    margin: 0 auto;
+    color: rgb(5, 3, 4);
+    transform: translate(0.25rem, -3.25rem);
 }
 
 .opacity {

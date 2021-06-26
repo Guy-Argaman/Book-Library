@@ -24,22 +24,22 @@
         <div id="item4" class="item">MADE BY GUY ARGAMAN</div>
     </div>
     <div class="book-container">
-        <div class="book-head">ADD NEW BOOK</div>
-        <div class="content">
-            <input type="text" maxlength="33" id="book-name" placeholder=" " required>
+        <div class="book-content">
+            <div class="book-head">ADD NEW BOOK</div>
+            <input class="book-input" type="text" maxlength="33" id="book-name" placeholder=" " required>
             <label id="book-label" for="book-name">Book Title</label>
-            <input type="number"
+            <input type="number" class="book-input"
                 oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                 maxlength="9" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="pages"
                 placeholder=" " required>
-            <label id="pages-label" for="pages" min="1">Number of Pages</label>
-            <input type="number"
+            <label id="pages-label" for="pages" min="1">Current Page</label>
+            <input type="number" class="book-input"
                 oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                 maxlength="9" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="max-pages"
                 placeholder=" " required>
             <label id="max-pages-label" for="max-pages" min="1">Total Pages</label>
-            <input type="date" id="date" placeholder=" " required>
-            <label id="date-label">Last Updated</label>
+            <input class="book-input" type="date" id="date" placeholder="" required>
+            <label id="date-label-book">Last Updated</label>
             <div class="btn-element">
                 <button class="btn-add" onclick="addCard()">ADD</button>
                 <button class="btn-cancel" onclick="exitModal()">CANCEL</button>
@@ -50,15 +50,21 @@
         <div class="edit-head">EDIT BOOK</div>
         <div class="content">
             <input type="text" maxlength="33" id="edit-name" placeholder=" " required>
-            <label id="edit-book-label" for="edit-name">New Title</label>
-            <input type="number" onkeydown="return event.keyCode !== 69" id="edit-pages" placeholder=" " required>
-            <label id="edit-pages-label" for="edit-pages" min="1">Number of Pages</label>
-            <input type="number" onkeydown="return event.keyCode !== 69" id="edit-max-pages" placeholder=" " required>
-            <label id="edit-max-pages-label" for="edit-max-pages" min="1">Total Pages</label>
+            <label class="edit-labels" id="edit-book-label" for="edit-name">New Title</label>
+            <input type="number"
+                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                maxlength="9" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="edit-pages"
+                placeholder=" " required>
+            <label class="edit-labels" id="edit-pages-label" for="edit-pages" min="1">Current Page</label>
+            <input type="number"
+                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                maxlength="9" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="edit-max-pages"
+                placeholder=" " required>
+            <label class="edit-labels" id="edit-max-pages-label" for="edit-max-pages" min="1">Total Pages</label>
             <input type="date" id="edit-date" placeholder=" " required>
-            <label id="date-label">Last Updated</label>
+            <label class="edit-labels" id="date-label-edit">Last Updated</label>
             <div class="edit-btns">
-                <button class="btn-edit" onclick="saveEdit()">SAVE</button>
+                <button class="btn-save" onclick="saveEdit()">SAVE</button>
                 <button class="btn-cancel" onclick="exitModal(this)">CANCEL</button>
             </div>
         </div>

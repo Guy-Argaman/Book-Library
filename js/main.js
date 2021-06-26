@@ -20,7 +20,7 @@ class Book {
         pages = '0',
         maxPages = '0',
         isRead = false,
-        bookId = gNextId++
+        bookId = gNextId++,
     ) {
         this.title = title;
         this.pages = pages;
@@ -144,6 +144,7 @@ function saveEdit() {
             cardDate.innerText = editDate;
         }
     }
+    updateSideNav();
     resetEditModalInputs();
     removeBlur();
 }
@@ -152,17 +153,18 @@ function warnUserEdit() {
     let editTitle = document.querySelector('#edit-name').value;
     let editPages = document.querySelector('#edit-pages').value;
     let editMaxPages = document.querySelector('#edit-max-pages').value;
-    let editDate = document.querySelector('#edit-date').value;
     let editBookLabel = document.querySelector('#edit-book-label');
     let editPagesLabel = document.querySelector('#edit-pages-label');
     let editMaxPagesLabel = document.querySelector('#edit-max-pages-label');
+    let chosenCardTitle = cardToModify.querySelector('.card-title').innerText;
     for (let i = 0; i < myLibrary.length; i++) {
-        if (editPages !== '' || editMaxPages !== '' || editDate !== '') {
+        if (editTitle === chosenCardTitle) {
+            console.log(chosenCardTitle, editTitle);
             break;
         }
         if (editTitle === myLibrary[i].title) {
             editBookLabel.innerText = 'Book Exists';
-            editBookLabel.style.color = 'red';
+            editBookLabel.style.color = 'darkred';
             toggleWarn = true;
             return;
         }
@@ -175,7 +177,7 @@ function warnUserEdit() {
     }
     if (Number(editMaxPages) < Number(editPages) || Number(editMaxPages) < 0) {
         editMaxPagesLabel.innerText = 'Invalid Number'
-        editMaxPagesLabel.style.color = 'red';
+        editMaxPagesLabel.style.color = 'darkred';
         toggleWarn = true;
     } else {
         editMaxPagesLabel.innerText = 'Total Pages';
@@ -183,30 +185,44 @@ function warnUserEdit() {
     }
     if (Number(editPages) > Number(editMaxPages) || Number(editPages) < 0) {
         editPagesLabel.innerText = 'Invalid Number'
-        editPagesLabel.style.color = 'red';
+        editPagesLabel.style.color = 'darkred';
         toggleWarn = true;
     } else {
-        editPagesLabel.innerText = 'Number of Pages';
+        editPagesLabel.innerText = 'Current Page';
         editPagesLabel.style.color = '';
     }
 }
 
 function showEdit(btn) {
+    // Capture edit elements ( user inputs to edit the card )
     let editModal = document.querySelector('.edit-container');
     let editTitle = document.querySelector('#edit-name');
+    let editPages = document.querySelector('#edit-pages');
+    let editMaxPages = document.querySelector('#edit-max-pages');
+    let editDate = document.querySelector('#edit-date');
+    // Transition class
     editModal.classList.add('opacity');
+    // Capture the card you want to edit by pressing the button
     cardToModify = btn.parentNode.parentNode.parentNode;
+    // Capture specific card elements to modify
     let cardTitle = cardToModify.querySelector('.card-title').innerText;
-    // Book title name is the same as the card's
+    let cardPages = cardToModify.querySelector('.card-pages').innerText;
+    let cardMaxPages = cardToModify.querySelector('.card-max-pages').innerText;
+    let cardDate = cardToModify.querySelector('.card-date').innerText;
+    // Book edit inputs/placeholders are the same as the card's
     editTitle.value = cardTitle;
-    console.log(editTitle);
+    editPages.value = cardPages;
+    editMaxPages.value = cardMaxPages;
+    editDate.value = cardDate;
     addBlur();
+    updateSideNav();
 }
 
 function unfinishedBook() {
     let cardHead = cardToModify.querySelector('.card-head');
     let cardPagesHead = cardToModify.querySelector('.card-pages-head');
     let cardMaxPagesHead = cardToModify.querySelector('.card-max-pages-head');
+    cardToModify.style.borderColor = '';
     cardToModify.style.backgroundColor = '';
     cardHead.style.backgroundColor = '';
     cardPagesHead.style.backgroundColor = '';
@@ -225,14 +241,14 @@ function finishedBook() {
         unfinishedBook();
         return;
     }
-
     for (let i = 0; i < myLibrary.length; i++) {
         // If the name of the card is the same as the name of the book constructor, change read status.
         if (cardTitle.innerText === myLibrary[i].title && Number(cardPages.innerText) === Number(cardMaxPages.innerText)) {
             myLibrary[i].isRead = true;
             if (myLibrary[i].isRead) {
-                cardToModify.style.backgroundColor = 'green';
-                cardToModify.style.transform = 'rotateZ(20deg)'
+                cardToModify.style.backgroundColor = '#468a2e';
+                cardToModify.style.borderColor = 'green';
+                cardToModify.style.transform = 'rotateZ(5deg)';
                 cardHead.style.backgroundColor = 'black';
                 cardPagesHead.style.backgroundColor = 'black';
                 cardMaxPagesHead.style.backgroundColor = 'black';
@@ -244,6 +260,7 @@ function finishedBook() {
         }
         console.log(myLibrary);
     }
+    updateSideNav();
 }
 
 function addPages(btn) {
@@ -266,8 +283,6 @@ function addPages(btn) {
     }
     finishedBook();
 }
-
-
 
 function reducePages(btn) {
     cardToModify = btn.parentNode.parentNode.parentNode;
@@ -364,14 +379,26 @@ function warnUser() {
         pagesLabel.style.color = 'red';
         toggleWarn = true;
     } else {
-        pagesLabel.innerText = 'Number of Pages';
+        pagesLabel.innerText = 'Current Page';
         pagesLabel.style.color = '';
     }
 }
 
 function updateSideNav() {
     let booksNum = document.querySelector('#item1');
+    let completedBooks = document.querySelector('#item2');
+    let pagesSum = document.querySelector('#item3');
+    let booksPagesSum = 0;
+    let booksCount = 0;
     booksNum.innerText = `Books: ${myLibrary.length}`;
+    for (let i = 0; i < myLibrary.length; i++) {
+        booksPagesSum += myLibrary[i].maxPages;
+        if (myLibrary[i].pages === myLibrary[i].maxPages && myLibrary[i].pages !== 0 && myLibrary[i].maxPages !== 0) {
+            booksCount++;
+        }
+    }
+    pagesSum.innerText = `Total Pages: ${booksPagesSum}`;
+    completedBooks.innerText = `Completed Books: ${booksCount}`;
 }
 
 function addCard() {
