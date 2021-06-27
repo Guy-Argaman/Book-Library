@@ -29,20 +29,24 @@ header {
     display: grid;
     transition: all 0.8s ease-in-out;
     background-color: rgb(218, 197, 197);
+    margin: 0 auto;
+    margin-top: 70px;
     border: solid;
+    border-color: grey;
     height: 150px;
     width: 150px;
     box-shadow: 0 0 5px 5px rgb(128, 110, 128);
+    order: 1;
     cursor: pointer;
 }
 
-/* INNER TEXT OF ADD BUTTON */
+/* INNER SYMOBL OF ADD BUTTON */
 
 .plus span {
     transition-duration: 1s;
     align-self: center;
     justify-self: center;
-    font-size: 100px;
+    font-size: 50px;
     font-family: sans-serif;
     user-select: none;
 }
@@ -50,12 +54,10 @@ header {
 /* HOVERING OVER THE .PLUS DIV CHANGES THE SCALE ETC */
 
 .plus:hover {
-    border-color: rgb(78, 69, 78);
+    border-color: rgb(0, 0, 0);
     border-radius: 10px;
-    box-shadow: 0 0 4px 5px rgb(128, 110, 128);
-    transform: scale(1.5);
-    /* height: 300px; */
-    /* width: 300px; */
+    box-shadow: 0 0 4px 2px rgb(14, 11, 14);
+    transform: scale(2.5);
     background-color: purple;
 }
 
@@ -70,22 +72,15 @@ header {
     transition: all 1.5s ease-in-out;
     height: 100%;
     margin-top: 58px;
-    /* Full-height: remove this if you want "auto" height */
     width: 35px;
     color: transparent;
-    /* Set the width of the sidebar */
     position: fixed;
     float: left;
-    /* Fixed Sidebar (stay in place on scroll) */
     z-index: 1;
-    /* Stay on top */
     top: 0;
-    /* Stay at the top */
     right: 0;
     background-color: transparent;
-    /* Black */
     overflow-x: hidden;
-    /* Disable horizontal scroll */
     padding-top: 20px;
     user-select: none;
 }
@@ -292,13 +287,13 @@ label {
 
 .card {
     display: grid;
+    margin: 0 auto;
     transform: scale(1.3);
     box-shadow: 0 0 4px 5px rgb(128, 110, 128);
     border: solid;
     border-radius: 15px;
     height: 300px;
     width: 300px;
-    box-sizing: content-box;
     color: white;
     background-color: rgba(0, 0, 0, 0.876);
     transition: all .5s;
@@ -468,12 +463,12 @@ h1 {
 }
 
 .wrapper {
+    margin-top: 100px;
     transition: all 2s;
     display: grid;
-    margin: 100px 100px;
+    justify-content: start;
     grid-template-columns: repeat(3, 1fr);
-    justify-content: space-around;
-    gap: 200px;
+    gap: 150px;
     opacity: 1;
 }
 

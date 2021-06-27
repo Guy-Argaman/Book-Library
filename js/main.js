@@ -1,6 +1,7 @@
 'use strict';
+// Local Storage
+let myStorage = window.localStorage;
 let myLibrary = [];
-let myCards = [];
 // Toggles a warning for the user's inputs
 let toggleWarn = false;
 // Card Deletion or Modification(edit)
@@ -122,6 +123,8 @@ function saveEdit() {
     let cardPages = cardToModify.querySelector('.card-pages');
     let maxCardPages = cardToModify.querySelector('.card-max-pages');
     let cardDate = cardToModify.querySelector('.card-date');
+    // Removes unnecessary spaces
+    editTitle = editTitle.trim();
     warnUserEdit();
     if (toggleWarn) {
         if (editPages === '' || editMaxPages === '' || editDate === '') {
@@ -131,6 +134,8 @@ function saveEdit() {
     }
     for (let i = 0; i < myLibrary.length; i++) {
         if (bookName.innerText === myLibrary[i].title) {
+            // Removes unnecessary spaces
+            editTitle = editTitle.trim();
             // Change Book Title (both in the constructor and card)
             myLibrary[i].title = editTitle;
             bookName.innerText = editTitle;
@@ -147,6 +152,7 @@ function saveEdit() {
     updateSideNav();
     resetEditModalInputs();
     removeBlur();
+    removeSpaces();
 }
 
 function warnUserEdit() {
@@ -159,7 +165,6 @@ function warnUserEdit() {
     let chosenCardTitle = cardToModify.querySelector('.card-title').innerText;
     for (let i = 0; i < myLibrary.length; i++) {
         if (editTitle === chosenCardTitle) {
-            console.log(chosenCardTitle, editTitle);
             break;
         }
         if (editTitle === myLibrary[i].title) {
@@ -348,6 +353,7 @@ function warnUser() {
     let pagesLabel = document.querySelector('#pages-label');
     let maxPagesLabel = document.querySelector('#max-pages-label');
     let titleLabel = document.querySelector('#book-label');
+    titleInput = titleInput.trim();
     for (let i = 0; i < myLibrary.length; i++) {
         if (titleInput === myLibrary[i].title) {
             titleLabel.innerText = 'Book Exists';
@@ -410,16 +416,17 @@ function addCard() {
     if (toggleWarn) {
         return;
     }
+    // Removes unnecessary spaces
+    titleInput = titleInput.trim();
     myLibrary.push(new Book(titleInput, Number(pagesInput), Number(maxPagesInput)));
     let wrapper = document.querySelector('.wrapper');
     wrapper.innerHTML += createCard(myLibrary[myLibrary.length - 1]);
-    let newCard = document.querySelectorAll(`#book-${myLibrary.length - 1}`);
-    myCards.push(newCard[0]);
     modal.classList.remove('opacity');
     removeBlur();
     updateSideNav();
-    console.log(myLibrary);
+    removeSpaces();
     resetInputs();
+    console.log(myLibrary);
 }
 
 function createCard(book) {
@@ -486,6 +493,11 @@ function resetEditModalInputs() {
     editDate.value = '';
 }
 
-function removeKeys(event) {
-    return event.charCode >= 48 && event.charCode <= 57;
+function removeSpaces() {
+    // REMOVES UNNECESSARY SPACES
+    for (let i = 0; i < myLibrary.length; i++) {
+        if (myLibrary[i].title.includes(' ')) {
+            myLibrary[i].title = myLibrary[i].title.replace(/  +/g, ' ');
+        }
+    }
 }
