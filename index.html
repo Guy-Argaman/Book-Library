@@ -8,7 +8,7 @@
 <body onload="populateStorage()">
     <header class="title">
         <span>Library</span>
-        <button id="btn-storage" onclick="deleteLocal()">CLEAR STORAGE</button>
+        <button id="btn-storage" onclick="showMsgConfirm()">CLEAR STORAGE</button>
     </header>
     <div class="sidenav">
         <header></header>
@@ -76,6 +76,15 @@
             <div class="msg-btns">
                 <button class="btn-yes" onclick="removeCardConfirm(); exitModal()">Oh, yes</button>
                 <button class="btn-no" onclick="exitModal()">NO!</button>
+            </div>
+        </div>
+    </div>
+    <div class="msg-local-container">
+        <div class="msg-local-head">Are you sure you want to clear storage? (Cannot be undone)</div>
+        <div class="msg-local-content">
+            <div class="msg-local-btns">
+                <button class="btn-local-yes" onclick="deleteLocal(); removeMsgConfrim()">CONFIRM</button>
+                <button class="btn-local-no" onclick="exitModal()">NO! NO! NO!</button>
             </div>
         </div>
     </div>

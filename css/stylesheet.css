@@ -717,6 +717,97 @@ input:focus+label, input:not(:placeholder-shown)+label {
     transform: translate(0.25rem, -3.25rem);
 }
 
+/* CONFIRMATION FOR CLEARING STORAGE MESSAGE */
+
+.msg-local-container {
+    position: fixed;
+    z-index: 20;
+    transform: scale(1.5);
+    margin-top: 250px;
+    margin-left: 750px;
+    box-shadow: 0 0 4px 5px rgb(192, 15, 15);
+    border: solid;
+    border-radius: 15px;
+    block-size: 10rem;
+    height: 90px;
+    width: 300px;
+    box-sizing: content-box;
+    background-color: rgba(61, 22, 22, 0.876);
+    cursor: default;
+    user-select: none;
+    transition: all .5s;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.msg-local-head {
+    text-align: center;
+    font-family: fantasy;
+    font-size: 20px;
+    background-color: rgb(119, 4, 4);
+    border: solid;
+    user-select: none;
+    border-radius: 10px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.btn-local-yes {
+    transition: all .5s;
+    box-sizing: border-box;
+    padding: 8px 8px;
+    font-size: 14px;
+    cursor: pointer;
+    width: 150px;
+    color: #fff;
+    background-color: rgb(20, 75, 37);
+    box-shadow: 0 -4px 0 green;
+    border: 0;
+    border-radius: 12px;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.btn-local-no {
+    transition: all .5s;
+    box-sizing: border-box;
+    padding: 8px 8px;
+    width: 150px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    color: #fff;
+    background-color: rgb(104, 18, 18);
+    box-shadow: 0px -4px 0px 0px brown;
+    border: 0;
+    border-radius: 12px;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.btn-local-yes:hover {
+    transition: all .2s;
+    color: rgb(1, 255, 1);
+    background-color: rgb(36, 87, 52);
+}
+
+.btn-local-no:hover {
+    transition: all .2s;
+    color: red;
+    background-color: rgb(112, 38, 38);
+}
+
+.msg-local-btns {
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    align-content: center;
+    align-items: flex-end;
+    margin-top: 5px;
+}
+
 .opacity {
     transition: all .5s;
     opacity: 1;

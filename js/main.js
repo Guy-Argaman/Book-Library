@@ -34,11 +34,13 @@ header.innerText = '<<';
 function adjustCursor() {
     let modal = document.querySelector('.book-container');
     let msg = document.querySelector('.msg-container');
+    let msgLocal = document.querySelector('.msg-local-container');
     let body = document.querySelector('body');
     let editModal = document.querySelector('.edit-container')
-    if (editModal.classList.contains('opacity') || modal.classList.contains('opacity') || msg.classList.contains('opacity')) {
+    if (msgLocal.classList.contains('opacity') || editModal.classList.contains('opacity') || modal.classList.contains('opacity') || msg.classList.contains('opacity')) {
         body.style.pointerEvents = 'none';
         modal.style.pointerEvents = 'all';
+        msgLocal.style.pointerEvents = 'all';
         editModal.style.pointerEvents = 'all';
         msg.style.pointerEvents = 'all';
     } else {
@@ -56,9 +58,11 @@ function showModal() {
 function exitModal(editBtn) {
     let msgBtnNo = document.querySelector('.btn-no');
     let btnCancel = document.querySelector('.btn-cancel');
+    let btnCancelLocal = document.querySelector('.btn-local-no');
     let btnConfirm = document.querySelector('.btn-yes');
+    let btnConfirmLocal = document.querySelector('.btn-local-yes');
     window.onclick = function (event) {
-        if (event.target == editBtn || event.target == msgBtnNo || event.target == btnCancel || event.target == btnConfirm) {
+        if (event.target == btnConfirmLocal || event.target == btnCancelLocal || event.target == editBtn || event.target == msgBtnNo || event.target == btnCancel || event.target == btnConfirm) {
             removeBlur();
             resetEditModalInputs();
         }
@@ -69,12 +73,14 @@ function removeBlur() {
     let modal = document.querySelector('.book-container');
     let sidenav = document.querySelector('.sidenav');
     let msg = document.querySelector('.msg-container');
+    let msgLocal = document.querySelector('.msg-local-container');
     let elTitle = document.querySelector('.title');
     let wrapper = document.querySelector('.wrapper');
     let editModal = document.querySelector('.edit-container');
     elTitle.classList.remove('blur');
     modal.classList.remove('opacity');
     msg.classList.remove('opacity');
+    msgLocal.classList.remove('opacity');
     editModal.classList.remove('opacity');
     sidenav.classList.remove('blur');
     wrapper.classList.remove('blur');
@@ -545,6 +551,31 @@ function populateStorage() {
 
 function updateStorageDetails() {
     localStorage.setItem('library', JSON.stringify(myLibrary));
+}
+
+function showMsgConfirm() {
+    let msgLocal = document.querySelector('.msg-local-container');
+    addBlur();
+    msgLocal.classList.add('opacity');
+    adjustCursor();
+}
+
+function removeMsgConfrim() {
+    let body = document.querySelector('body');
+    body.style.pointerEvents = 'none';
+    let btnConfirmLocal = document.querySelector('.btn-local-yes');
+    let msgLocal = document.querySelector('.msg-local-container');
+    let sidenav = document.querySelector('.sidenav');
+    let elTitle = document.querySelector('.title');
+    let wrapper = document.querySelector('.wrapper');
+    window.onclick = function (event) {
+        if (event.target == btnConfirmLocal) {
+            msgLocal.classList.remove('opacity');
+            sidenav.classList.remove('blur');
+            elTitle.classList.remove('blur');
+            wrapper.classList.remove('blur');
+        }
+    }
 }
 
 function deleteLocal() {
