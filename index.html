@@ -5,9 +5,10 @@
     <title>Book Library</title>
 </head>
 
-<body>
+<body onload="applyStorage()">
     <header class="title">
-        Library
+        <span>Library</span>
+        <button id="btn-storage" onclick="deleteLocal()">CLEAR STORAGE</button>
     </header>
     <div class="sidenav">
         <header></header>
@@ -20,7 +21,6 @@
         <div id="item3" class="item">Total Pages:
             <hr class="hr">
         </div>
-
         <div id="item4" class="item">MADE BY GUY ARGAMAN</div>
     </div>
     <div class="book-container">
@@ -79,7 +79,6 @@
             </div>
         </div>
     </div>
-
     <div class="wrapper">
         <div class="plus" onclick="showModal(this)"><span>➕</span></div>
     </div>

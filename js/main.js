@@ -1,6 +1,4 @@
 'use strict';
-// Local Storage
-let myStorage = window.localStorage;
 let myLibrary = [];
 // Toggles a warning for the user's inputs
 let toggleWarn = false;
@@ -21,12 +19,14 @@ class Book {
         pages = '0',
         maxPages = '0',
         isRead = false,
+        date = '',
         bookId = gNextId++,
     ) {
         this.title = title;
         this.pages = pages;
         this.maxPages = maxPages;
         this.isRead = isRead;
+        this.date = date;
         this.bookId = bookId;
     }
 }
@@ -110,8 +110,8 @@ function removeCardConfirm() {
             myLibrary.splice(i, 1);
         }
     }
+    updateStorageDetails();
     updateSideNav();
-    console.log(myLibrary);
 }
 
 function saveEdit() {
@@ -146,11 +146,14 @@ function saveEdit() {
             myLibrary[i].maxPages = Number(editMaxPages);
             maxCardPages.innerText = Number(editMaxPages);
             // Change Book Date (both in the card)
+            myLibrary[i].date = editDate;
             cardDate.innerText = editDate;
         }
     }
     updateSideNav();
+    updateStorageDetails();
     resetEditModalInputs();
+    finishedBook();
     removeBlur();
     removeSpaces();
 }
@@ -233,6 +236,7 @@ function unfinishedBook() {
     cardPagesHead.style.backgroundColor = '';
     cardMaxPagesHead.style.backgroundColor = '';
     cardToModify.style.transform = ''
+    updateStorageDetails()
 }
 
 function finishedBook() {
@@ -263,8 +267,8 @@ function finishedBook() {
             myLibrary[i].isRead = false;
             unfinishedBook();
         }
-        console.log(myLibrary);
     }
+    updateStorageDetails();
     updateSideNav();
 }
 
@@ -286,6 +290,7 @@ function addPages(btn) {
             }
         }
     }
+    updateStorageDetails();
     finishedBook();
 }
 
@@ -305,6 +310,7 @@ function reducePages(btn) {
             }
         }
     }
+    updateStorageDetails();
     finishedBook();
 }
 
@@ -319,6 +325,7 @@ function addMaxPages(btn) {
             myLibrary[i].maxPages = Number(cardMaxPages.innerText);
         }
     }
+    updateStorageDetails();
     finishedBook();
 }
 
@@ -343,6 +350,7 @@ function reduceMaxPages(btn) {
             cardPages.innerText = cardMaxPages.innerText;
         }
     }
+    updateStorageDetails();
     finishedBook();
 }
 
@@ -412,31 +420,32 @@ function addCard() {
     let titleInput = document.querySelector('#book-name').value;
     let pagesInput = document.querySelector('#pages').value;
     let maxPagesInput = document.querySelector('#max-pages').value;
+    let dateInput = document.querySelector('#date').value;
     warnUser();
     if (toggleWarn) {
         return;
     }
     // Removes unnecessary spaces
     titleInput = titleInput.trim();
-    myLibrary.push(new Book(titleInput, Number(pagesInput), Number(maxPagesInput)));
+    myLibrary.push(new Book(titleInput, Number(pagesInput), Number(maxPagesInput), false, dateInput));
     let wrapper = document.querySelector('.wrapper');
-    wrapper.innerHTML += createCard(myLibrary[myLibrary.length - 1]);
+    let newCard = createCard(myLibrary[myLibrary.length - 1]);
+    wrapper.innerHTML += newCard;
     modal.classList.remove('opacity');
+    updateStorageDetails();
     removeBlur();
     updateSideNav();
     removeSpaces();
     resetInputs();
-    console.log(myLibrary);
 }
 
 function createCard(book) {
-    let dateInput = document.querySelector('#date').value;
     let strHTML = `<div class="card" id="book-${book.bookId}">
     <div class="content">
     <h1 class="card-head">BOOK TITLE</h1>
     <div class="card-title">${book.title}</div>
     <h1 class="card-pages-head">PAGE</h1>
-    <div class="card-date">${dateInput}</div>
+    <div class="card-date">${book.date}</div>
         <div class="card-btns-pages">
             <button class="btn-add-pages" onclick="addPages(this)">➕</button>
             <div class="card-pages">${book.pages}</div>
@@ -494,10 +503,56 @@ function resetEditModalInputs() {
 }
 
 function removeSpaces() {
+    if (myLibrary.length === 0) {
+        return;
+    }
     // REMOVES UNNECESSARY SPACES
     for (let i = 0; i < myLibrary.length; i++) {
         if (myLibrary[i].title.includes(' ')) {
             myLibrary[i].title = myLibrary[i].title.replace(/  +/g, ' ');
         }
     }
+}
+
+// Local Storage
+function applyStorage() {
+    let wrapper = document.querySelector('.wrapper');
+    if (localStorage.length === 0) {
+        return;
+    }
+    let library = JSON.parse(localStorage.getItem('library'));
+    for (let i = 0; i < library.length; i++) {
+        myLibrary.push(library[i]);
+        wrapper.innerHTML += createCard(library[i]);
+    }
+    updateSideNav();
+}
+
+function updateStorageDetails() {
+    localStorage.setItem('library', JSON.stringify(myLibrary));
+}
+
+function deleteLocal() {
+    let btnLocal = document.querySelector('#btn-storage');
+    let title = document.querySelector('.title');
+    let titleText = document.querySelector('.title span');
+    title.style.backgroundColor = 'red';
+    btnLocal.style.backgroundColor = 'red';
+    title.style.color = 'black';
+    btnLocal.innerText = 'Deleting Local Storage...';
+    titleText.style.transform = 'translateX(550px)';
+    btnLocal.style.transform = 'translateX(-550px)';
+    setTimeout(() => {
+        title.style.backgroundColor = '';
+        btnLocal.style.transform = '';
+        titleText.style.transform = '';
+        btnLocal.style.backgroundColor = '';
+        title.style.color = '';
+        btnLocal.innerText = 'CLEAR STORAGE';
+        btnLocal.style.transform = ''
+    }, 2000);
+    setTimeout(() => {
+        window.location.reload();
+    }, 3500);
+    localStorage.clear();
 }

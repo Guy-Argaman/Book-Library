@@ -4,13 +4,38 @@ body {
 }
 
 .title {
+    transition: all 2s;
+    display: flex;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    justify-content: space-between;
     background-color: black;
     height: 50px;
     font-size: 35px;
     text-align: left;
     letter-spacing: 4px;
     user-select: none;
+}
+
+.title span {
+    transition-duration: 1s;
+}
+
+#btn-storage {
+    transition-duration: 1s;
+    text-align: center;
+    background-color: brown;
+    cursor: pointer;
+    border: solid rgb(0, 0, 0);
+}
+
+#btn-storage:hover {
+    background-color: red;
+}
+
+.anim {
+    transition: all 2s;
+    background-color: brown;
+    /* transform: translateX(-1050px) */
 }
 
 header {
@@ -59,11 +84,14 @@ header {
     box-shadow: 0 0 4px 2px rgb(14, 11, 14);
     transform: scale(2.5);
     background-color: purple;
+    transition: ease-out;
+    transition-duration: 1s;
 }
 
 /* HOVERING OVER THE .PLUS DIV CHANGES THE INNER TEXT AS WELL */
 
 .plus:hover span {
+    transition: ease-in-out;
     transition-duration: 1s;
     transform: rotateZ(90deg);
 }
@@ -108,7 +136,7 @@ header {
 }
 
 .sidenav .item:hover {
-    color: red;
+    color: white;
 }
 
 .sidenav .hr {
@@ -532,7 +560,7 @@ h1 {
     padding: 8px 8px;
     font-size: 14px;
     cursor: pointer;
-    width: 146px;
+    width: 150px;
     color: #fff;
     background-color: rgb(20, 75, 37);
     box-shadow: 0 -4px 0 green;
@@ -574,6 +602,11 @@ h1 {
 }
 
 .msg-btns {
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    align-content: center;
+    align-items: flex-end;
     margin-top: 5px;
 }
 
