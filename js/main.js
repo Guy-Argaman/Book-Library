@@ -1,15 +1,11 @@
 'use strict';
 let myLibrary = [];
 // Toggles a warning for the user's inputs
-let toggleWarn = false;
+let toggleWarning = false;
 // Card Deletion or Modification(edit)
 let cardToModify;
 // Gives ID's to the books
 let gNextId = 0;
-// Removes or adds the ability to add books
-let toggleAdd = true;
-// Removes or adds the ability to show message
-let toggleShow = true;
 // Disabling Right Click
 document.addEventListener('contextmenu', event => event.preventDefault());
 
@@ -110,8 +106,8 @@ function removeCardConfirm() {
             myLibrary.splice(i, 1);
         }
     }
-    updateStorageDetails();
     updateSideNav();
+    updateStorageDetails();
 }
 
 function saveEdit() {
@@ -126,7 +122,7 @@ function saveEdit() {
     // Removes unnecessary spaces
     editTitle = editTitle.trim();
     warnUserEdit();
-    if (toggleWarn) {
+    if (toggleWarning) {
         if (editPages === '' || editMaxPages === '' || editDate === '') {
             return;
         }
@@ -151,11 +147,11 @@ function saveEdit() {
         }
     }
     updateSideNav();
-    updateStorageDetails();
     resetEditModalInputs();
     finishedBook();
     removeBlur();
     removeSpaces();
+    updateStorageDetails();
 }
 
 function warnUserEdit() {
@@ -173,20 +169,20 @@ function warnUserEdit() {
         if (editTitle === myLibrary[i].title) {
             editBookLabel.innerText = 'Book Exists';
             editBookLabel.style.color = 'darkred';
-            toggleWarn = true;
+            toggleWarning = true;
             return;
         }
     }
     if (editTitle === '') {
-        toggleWarn = true;
+        toggleWarning = true;
     }
     else {
-        toggleWarn = false;
+        toggleWarning = false;
     }
     if (Number(editMaxPages) < Number(editPages) || Number(editMaxPages) < 0) {
         editMaxPagesLabel.innerText = 'Invalid Number'
         editMaxPagesLabel.style.color = 'darkred';
-        toggleWarn = true;
+        toggleWarning = true;
     } else {
         editMaxPagesLabel.innerText = 'Total Pages';
         editMaxPagesLabel.style.color = '';
@@ -194,11 +190,12 @@ function warnUserEdit() {
     if (Number(editPages) > Number(editMaxPages) || Number(editPages) < 0) {
         editPagesLabel.innerText = 'Invalid Number'
         editPagesLabel.style.color = 'darkred';
-        toggleWarn = true;
+        toggleWarning = true;
     } else {
         editPagesLabel.innerText = 'Current Page';
         editPagesLabel.style.color = '';
     }
+    finishedBook();
 }
 
 function showEdit(btn) {
@@ -268,8 +265,8 @@ function finishedBook() {
             unfinishedBook();
         }
     }
-    updateStorageDetails();
     updateSideNav();
+    updateStorageDetails();
 }
 
 function addPages(btn) {
@@ -290,8 +287,8 @@ function addPages(btn) {
             }
         }
     }
-    updateStorageDetails();
     finishedBook();
+    updateStorageDetails();
 }
 
 function reducePages(btn) {
@@ -310,8 +307,8 @@ function reducePages(btn) {
             }
         }
     }
-    updateStorageDetails();
     finishedBook();
+    updateStorageDetails();
 }
 
 function addMaxPages(btn) {
@@ -325,8 +322,8 @@ function addMaxPages(btn) {
             myLibrary[i].maxPages = Number(cardMaxPages.innerText);
         }
     }
-    updateStorageDetails();
     finishedBook();
+    updateStorageDetails();
 }
 
 function reduceMaxPages(btn) {
@@ -350,8 +347,8 @@ function reduceMaxPages(btn) {
             cardPages.innerText = cardMaxPages.innerText;
         }
     }
-    updateStorageDetails();
     finishedBook();
+    updateStorageDetails();
 }
 
 function warnUser() {
@@ -366,24 +363,24 @@ function warnUser() {
         if (titleInput === myLibrary[i].title) {
             titleLabel.innerText = 'Book Exists';
             titleLabel.style.color = 'red';
-            toggleWarn = true;
+            toggleWarning = true;
             return;
         }
     }
     if (titleInput === '') {
         titleLabel.innerText = 'A title must be inserted';
         titleLabel.style.color = 'red';
-        toggleWarn = true;
+        toggleWarning = true;
     }
     else {
         titleLabel.innerText = 'Book Title';
         titleLabel.style.color = 'pink';
-        toggleWarn = false;
+        toggleWarning = false;
     }
     if (Number(maxPagesInput) < Number(pagesInput) || Number(maxPagesInput) < 0) {
         maxPagesLabel.innerText = 'Invalid Number'
         maxPagesLabel.style.color = 'red';
-        toggleWarn = true;
+        toggleWarning = true;
     } else {
         maxPagesLabel.innerText = 'Total Pages';
         maxPagesLabel.style.color = '';
@@ -391,7 +388,7 @@ function warnUser() {
     if (Number(pagesInput) > Number(maxPagesInput) || Number(pagesInput) < 0) {
         pagesLabel.innerText = 'Invalid Number'
         pagesLabel.style.color = 'red';
-        toggleWarn = true;
+        toggleWarning = true;
     } else {
         pagesLabel.innerText = 'Current Page';
         pagesLabel.style.color = '';
@@ -403,16 +400,16 @@ function updateSideNav() {
     let completedBooks = document.querySelector('#item2');
     let pagesSum = document.querySelector('#item3');
     let booksPagesSum = 0;
-    let booksCount = 0;
+    let completedBooksCount = 0;
     booksNum.innerText = `Books: ${myLibrary.length}`;
     for (let i = 0; i < myLibrary.length; i++) {
         booksPagesSum += myLibrary[i].maxPages;
-        if (myLibrary[i].pages === myLibrary[i].maxPages && myLibrary[i].pages !== 0 && myLibrary[i].maxPages !== 0) {
-            booksCount++;
+        if (myLibrary[i].isRead) {
+            completedBooksCount++;
         }
     }
     pagesSum.innerText = `Total Pages: ${booksPagesSum}`;
-    completedBooks.innerText = `Completed Books: ${booksCount}`;
+    completedBooks.innerText = `Completed Books: ${completedBooksCount}`;
 }
 
 function addCard() {
@@ -422,7 +419,7 @@ function addCard() {
     let maxPagesInput = document.querySelector('#max-pages').value;
     let dateInput = document.querySelector('#date').value;
     warnUser();
-    if (toggleWarn) {
+    if (toggleWarning) {
         return;
     }
     // Removes unnecessary spaces
@@ -432,11 +429,11 @@ function addCard() {
     let newCard = createCard(myLibrary[myLibrary.length - 1]);
     wrapper.innerHTML += newCard;
     modal.classList.remove('opacity');
-    updateStorageDetails();
     removeBlur();
     updateSideNav();
     removeSpaces();
     resetInputs();
+    updateStorageDetails();
 }
 
 function createCard(book) {
@@ -514,8 +511,25 @@ function removeSpaces() {
     }
 }
 
+// function updateBookStatus() {
+//     for (let i = 0; i < myLibrary.length; i++) {
+//         if (myLibrary[i].isRead) {
+//             let card = document.querySelector('.card');
+//             let cardHead = document.querySelector('.card-head');
+//             let cardPagesHead = document.querySelector('.card-pages-head');
+//             let cardMaxPagesHead = document.querySelector('.card-max-pages-head');
+//             card.style.backgroundColor = '#468a2e';
+//             card.style.borderColor = 'green';
+//             card.style.transform = 'rotateZ(5deg)';
+//             cardHead.style.backgroundColor = 'black';
+//             cardPagesHead.style.backgroundColor = 'black';
+//             cardMaxPagesHead.style.backgroundColor = 'black';
+//         }
+//     }
+// }
+
 // Local Storage
-function applyStorage() {
+function populateStorage() {
     let wrapper = document.querySelector('.wrapper');
     if (localStorage.length === 0) {
         return;
@@ -525,6 +539,7 @@ function applyStorage() {
         myLibrary.push(library[i]);
         wrapper.innerHTML += createCard(library[i]);
     }
+    // updateBookStatus();
     updateSideNav();
 }
 
@@ -536,21 +551,26 @@ function deleteLocal() {
     let btnLocal = document.querySelector('#btn-storage');
     let title = document.querySelector('.title');
     let titleText = document.querySelector('.title span');
+    // Title animation start
     title.style.backgroundColor = 'red';
+    // Button press animation start
     btnLocal.style.backgroundColor = 'red';
-    title.style.color = 'black';
-    btnLocal.innerText = 'Deleting Local Storage...';
-    titleText.style.transform = 'translateX(550px)';
     btnLocal.style.transform = 'translateX(-550px)';
+    btnLocal.innerText = 'Deleting Local Storage...';
+    // Text within title animation start
+    titleText.style.color = 'black';
+    titleText.style.transform = 'translateX(550px)';
+    // Unset the animation on a timer
     setTimeout(() => {
         title.style.backgroundColor = '';
         btnLocal.style.transform = '';
         titleText.style.transform = '';
         btnLocal.style.backgroundColor = '';
-        title.style.color = '';
+        titleText.style.color = '';
         btnLocal.innerText = 'CLEAR STORAGE';
         btnLocal.style.transform = ''
     }, 2000);
+    // Reload after animation finishes and clear the storage
     setTimeout(() => {
         window.location.reload();
     }, 3500);
