@@ -511,22 +511,22 @@ function removeSpaces() {
     }
 }
 
-// function updateBookStatus() {
-//     for (let i = 0; i < myLibrary.length; i++) {
-//         if (myLibrary[i].isRead) {
-//             let card = document.querySelector('.card');
-//             let cardHead = document.querySelector('.card-head');
-//             let cardPagesHead = document.querySelector('.card-pages-head');
-//             let cardMaxPagesHead = document.querySelector('.card-max-pages-head');
-//             card.style.backgroundColor = '#468a2e';
-//             card.style.borderColor = 'green';
-//             card.style.transform = 'rotateZ(5deg)';
-//             cardHead.style.backgroundColor = 'black';
-//             cardPagesHead.style.backgroundColor = 'black';
-//             cardMaxPagesHead.style.backgroundColor = 'black';
-//         }
-//     }
-// }
+function updateBookStatus() {
+    for (let i = 0; i < myLibrary.length; i++) {
+        if (myLibrary[i].isRead) {
+            let card = document.querySelectorAll('.card');
+            let cardHead = document.querySelectorAll('.card-head');
+            let cardPagesHead = document.querySelectorAll('.card-pages-head');
+            let cardMaxPagesHead = document.querySelectorAll('.card-max-pages-head');
+            card[i].style.backgroundColor = '#468a2e';
+            card[i].style.borderColor = 'green';
+            card[i].style.transform = 'rotateZ(5deg)';
+            cardHead[i].style.backgroundColor = 'black';
+            cardPagesHead[i].style.backgroundColor = 'black';
+            cardMaxPagesHead[i].style.backgroundColor = 'black';
+        }
+    }
+}
 
 // Local Storage
 function populateStorage() {
@@ -539,7 +539,7 @@ function populateStorage() {
         myLibrary.push(library[i]);
         wrapper.innerHTML += createCard(library[i]);
     }
-    // updateBookStatus();
+    updateBookStatus();
     updateSideNav();
 }
 
