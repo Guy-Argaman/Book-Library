@@ -171,11 +171,11 @@ input {
 
 .book-container {
     display: grid;
+    top: 30%;
+    left: 45%;
     position: fixed;
     z-index: 1;
     transform: scale(1.5);
-    margin-top: 200px;
-    margin-left: 700px;
     box-shadow: 0 0 4px 5px rgb(129, 62, 129);
     border: solid;
     border-radius: 15px;
@@ -519,8 +519,8 @@ h1 {
     position: fixed;
     z-index: 20;
     transform: scale(1.5);
-    margin-top: 250px;
-    margin-left: 750px;
+    top: 30%;
+    left: 45%;
     box-shadow: 0 0 4px 5px rgb(192, 15, 15);
     border: solid;
     border-radius: 15px;
@@ -611,8 +611,8 @@ h1 {
     display: grid;
     z-index: 20;
     transform: scale(1.5);
-    margin-top: 200px;
-    margin-left: 700px;
+    top: 30%;
+    left: 45%;
     box-shadow: 0 0 4px 5px rgb(168, 120, 42);
     border: solid;
     border-radius: 15px;
@@ -723,8 +723,8 @@ input:focus+label, input:not(:placeholder-shown)+label {
     position: fixed;
     z-index: 20;
     transform: scale(1.5);
-    margin-top: 250px;
-    margin-left: 750px;
+    top: 30%;
+    left: 45%;
     box-shadow: 0 0 4px 5px rgb(192, 15, 15);
     border: solid;
     border-radius: 15px;
