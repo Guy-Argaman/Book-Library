@@ -153,21 +153,6 @@ input {
     border-bottom: 2px solid rgb(98, 95, 95) !important;
 }
 
-.book-head {
-    display: grid;
-    text-align: center;
-    height: 50px;
-    font-family: fantasy;
-    font-size: 40px;
-    background-color: purple;
-    border: solid;
-    user-select: none;
-    border-radius: 10px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    margin-bottom: 15px;
-}
-
 .book-container {
     display: grid;
     top: 30%;
@@ -186,6 +171,21 @@ input {
     transition: all .5s;
     opacity: 0;
     visibility: hidden;
+}
+
+.book-head {
+    display: grid;
+    text-align: center;
+    height: 50px;
+    font-family: fantasy;
+    font-size: 40px;
+    background-color: purple;
+    border: solid;
+    user-select: none;
+    border-radius: 10px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-bottom: 10px;
 }
 
 .book-content {
@@ -484,13 +484,11 @@ h1 {
 }
 
 .wrapper {
+    display: grid;
     margin-top: 100px;
     transition: all 2s;
-    display: grid;
-    justify-content: start;
     grid-template-columns: repeat(3, 1fr);
     gap: 150px;
-    opacity: 1;
 }
 
 .btn-add:active {
@@ -637,7 +635,7 @@ h1 {
     border-radius: 10px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    margin-bottom: 15px;
+    margin-bottom: -25px;
 }
 
 #edit-name {
