@@ -519,7 +519,7 @@ h1 {
     position: fixed;
     z-index: 20;
     transform: scale(1.5);
-    top: 30%;
+    top: 45%;
     left: 45%;
     box-shadow: 0 0 4px 5px rgb(192, 15, 15);
     border: solid;
@@ -723,7 +723,7 @@ input:focus+label, input:not(:placeholder-shown)+label {
     position: fixed;
     z-index: 20;
     transform: scale(1.5);
-    top: 30%;
+    top: 45%;
     left: 45%;
     box-shadow: 0 0 4px 5px rgb(192, 15, 15);
     border: solid;
