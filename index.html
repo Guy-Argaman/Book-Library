@@ -31,12 +31,12 @@
             <label id="book-label" for="book-name">Book Title</label>
             <input type="number" class="book-input"
                 oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength); warnUser() "
-                maxlength="9" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="pages"
+                maxlength="9" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="pages" min="0"
                 placeholder=" " required>
             <label id="pages-label" for="pages" min="1">Current Page</label>
             <input type="number" class="book-input"
                 oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength); warnUser()"
-                maxlength="9" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="max-pages"
+                maxlength="9" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="max-pages" min="0"
                 placeholder=" " required>
             <label id="max-pages-label" for="max-pages" min="1">Total Pages</label>
             <input class="book-input" type="date" id="date" placeholder="" required>
@@ -54,13 +54,13 @@
             <label class="edit-labels" id="edit-book-label" for="edit-name">Current Title</label>
             <input type="number"
                 oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength); warnUserEdit()"
-                maxlength="9" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="edit-pages"
+                maxlength="9" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="edit-pages" min="0"
                 placeholder=" " required>
             <label class="edit-labels" id="edit-pages-label" for="edit-pages" min="1">Current Page</label>
             <input type="number"
                 oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength); warnUserEdit()"
                 maxlength="9" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="edit-max-pages"
-                placeholder=" " required>
+                min="0" placeholder=" " required>
             <label class="edit-labels" id="edit-max-pages-label" for="edit-max-pages" min="1">Total Pages</label>
             <input type="date" id="edit-date" placeholder=" " required>
             <label class="edit-labels" id="date-label-edit">Last Updated</label>
