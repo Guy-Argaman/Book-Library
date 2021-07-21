@@ -485,7 +485,7 @@ h1 {
 
 .wrapper {
     display: grid;
-    margin-top: 100px;
+    padding-top: 6rem;
     transition: all 2s;
     grid-template-columns: repeat(3, 1fr);
     gap: 150px;
@@ -695,11 +695,11 @@ h1 {
 }
 
 #edit-date:focus+label, input:not(:placeholder-shown)+label {
-    color: rgb(187, 202, 20);
+    color: yellow;
 }
 
 input:focus+label, input:not(:placeholder-shown)+label {
-    color: rgb(187, 202, 20);
+    color: yellow;
     transform: rotateX(90deg);
     transform: translate(0.25rem, -3rem);
 }

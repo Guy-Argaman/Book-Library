@@ -127,7 +127,6 @@ function saveEdit() {
     let cardDate = cardToModify.querySelector('.card-date');
     // Removes unnecessary spaces
     editTitle = editTitle.trim();
-    warnUserEdit();
     if (toggleWarning) {
         if (editPages === '' || editMaxPages === '' || editDate === '') {
             return;
@@ -160,6 +159,10 @@ function saveEdit() {
     updateStorageDetails();
 }
 
+let editBookLabel = document.querySelector('#edit-book-label');
+editBookLabel.innerText = 'Current Title';
+editBookLabel.style.color = '#828824';
+
 function warnUserEdit() {
     let editTitle = document.querySelector('#edit-name').value;
     let editPages = document.querySelector('#edit-pages').value;
@@ -170,20 +173,25 @@ function warnUserEdit() {
     let chosenCardTitle = cardToModify.querySelector('.card-title').innerText;
     for (let i = 0; i < myLibrary.length; i++) {
         if (editTitle === chosenCardTitle) {
+            editBookLabel.innerText = 'Current Title';
+            editBookLabel.style.color = '#828824';
+            toggleWarning = false;
             break;
         }
         if (editTitle === myLibrary[i].title) {
             editBookLabel.innerText = 'Book Exists';
             editBookLabel.style.color = 'darkred';
             toggleWarning = true;
-            return;
+            break;
+        }
+        else if (editTitle !== myLibrary[i].title) {
+            editBookLabel.innerText = 'New Title';
+            editBookLabel.style.color = '';
+            toggleWarning = false;
         }
     }
     if (editTitle === '') {
         toggleWarning = true;
-    }
-    else {
-        toggleWarning = false;
     }
     if (Number(editMaxPages) < Number(editPages) || Number(editMaxPages) < 0) {
         editMaxPagesLabel.innerText = 'Invalid Number'
@@ -380,7 +388,7 @@ function warnUser() {
     }
     else {
         titleLabel.innerText = 'Book Title';
-        titleLabel.style.color = 'pink';
+        titleLabel.style.color = '';
         toggleWarning = false;
     }
     if (Number(maxPagesInput) < Number(pagesInput) || Number(maxPagesInput) < 0) {
@@ -424,7 +432,6 @@ function addCard() {
     let pagesInput = document.querySelector('#pages').value;
     let maxPagesInput = document.querySelector('#max-pages').value;
     let dateInput = document.querySelector('#date').value;
-    warnUser();
     if (toggleWarning) {
         return;
     }
