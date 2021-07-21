@@ -183,7 +183,7 @@ function warnUserEdit() {
             toggleWarning = true;
             break;
         }
-        else if (editTitle !== myLibrary[i].title) {
+        if (editTitle !== myLibrary[i].title) {
             editBookLabel.innerText = 'New Title';
             editBookLabel.style.color = '';
             toggleWarning = false;
@@ -504,8 +504,8 @@ function resetEditModalInputs() {
     editTitle.value = '';
     editPages.value = '';
     editMaxPages.value = '';
-    editBookLabel.innerText = 'New Title';
-    editBookLabel.style.color = '';
+    editBookLabel.innerText = 'Current Title';
+    editBookLabel.style.color = '#828824';
     editPagesLabel.style.color = '';
     editMaxPagesLabel.style.color = '';
     editDate.value = '';
