@@ -8,6 +8,13 @@ let cardToModify;
 let gNextId = 0;
 // Disabling Right Click
 document.addEventListener('contextmenu', event => event.preventDefault());
+// Initializing some values to a specific value
+let editBookLabel = document.querySelector('#edit-book-label');
+editBookLabel.innerText = 'Current Title';
+editBookLabel.style.color = '#828824';
+// sidenav 
+let header = document.querySelector('.sidenav header');
+header.innerText = '<<';
 
 class Book {
     constructor(
@@ -26,10 +33,6 @@ class Book {
         this.bookId = bookId;
     }
 }
-
-// sidenav 
-let header = document.querySelector('.sidenav header');
-header.innerText = '<<';
 
 function adjustCursor() {
     let modal = document.querySelector('.book-container');
@@ -158,10 +161,6 @@ function saveEdit() {
     removeSpaces();
     updateStorageDetails();
 }
-
-let editBookLabel = document.querySelector('#edit-book-label');
-editBookLabel.innerText = 'Current Title';
-editBookLabel.style.color = '#828824';
 
 function warnUserEdit() {
     let editTitle = document.querySelector('#edit-name').value;
