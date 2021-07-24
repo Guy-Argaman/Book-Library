@@ -16,11 +16,49 @@ editBookLabel.style.color = '#828824';
 let header = document.querySelector('.sidenav header');
 header.innerText = '<<';
 
+
+// HOVER FUNCTIONS FOR CARDS
+function onHoverRemoveBtn(btn) {
+    cardToModify = btn.parentNode.parentNode.parentNode
+    let cardHead = cardToModify.querySelector('.card-head');
+    cardHead.style.color = 'red';
+    cardHead.style.textShadow = '0px 0px 3px red';
+    btn.style.color = 'red';
+    cardToModify.classList.add('hover-remove');
+}
+
+function removeHoverRemoveBtn(btn) {
+    cardToModify = btn.parentNode.parentNode.parentNode;
+    let cardHead = cardToModify.querySelector('.card-head');
+    cardHead.style.color = '';
+    cardHead.style.textShadow = '';
+    btn.style.color = '';
+    cardToModify.classList.remove('hover-remove');
+}
+
+function onHoverEditBtn(btn) {
+    cardToModify = btn.parentNode.parentNode.parentNode;
+    let cardHead = cardToModify.querySelector('.card-head');
+    cardHead.style.color = 'orange';
+    cardHead.style.textShadow = 'orange';
+    btn.style.color = 'yellow';
+    cardToModify.classList.add('hover-edit');
+}
+
+function removeHoverEditBtn(btn) {
+    cardToModify = btn.parentNode.parentNode.parentNode;
+    let cardHead = cardToModify.querySelector('.card-head');
+    cardHead.style.color = '';
+    cardHead.style.textShadow = '';
+    btn.style.color = '';
+    cardToModify.classList.remove('hover-edit');
+}
+
 class Book {
     constructor(
         title = 'Unknown',
-        pages = '0',
-        maxPages = '0',
+        pages = 0,
+        maxPages = 0,
         isRead = false,
         date = '',
         bookId = gNextId++,
@@ -67,6 +105,7 @@ function exitModal(editBtn) {
     window.onclick = function (event) {
         if (event.target == btnConfirmLocal || event.target == btnCancelLocal || event.target == editBtn || event.target == msgBtnNo || event.target == btnCancel || event.target == btnConfirm) {
             removeBlur();
+            resetInputs();
             resetEditModalInputs();
         }
     }
@@ -130,6 +169,7 @@ function saveEdit() {
     let cardDate = cardToModify.querySelector('.card-date');
     // Removes unnecessary spaces
     editTitle = editTitle.trim();
+    warnUserEdit();
     if (toggleWarning) {
         if (editPages === '' || editMaxPages === '' || editDate === '') {
             return;
@@ -145,10 +185,10 @@ function saveEdit() {
             bookName.innerText = editTitle;
             // Change Book Pages (both in the constructor and card)
             myLibrary[i].pages = Number(editPages);
-            cardPages.innerText = Number(editPages);
+            cardPages.innerText = parseInt(editPages);
             // Change Book Total Pages (both in the constructor and card)
             myLibrary[i].maxPages = Number(editMaxPages);
-            maxCardPages.innerText = Number(editMaxPages);
+            maxCardPages.innerText = parseInt(editMaxPages);
             // Change Book Date (both in the card)
             myLibrary[i].date = editDate;
             cardDate.innerText = editDate;
@@ -431,6 +471,7 @@ function addCard() {
     let pagesInput = document.querySelector('#pages').value;
     let maxPagesInput = document.querySelector('#max-pages').value;
     let dateInput = document.querySelector('#date').value;
+    warnUser();
     if (toggleWarning) {
         return;
     }
@@ -467,8 +508,8 @@ function createCard(book) {
             <button class="btn-remove-max-pages" onclick="reduceMaxPages(this)">➖</button>
         </div>
         <div class="btn-container">
-            <button class="btn-edit" onclick="showEdit(this)">EDIT</button>
-            <button class="btn-remove" onclick="removeCard(this)">REMOVE</button>
+            <button class="btn-edit" onclick="showEdit(this)" onmouseover="onHoverEditBtn(this)" onmouseout="removeHoverEditBtn(this)">EDIT</button>
+            <button class="btn-remove" onclick="removeCard(this)" onmouseover="onHoverRemoveBtn(this)" onmouseout="removeHoverRemoveBtn(this)">REMOVE</button>
         </div>
     </div>`
     return strHTML;
@@ -485,6 +526,7 @@ function resetInputs() {
     let titleLabel = document.querySelector('#book-label');
     pagesLabel.style.color = '';
     maxPagesLabel.style.color = '';
+    titleLabel.innerText = 'Book Title';
     titleLabel.style.color = '';
     titleInput.value = '';
     pagesInput.value = '';

@@ -1,5 +1,6 @@
 body {
     background: url(https://tinyurl.com/5axytknj);
+    /* background: linear-gradient( rgb(197, 193, 193), rgb(82, 80, 80)) repeat; */
     background-size: cover;
 }
 
@@ -47,7 +48,7 @@ header {
 .plus {
     display: grid;
     transition: all 0.8s ease-in-out;
-    background-color: rgb(218, 197, 197);
+    background-color: rgb(231, 220, 220);
     margin: 0 auto;
     margin-top: 70px;
     border: solid;
@@ -78,15 +79,15 @@ header {
     box-shadow: 0 0 4px 2px rgb(14, 11, 14);
     transform: scale(2.5);
     background-color: purple;
-    transition: ease-out;
-    transition-duration: 1s;
+    transition: cubic-bezier(.55, .2, .8, .8);
+    transition-duration: .7s;
 }
 
 /* HOVERING OVER THE .PLUS DIV CHANGES THE INNER TEXT AS WELL */
 
 .plus:hover span {
-    transition: ease-in-out;
-    transition-duration: 1s;
+    transition: cubic-bezier(.55, .2, .8, .8);
+    transition-duration: .7s;
     transform: rotateZ(90deg);
 }
 
@@ -361,6 +362,14 @@ label {
     border-top-right-radius: 0;
 }
 
+.hover-remove {
+    border-color: red;
+}
+
+.hover-edit {
+    border-color: orange;
+}
+
 .btn-remove:active {
     transition: all .2s;
     box-shadow: 1px 0px 1px 0px rgb(71, 39, 39);
@@ -390,16 +399,20 @@ h1 {
 
 .card-head {
     align-items: center;
+    transition: all .3s;
+    text-shadow: 0px 0px 3px white;
 }
 
 .card-pages-head {
     border-radius: 0;
     align-items: center;
+    text-shadow: 0px 0px 3px white;
 }
 
 .card-max-pages-head {
     border-radius: 0;
     align-items: center;
+    text-shadow: 0px 0px 3px white;
 }
 
 .card-date {
@@ -485,6 +498,7 @@ h1 {
 
 .wrapper {
     display: grid;
+    grid-area: 'card card card';
     padding-top: 6rem;
     transition: all 2s;
     grid-template-columns: repeat(3, 1fr);
