@@ -2,96 +2,112 @@
 
 <head>
     <link rel="stylesheet" href="./css/stylesheet.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>Book Library</title>
 </head>
 
-<body onload="populateStorage()">
+<body>
     <header class="title">
         <span>Library</span>
         <button id="btn-storage" onclick="showMsgConfirm()">CLEAR STORAGE</button>
     </header>
-    <div class="sidenav">
-        <header></header>
-        <div id="item1" class="item">Books:
-            <hr class="hr">
-        </div>
-        <div id="item2" class="item">Completed Books:
-            <hr class="hr">
-        </div>
-        <div id="item3" class="item">Total Pages:
-            <hr class="hr">
-        </div>
-        <div id="item4" class="item">MADE BY GUY ARGAMAN</div>
-    </div>
-    <div class="book-container">
-        <div class="book-content">
-            <div class="book-head">ADD NEW BOOK</div>
-            <input class="book-input" oninput="warnUser()" type="text" maxlength="33" id="book-name" placeholder=" "
-                required>
-            <label id="book-label" for="book-name">Book Title</label>
-            <input type="number" class="book-input"
-                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength); warnUser() "
-                maxlength="9" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="pages" min="0"
-                placeholder=" " required>
-            <label id="pages-label" for="pages" min="1">Current Page</label>
-            <input type="number" class="book-input"
-                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength); warnUser()"
-                maxlength="9" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="max-pages" min="0"
-                placeholder=" " required>
-            <label id="max-pages-label" for="max-pages" min="1">Total Pages</label>
-            <input class="book-input" type="date" id="date" placeholder="" required>
-            <label id="date-label-book">Last Updated</label>
-            <div class="btn-element">
-                <button class="btn-add" onclick="addCard()">ADD</button>
-                <button class="btn-cancel" onclick="exitModal()">CANCEL</button>
+    <main>
+        <div class="container">
+            <div class="sidenav">
+                <div id="item1" class="item">Books:
+                    <hr>
+                </div>
+                <div id="item2" class="item">Completed Books:
+                    <hr>
+                </div>
+                <div id="item3" class="item">Total Pages:
+                    <hr>
+                </div>
+                <div id="item4" class="item">MADE BY GUY ARGAMAN</div>
+            </div>
+            <div class="overlay">
+                <div class="modal">
+                    <div class="modal-content">
+                        <div class="modal-head">ADD NEW BOOK</div>
+                        <div class="modal-input">
+                            <input type="text" maxlength="33" id="modal-name" placeholder="" required>
+                            <label id="modal-label">Book Title</label>
+                        </div>
+                        <div class="modal-input">
+                            <input type="number"
+                                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                maxlength="9" onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                                id="pages" min="0" placeholder=" " required>
+                            <label id="pages-label" for="pages" min="1">Current Page</label>
+                        </div>
+                        <div class="modal-input">
+                            <input type="number"
+                                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                maxlength="9" onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                                id="max-pages" min="0" placeholder=" " required>
+                            <label id="max-pages-label" for="max-pages" min="1">Total Pages</label>
+                        </div>
+                        <div class="modal-input">
+                            <input type="date" id="date" placeholder="" required>
+                            <label id="date-label-modal">Last Updated</label>
+                        </div>
+
+                        <div class="button-wrapper">
+                            <button class="button-add">ADD</button>
+                            <button class="button-cancel">CANCEL</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="edit-container">
+                <div class="edit-head">EDIT BOOK</div>
+                <div class="content">
+                    <input type="text" oninput="warnUserEdit()" maxlength="33" id="edit-name" placeholder=" " required>
+                    <label class="edit-labels" id="edit-book-label" for="edit-name">Current Title</label>
+                    <input type="number"
+                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength); warnUserEdit()"
+                        maxlength="9" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="edit-pages"
+                        min="0" placeholder=" " required>
+                    <label class="edit-labels" id="edit-pages-label" for="edit-pages" min="1">Current Page</label>
+                    <input type="number"
+                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength); warnUserEdit()"
+                        maxlength="9" onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                        id="edit-max-pages" min="0" placeholder=" " required>
+                    <label class="edit-labels" id="edit-max-pages-label" for="edit-max-pages" min="1">Total
+                        Pages</label>
+                    <input type="date" id="edit-date" placeholder=" " required>
+                    <label class="edit-labels" id="date-label-edit">Last Updated</label>
+                    <div class="edit-btns">
+                        <button class="btn-save" onclick="saveEdit()">SAVE</button>
+                        <button class="btn-cancel">CANCEL</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="edit-container">
-        <div class="edit-head">EDIT BOOK</div>
-        <div class="content">
-            <input type="text" oninput="warnUserEdit()" maxlength="33" id="edit-name" placeholder=" " required>
-            <label class="edit-labels" id="edit-book-label" for="edit-name">Current Title</label>
-            <input type="number"
-                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength); warnUserEdit()"
-                maxlength="9" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="edit-pages" min="0"
-                placeholder=" " required>
-            <label class="edit-labels" id="edit-pages-label" for="edit-pages" min="1">Current Page</label>
-            <input type="number"
-                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength); warnUserEdit()"
-                maxlength="9" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="edit-max-pages"
-                min="0" placeholder=" " required>
-            <label class="edit-labels" id="edit-max-pages-label" for="edit-max-pages" min="1">Total Pages</label>
-            <input type="date" id="edit-date" placeholder=" " required>
-            <label class="edit-labels" id="date-label-edit">Last Updated</label>
-            <div class="edit-btns">
-                <button class="btn-save" onclick="saveEdit()">SAVE</button>
-                <button class="btn-cancel" onclick="exitModal(this)">CANCEL</button>
+        <div class="msg-container">
+            <div class="msg-head">Would you like to remove this book?</div>
+            <div class="msg-content">
+                <div class="msg-btns">
+                    <button class="btn-yes" onclick="removeCardConfirm(); exitModal()">Oh, yes</button>
+                    <button class="btn-no">NO!</button>
+                </div>
             </div>
         </div>
-    </div>
-    </div>
-    <div class="msg-container">
-        <div class="msg-head">Would you like to remove this book?</div>
-        <div class="msg-content">
-            <div class="msg-btns">
-                <button class="btn-yes" onclick="removeCardConfirm(); exitModal()">Oh, yes</button>
-                <button class="btn-no" onclick="exitModal()">NO!</button>
+        <div class="msg-local-container">
+            <div class="msg-local-head">Are you sure you want to clear storage? (Cannot be undone)</div>
+            <div class="msg-local-content">
+                <div class="msg-local-btns">
+                    <button class="btn-local-yes" onclick="deleteLocal(); removeMsgConfrim()">CONFIRM</button>
+                    <button class="btn-local-no" onclick="exitModal()">NO! NO! NO!</button>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="msg-local-container">
-        <div class="msg-local-head">Are you sure you want to clear storage? (Cannot be undone)</div>
-        <div class="msg-local-content">
-            <div class="msg-local-btns">
-                <button class="btn-local-yes" onclick="deleteLocal(); removeMsgConfrim()">CONFIRM</button>
-                <button class="btn-local-no" onclick="exitModal()">NO! NO! NO!</button>
-            </div>
+        <div class="wrapper">
+            <div class="plus"><span>➕</span></div>
         </div>
-    </div>
-    <div class="wrapper">
-        <div class="plus" onclick="showModal(this)"><span>➕</span></div>
-    </div>
+        </div>
+    </main>
+
     <script src="./js/main.js"></script>
 </body>
 
