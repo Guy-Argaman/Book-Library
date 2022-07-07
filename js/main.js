@@ -1,9 +1,9 @@
 'use strict';
 $(document).ready(function () {
     let myLibrary = [];
+    let cardID;
     let titleValid = false;
     let pagesValid = false;
-    let gNextId = 0;
     class Book {
         constructor(
             title = 'Unknown',
@@ -11,7 +11,7 @@ $(document).ready(function () {
             maxPages = 0,
             isRead = false,
             date = '',
-            bookId = gNextId++,
+            bookId = '',
         ) {
             this.title = title;
             this.pages = pages;
@@ -54,24 +54,44 @@ $(document).ready(function () {
         cardPagesEl.text(currentNum);
     });
     $(document).on('click', '.btn-decline', function () {
-        $('.overlay,.message').fadeOut(300);
+        $('.overlay, .message').fadeOut(300);
     });
     $(document).on('click', '.card .btn-remove', function () {
-        let card = $(this).parents('.card');
-        console.log(card);
-        console.log(card.data().id);
-        console.log(myLibrary, 'before');
+        cardID = $(this).parents('.card').data().id;
         $('.overlay, .message').fadeIn();
-        $('.btn-confirm').on('click', function () {
-            $('.overlay, .message').fadeOut().promise().done(function () {
-                console.log(card.data().id);
-                myLibrary.splice(card.data().id, 1);
-                console.log(myLibrary, 'after');
-                card.remove();
-            });
-        });
+    });
+    $('.btn-confirm').on('click', function () {
+        $('.overlay, .message').fadeOut();
+        let book = getBookByID(cardID);
+        console.log(cardID);
+        $(book.card).remove();
+        // console.log(cardID);
+        delete myLibrary[cardID];
+        if (myLibrary[cardID] === undefined) {
+            myLibrary.splice(cardID, 1);
+        }
+        // console.log(myLibrary[cardID].splice(cardID, 1));
+        // for (let i = 0; i < myLibrary.length; i++) {
+        //     if (card.find('.card-title').text() === myLibrary[i].title) {
+        //         card.remove();
+        //         myLibrary.splice(i, 1);
+        //     }
+        // }
+        console.log(myLibrary, 'after');
     });
 
+    function getBookByID(id) {
+        let bookDetails = {
+            book: '',
+            card: cardID,
+        };
+        if (myLibrary[id]) {
+            bookDetails.book = myLibrary[id];
+            bookDetails.card = $(`.card[data-id="${id}"]`)[0];
+        }
+        console.log(bookDetails);
+        return bookDetails;
+    }
     function checkRepeats() {
         for (let i = 0; i < myLibrary.length; i++) {
             if ($('#modal-name').val() === myLibrary[i].title) {
@@ -108,7 +128,7 @@ $(document).ready(function () {
         if (!titleValid || !pagesValid) {
             return;
         }
-        myLibrary.push(new Book($('#modal-name').val(), Number($('#pages').val()), Number($('#max-pages').val()), false, $('#date').val()));
+        myLibrary.push(new Book($('#modal-name').val(), Number($('#pages').val()), Number($('#max-pages').val()), false, $('#date').val(), myLibrary.length));
         let newCard = createCard(myLibrary[myLibrary.length - 1]);
         $('.wrapper').append(newCard);
         $('.overlay, .modal').fadeOut(300).promise().done(function () {
@@ -118,6 +138,7 @@ $(document).ready(function () {
     function clearInputs() {
         $('.modal input').val('');
     }
+
     function createCard(book) {
         let strHTML = `<div class="card" data-id="${book.bookId}">
     <div class="content">
@@ -144,4 +165,3 @@ $(document).ready(function () {
         return strHTML;
     }
 });
-// getBookByID(0);
