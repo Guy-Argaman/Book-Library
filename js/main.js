@@ -29,21 +29,39 @@ $(document).ready(function () {
     $('.button-add').on('click', function () {
         addCard();
     });
-    $(document).on('click', '.card button', function () {
-        let cardPages = $(this)[0].classList.contains('add') ? $(this).next() : $(this).prev();
-        let currentNum = Number(cardPages.text());
+    $(document).on('click', '.card button:not(.btn-edit):not(.btn-remove)', function () {
+        let cardPagesEl = $(this)[0].classList.contains('add') ? $(this).next() : $(this).prev();
+        let cardPagesNum = Number($(this).parents('.card').find('.card-pages').text());
+        let cardMaxPagesNum = Number($(this).parents('.card').find('.card-max-pages').text());
+        let currentNum = Number(cardPagesEl.text());
         if ($(this)[0].classList.contains('add')) {
             currentNum++;
+
         } else {
             currentNum--;
+            if (currentNum < 0) { return }
         }
-        console.log($(this).find('card-max-pages'));
-        if (currentNum >= $(this).find('card-max-pages')) {
-            $('.card-max-pages', this).text(currentNum);
+        if (cardPagesEl.hasClass('card-pages')) {
+            if (currentNum >= cardMaxPagesNum) {
+                $(this).parents('.card').find('.card-max-pages').text(currentNum);
+            }
+        } else {
+            if (currentNum <= cardPagesNum) {
+                $(this).parents('.card').find('.card-pages').text(currentNum);
+            }
         }
-        cardPages.text(currentNum);
+        cardPagesEl.text(currentNum);
     });
 
+    $(document).on('click', '.card .btn-remove', function () {
+        let card = $(this).parents('.card');
+        $('.overlay, .message').fadeIn();
+        $('.btn-yes').on('click', function () {
+            $('.overlay, .message').fadeOut().promise().done(function () {
+                card.remove();
+            });
+        });
+    });
     function checkRepeats() {
         for (let i = 0; i < myLibrary.length; i++) {
             if ($('#modal-name').val() === myLibrary[i].title) {
@@ -110,7 +128,7 @@ $(document).ready(function () {
         </div>
         <div class="btn-container">
             <button class="btn-edit">EDIT</button>
-            <button class="btn-remove" onclick="removeCard(this)">REMOVE</button>
+            <button class="btn-remove">REMOVE</button>
         </div>
     </div>`
         return strHTML;

@@ -376,79 +376,137 @@ input:focus:not(#date) + label {
 
 /* NEW CARD ELEMENTS / PARAMETERS */
 .card {
+  position: relative;
   display: -ms-grid;
   display: grid;
-  margin: 0 auto;
-  -webkit-transform: scale(1.3);
-          transform: scale(1.3);
   -webkit-box-shadow: 0 0 4px 5px #806e80;
           box-shadow: 0 0 4px 5px #806e80;
   border: solid;
   border-radius: 15px;
-  height: 300px;
-  width: 300px;
   color: white;
   background-color: rgba(0, 0, 0, 0.876);
-  -webkit-transition: all 0.5s;
-  transition: all 0.5s;
+  -webkit-transition: background-color 0.5s;
+  transition: background-color 0.5s;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
+  overflow: hidden;
+  max-width: 30rem;
 }
 
-.card .btn-edit:hover {
-  color: orange;
+.card-head, .card-pages-head, .card-max-pages-head {
+  font-size: 50px;
+  padding: 0 20px;
+  margin: 0;
 }
 
-.card .btn-edit:hover .card-head {
-  color: yellow;
-  text-shadow: 0px 0px 3px orange;
+.card-title {
+  padding: 20px 15px !important;
 }
 
-.content {
-  display: -ms-grid;
-  display: grid;
+.card-date {
+  position: fixed;
+  font-size: 15px;
+  -ms-grid-column-align: right;
+      justify-self: right;
+  margin-top: 39px;
+  text-shadow: 1px 1px 1px purple;
 }
 
-.btn-edit {
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  padding: 8px 8px;
-  font-size: 14px;
+.card-title, .card-btns-pages, .card-btns-max-pages {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 20px;
+  padding: 20px 0;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 30px;
+}
+
+.card .btn-add-pages,
+.card .btn-add-max-pages,
+.card .btn-reduce-pages,
+.card .btn-reduce-max-pages {
+  border: none;
+  -webkit-transition: background-color 0.5s;
+  transition: background-color 0.5s;
+}
+
+.card .btn-add-pages,
+.card .btn-add-max-pages {
+  background-color: green;
+}
+
+.card .btn-add-pages:active,
+.card .btn-add-max-pages:active {
+  background-color: #13ff13;
+}
+
+.card .btn-reduce-pages,
+.card .btn-reduce-max-pages {
+  background-color: brown;
+}
+
+.card .btn-reduce-pages:active,
+.card .btn-reduce-max-pages:active {
+  background-color: red;
+}
+
+.card .btn-edit,
+.card .btn-remove {
+  font-size: 30px;
   text-align: center;
-  width: 150px;
+  width: 100%;
   color: #fff;
   background-color: #e9650d;
   -webkit-box-shadow: 0 -4px 0 orange;
           box-shadow: 0 -4px 0 orange;
   border: none;
-  border-radius: 11px;
-  border-bottom-right-radius: 0;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+  -webkit-transition: background-color 0.2s, -webkit-box-shadow 0.2s;
+  transition: background-color 0.2s, -webkit-box-shadow 0.2s;
+  transition: box-shadow 0.2s, background-color 0.2s;
+  transition: box-shadow 0.2s, background-color 0.2s, -webkit-box-shadow 0.2s;
 }
 
-.btn-remove {
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  padding: 8px 8px;
-  width: 150px;
-  font-size: 14px;
-  text-align: center;
-  color: #fff;
+.card .btn-edit:hover,
+.card .btn-remove:hover {
+  color: orange;
+  text-shadow: 0px 0px 3px orange;
+}
+
+.card .btn-edit:active,
+.card .btn-remove:active {
+  -webkit-box-shadow: 1px 0px 1px 0px #472727;
+          box-shadow: 1px 0px 1px 0px #472727;
+  color: orange;
+  background-color: #644a19;
+}
+
+.card .btn-remove {
   background-color: #681212;
   -webkit-box-shadow: 0 -4px 0 brown;
           box-shadow: 0 -4px 0 brown;
-  border: none;
-  border-radius: 11px;
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+}
+
+.card .btn-remove:hover {
+  color: brown;
+  text-shadow: 0px 0px 3px brown;
+}
+
+.card .btn-remove:active {
+  color: red;
+  background-color: brown;
+}
+
+.content {
+  display: -ms-grid;
+  display: grid;
 }
 
 .hover-remove {
@@ -457,24 +515,6 @@ input:focus:not(#date) + label {
 
 .hover-edit {
   border-color: orange;
-}
-
-.btn-remove:active {
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s;
-  -webkit-box-shadow: 1px 0px 1px 0px #472727;
-          box-shadow: 1px 0px 1px 0px #472727;
-  color: red;
-  background-color: brown;
-}
-
-.btn-edit:active {
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s;
-  -webkit-box-shadow: 1px 0px 1px 0px #472727;
-          box-shadow: 1px 0px 1px 0px #472727;
-  color: orange;
-  background-color: #644a19;
 }
 
 h1 {
@@ -489,119 +529,6 @@ h1 {
   border-radius: 10px;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-}
-
-.card-head {
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
-  text-shadow: 0px 0px 3px white;
-}
-
-.card-pages-head {
-  border-radius: 0;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  text-shadow: 0px 0px 3px white;
-}
-
-.card-max-pages-head {
-  border-radius: 0;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  text-shadow: 0px 0px 3px white;
-}
-
-.card-date {
-  position: fixed;
-  font-size: 15px;
-  -ms-grid-column-align: right;
-      justify-self: right;
-  margin-top: 39px;
-  text-shadow: 1px 1px 1px purple;
-}
-
-.card-title {
-  display: -ms-grid;
-  display: grid;
-  font-size: 20px;
-  text-shadow: 1px 1px 1px white;
-  text-align: center;
-}
-
-.card-btns-pages {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  gap: 10px;
-  justify-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  justify-self: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  margin: 0 auto;
-}
-
-.card-btns-max-pages {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  gap: 10px;
-  justify-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  justify-self: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  margin: 0 auto;
-}
-
-.card-pages {
-  justify-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -ms-flex-line-pack: center;
-      align-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.card-max-pages {
-  justify-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -ms-flex-line-pack: center;
-      align-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.btn-add-pages,
-.btn-reduce-pages,
-.btn-reduce-max-pages,
-.btn-add-max-pages {
-  background-color: #c72020;
-  border: 0;
-  -webkit-transition: background-color 0.5s;
-  transition: background-color 0.5s;
-}
-
-.btn-add-pages,
-.btn-add-max-pages {
-  background-color: green;
 }
 
 .btn-container {
@@ -631,14 +558,6 @@ h1 {
   gap: 150px;
 }
 
-.btn-add-pages:active {
-  background-color: #13ff13;
-}
-
-.btn-cancel:active {
-  background-color: red;
-}
-
 .delete-msg {
   -webkit-transition: all 2s ease-in-out;
   transition: all 2s ease-in-out;
@@ -652,39 +571,24 @@ h1 {
 }
 
 /* CONFIRMATION FOR DELETION MESSAGE */
-.msg-container {
-  position: fixed;
-  z-index: 20;
-  -webkit-transform: scale(1.5);
-          transform: scale(1.5);
-  top: 45%;
-  left: 45%;
-  -webkit-box-shadow: 0 0 4px 5px #c00f0f;
-          box-shadow: 0 0 4px 5px #c00f0f;
+.message {
+  display: none;
+  -webkit-box-shadow: 0 0 4px 5px navajowhite;
+          box-shadow: 0 0 4px 5px navajowhite;
   border: solid;
   border-radius: 15px;
-  block-size: 10rem;
-  height: 90px;
-  width: 300px;
-  -webkit-box-sizing: content-box;
-          box-sizing: content-box;
   background-color: rgba(61, 22, 22, 0.876);
-  cursor: default;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  -webkit-transition: all 0.5s;
-  transition: all 0.5s;
-  opacity: 0;
-  visibility: hidden;
+  overflow: hidden;
+  -webkit-transition: background-color 0.5s;
+  transition: background-color 0.5s;
 }
 
-.msg-head {
+.message-head {
   text-align: center;
   font-family: fantasy;
-  font-size: 20px;
-  background-color: #770404;
+  font-size: 40px;
+  padding: 10px 0 0;
+  background-color: navajowhite;
   border: solid;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -695,73 +599,49 @@ h1 {
   border-bottom-right-radius: 0;
 }
 
-.btn-yes {
-  -webkit-transition: all 0.5s;
-  transition: all 0.5s;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  padding: 8px 8px;
-  font-size: 14px;
-  width: 150px;
+.message-buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.message-buttons .btn-confirm,
+.message-buttons .btn-decline {
+  padding: 10px 0;
+  font-size: 30px;
+  width: 100%;
   color: #fff;
   background-color: #144b25;
-  -webkit-box-shadow: 0 -4px 0 green;
-          box-shadow: 0 -4px 0 green;
+  -webkit-box-shadow: 0 -8px 0 green;
+          box-shadow: 0 -8px 0 green;
   border: 0;
-  border-radius: 12px;
-  border-bottom-right-radius: 0;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+  -webkit-transition: background-color 0.2s, -webkit-box-shadow 0.5s;
+  transition: background-color 0.2s, -webkit-box-shadow 0.5s;
+  transition: background-color 0.2s, box-shadow 0.5s;
+  transition: background-color 0.2s, box-shadow 0.5s, -webkit-box-shadow 0.5s;
 }
 
-.btn-no {
-  -webkit-transition: all 0.5s;
-  transition: all 0.5s;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  padding: 8px 8px;
-  width: 150px;
-  font-size: 14px;
-  text-align: center;
-  color: #fff;
-  background-color: #681212;
-  -webkit-box-shadow: 0px -4px 0px 0px brown;
-          box-shadow: 0px -4px 0px 0px brown;
-  border: 0;
-  border-radius: 12px;
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-
-.btn-yes:hover {
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s;
+.message-buttons .btn-confirm:hover,
+.message-buttons .btn-decline:hover {
   color: #01ff01;
   background-color: #245734;
 }
 
-.btn-no:hover {
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s;
-  color: red;
-  background-color: #702626;
+.message-buttons .btn-confirm:active,
+.message-buttons .btn-decline:active {
+  -webkit-box-shadow: 0px -3px 0px 0px;
+          box-shadow: 0px -3px 0px 0px;
 }
 
-.msg-btns {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  justify-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -ms-flex-line-pack: center;
-      align-content: center;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
-  margin-top: 5px;
+.message-buttons .btn-decline {
+  background-color: #681212;
+  -webkit-box-shadow: 0px -8px 0px 0px brown;
+          box-shadow: 0px -8px 0px 0px brown;
+}
+
+.message-buttons .btn-decline:hover {
+  color: red;
+  background-color: #702626;
 }
 
 /* EDIT ELEMENTS */
