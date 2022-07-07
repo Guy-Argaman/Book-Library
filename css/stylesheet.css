@@ -615,10 +615,10 @@ h1 {
   -webkit-box-shadow: 0 -8px 0 green;
           box-shadow: 0 -8px 0 green;
   border: 0;
-  -webkit-transition: background-color 0.2s, -webkit-box-shadow 0.5s;
-  transition: background-color 0.2s, -webkit-box-shadow 0.5s;
-  transition: background-color 0.2s, box-shadow 0.5s;
-  transition: background-color 0.2s, box-shadow 0.5s, -webkit-box-shadow 0.5s;
+  -webkit-transition: background-color 0.2s, -webkit-box-shadow 0.2s;
+  transition: background-color 0.2s, -webkit-box-shadow 0.2s;
+  transition: background-color 0.2s, box-shadow 0.2s;
+  transition: background-color 0.2s, box-shadow 0.2s, -webkit-box-shadow 0.2s;
 }
 
 .message-buttons .btn-confirm:hover,

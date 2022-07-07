@@ -1,3 +1,4 @@
+'use strict';
 $(document).ready(function () {
     let myLibrary = [];
     let titleValid = false;
@@ -52,16 +53,25 @@ $(document).ready(function () {
         }
         cardPagesEl.text(currentNum);
     });
-
+    $(document).on('click', '.btn-decline', function () {
+        $('.overlay,.message').fadeOut(300);
+    });
     $(document).on('click', '.card .btn-remove', function () {
         let card = $(this).parents('.card');
+        console.log(card);
+        console.log(card.data().id);
+        console.log(myLibrary, 'before');
         $('.overlay, .message').fadeIn();
-        $('.btn-yes').on('click', function () {
+        $('.btn-confirm').on('click', function () {
             $('.overlay, .message').fadeOut().promise().done(function () {
+                console.log(card.data().id);
+                myLibrary.splice(card.data().id, 1);
+                console.log(myLibrary, 'after');
                 card.remove();
             });
         });
     });
+
     function checkRepeats() {
         for (let i = 0; i < myLibrary.length; i++) {
             if ($('#modal-name').val() === myLibrary[i].title) {
@@ -109,7 +119,7 @@ $(document).ready(function () {
         $('.modal input').val('');
     }
     function createCard(book) {
-        let strHTML = `<div class="card" id="book-${book.bookId}">
+        let strHTML = `<div class="card" data-id="${book.bookId}">
     <div class="content">
     <h1 class="card-head">BOOK TITLE</h1>
     <div class="card-title">${book.title}</div>
@@ -134,3 +144,4 @@ $(document).ready(function () {
         return strHTML;
     }
 });
+// getBookByID(0);

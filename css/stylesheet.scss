@@ -539,7 +539,7 @@ h1 {
             background-color: rgb(20, 75, 37);
             box-shadow: 0 -8px 0 green;
             border: 0;
-            transition: background-color 0.2s, box-shadow 0.5s;
+            transition: background-color 0.2s, box-shadow 0.2s;
             &:hover {
                 color: rgb(1, 255, 1);
                 background-color: rgb(36, 87, 52);
