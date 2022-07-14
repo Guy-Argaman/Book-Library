@@ -11,7 +11,7 @@ $(document).ready(function () {
             maxPages = 0,
             isRead = false,
             date = '',
-            bookId = 0,
+            bookId = '',
         ) {
             this.title = title;
             this.pages = pages;
