@@ -64,10 +64,15 @@ header {
 
 /* PLUS ADD BUTTON START */
 .plus {
-  display: -ms-grid;
-  display: grid;
-  -webkit-transition: all 0.8s ease-in-out;
-  transition: all 0.8s ease-in-out;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   background-color: #e7dcdc;
   margin: 0 auto;
   margin-top: 70px;
@@ -81,9 +86,18 @@ header {
       -ms-flex-order: 1;
           order: 1;
   cursor: pointer;
+  -webkit-transition-property: border-radius, color, background-color, -webkit-transform, -webkit-box-shadow;
+  transition-property: border-radius, color, background-color, -webkit-transform, -webkit-box-shadow;
+  transition-property: transform, box-shadow, border-radius, color, background-color;
+  transition-property: transform, box-shadow, border-radius, color, background-color, -webkit-transform, -webkit-box-shadow;
+  -webkit-transition-duration: 0.8s;
+          transition-duration: 0.8s;
+  -webkit-transition-timing-function: ease-in-out, ease-out, ease-out, ease-in;
+          transition-timing-function: ease-in-out, ease-out, ease-out, ease-in;
+  -webkit-transition-delay: 0s, 0s, 0s, 0.2s;
+          transition-delay: 0s, 0s, 0s, 0.2s;
 }
 
-/* INNER SYMOBL OF ADD BUTTON */
 .plus span {
   -webkit-transition-duration: 1s;
           transition-duration: 1s;
@@ -100,7 +114,6 @@ header {
           user-select: none;
 }
 
-/* HOVERING OVER THE .PLUS DIV CHANGES THE SCALE ETC */
 .plus:hover {
   border-color: black;
   border-radius: 10px;
@@ -115,12 +128,7 @@ header {
           transition-duration: 0.7s;
 }
 
-/* HOVERING OVER THE .PLUS DIV CHANGES THE INNER TEXT AS WELL */
 .plus:hover span {
-  -webkit-transition: cubic-bezier(0.55, 0.2, 0.8, 0.8);
-  transition: cubic-bezier(0.55, 0.2, 0.8, 0.8);
-  -webkit-transition-duration: 0.7s;
-          transition-duration: 0.7s;
   -webkit-transform: rotateZ(90deg);
           transform: rotateZ(90deg);
 }
@@ -549,25 +557,10 @@ h1 {
 .wrapper {
   display: -ms-grid;
   display: grid;
-  grid-area: "card card card";
-  padding-top: 6rem;
-  -webkit-transition: all 2s;
-  transition: all 2s;
+  padding-top: 5rem;
   -ms-grid-columns: (1fr)[3];
       grid-template-columns: repeat(3, 1fr);
   gap: 150px;
-}
-
-.delete-msg {
-  -webkit-transition: all 2s ease-in-out;
-  transition: all 2s ease-in-out;
-  font-size: 15px;
-  color: red;
-  text-align: center;
-  margin-top: -60px;
-  opacity: 1;
-  border: double;
-  width: 250px;
 }
 
 /* CONFIRMATION FOR DELETION MESSAGE */
