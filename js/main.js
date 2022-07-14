@@ -54,7 +54,7 @@ $(document).ready(function () {
         cardPagesEl.text(currentNum);
     });
     $(document).on('click', '.card .btn-remove', function () {
-        cardID = $(this).parent().closest('.card').data().id;
+        cardID = $(this).parent().closest('.card').attr('data-id');
         $('.overlay, .message').fadeIn();
     });
     $('.btn-confirm').on('click', function () {
@@ -64,7 +64,6 @@ $(document).ready(function () {
         assignIDs();
     });
     $(document).on('click', '.btn-decline', function () {
-        cardID = '';
         $('.overlay,.message').fadeOut(300);
     });
 
