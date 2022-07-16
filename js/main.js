@@ -93,6 +93,10 @@ $(document).ready(function () {
         // $('#max-pages').val(myLibrary[ID].maxPages);
         // $('#date').val(myLibrary[ID].date);
     });
+    $(document).on('click', '.btn-decline', function () {
+        $('.overlay,.message').fadeOut(300);
+    });
+
     function assignIDs() {
         let newId = '';
         for (let i = 0; i < myLibrary.length; i++) {
