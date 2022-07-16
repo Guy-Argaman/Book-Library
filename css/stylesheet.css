@@ -670,6 +670,7 @@ input:focus:not(.date) + label {
 
 .msg-local-container {
   position: fixed;
+  display: none;
   z-index: 20;
   -webkit-transform: scale(1.5);
           transform: scale(1.5);
@@ -690,10 +691,6 @@ input:focus:not(.date) + label {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
-  -webkit-transition: all 0.5s;
-  transition: all 0.5s;
-  opacity: 0;
-  visibility: hidden;
 }
 
 .msg-local-head {
@@ -778,12 +775,5 @@ input:focus:not(.date) + label {
       -ms-flex-align: end;
           align-items: flex-end;
   margin-top: 5px;
-}
-
-.opacity {
-  -webkit-transition: all 0.5s;
-  transition: all 0.5s;
-  opacity: 1;
-  visibility: visible;
 }
 /*# sourceMappingURL=stylesheet.css.map */

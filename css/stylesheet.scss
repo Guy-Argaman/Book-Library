@@ -463,6 +463,7 @@ input:focus:not(.date) + label {
 
 .msg-local-container {
     position: fixed;
+    display: none;
     z-index: 20;
     transform: scale(1.5);
     top: 45%;
@@ -477,9 +478,7 @@ input:focus:not(.date) + label {
     background-color: rgba(61, 22, 22, 0.876);
     cursor: default;
     user-select: none;
-    transition: all 0.5s;
-    opacity: 0;
-    visibility: hidden;
+    // transition: all 0.5s;
 }
 
 .msg-local-head {
@@ -546,10 +545,4 @@ input:focus:not(.date) + label {
     align-content: center;
     align-items: flex-end;
     margin-top: 5px;
-}
-
-.opacity {
-    transition: all 0.5s;
-    opacity: 1;
-    visibility: visible;
 }

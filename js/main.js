@@ -10,14 +10,12 @@ $(document).ready(function () {
             title = 'Unknown',
             pages = 0,
             maxPages = 0,
-            isRead = false,
             date = '',
             bookId = '',
         ) {
             this.title = title;
             this.pages = pages;
             this.maxPages = maxPages;
-            this.isRead = isRead;
             this.date = date;
             this.bookId = bookId;
         }
@@ -68,15 +66,18 @@ $(document).ready(function () {
     });
     $(document).on('click', '.card .btn-edit', function () {
         cardID = $(this).parent().closest('.card').attr('data-id');
+        let bookValue = $('.book-value');
+        let modalInput = $('.modal-edit input');
+        modalInput.each(function (index, el) {
+            bookValue.each(function (i, element) {
+                if (index === i) {
+                    console.log(index, i);
+                    console.log(element, 'element');
+                    console.log($(el).val($(element).text()));
+                }
+            });
+        });
         $('.overlay, .modal-edit').fadeIn(300).css('display', 'flex');
-        // $('.modal-head').text('EDIT BOOK');
-        // $('.modal-name').val(myLibrary[cardID].title);
-        // $('#modal-title').text('Current Book');
-        // $('#pages').val(myLibrary[cardID].pages);
-        // $('#max-pages').val(myLibrary[cardID].maxPages);
-        // $('#date').val(myLibrary[cardID].date);
-        // $('.btn-save').show();
-        // $('.btn-add').hide();
         console.log(editBook);
     });
     $('.btn-save').on('click', function () {
@@ -147,7 +148,7 @@ $(document).ready(function () {
         if (!titleValid || !pagesValid) {
             return;
         }
-        myLibrary.push(new Book($('.modal-name').val(), Number($('.pages').val()), Number($('.max-pages').val()), false, $('.date').val()));
+        myLibrary.push(new Book($('.modal-name').val(), Number($('.pages').val()), Number($('.max-pages').val()), $('.date').val()));
         let newCard = createCard(myLibrary[myLibrary.length - 1]);
         $('.wrapper').append(newCard);
         assignCardToBook(myLibrary[myLibrary.length - 1]);
@@ -174,18 +175,18 @@ $(document).ready(function () {
         let strHTML = `<div class="card" data-id="">
     <div class="content">
     <h1 class="card-head">BOOK TITLE</h1>
-    <div class="card-title">${book.title}</div>
+    <div class="card-title book-value">${book.title}</div>
     <h1 class="card-pages-head">PAGE</h1>
-    <div class="card-date">${book.date}</div>
+    <div class="card-date book-value">${book.date}</div>
         <div class="card-btns-pages">
             <button class="add btn-add-pages">➕</button>
-            <div class="card-pages">${book.pages}</div>
+            <div class="card-pages book-value">${book.pages}</div>
             <button class="btn-reduce-pages">➖</button>
         </div>
         <h1 class="card-max-pages-head">MAX PAGES</h1>
         <div class="card-btns-max-pages">
         <button class="add btn-add-max-pages">➕</button>
-        <div class="card-max-pages">${book.maxPages}</div>
+        <div class="card-max-pages book-value">${book.maxPages}</div>
             <button class="btn-reduce-max-pages">➖</button>
         </div>
         <div class="btn-container">
