@@ -155,17 +155,18 @@ input {
     border-bottom: 2px solid rgb(98, 95, 95);
 }
 
-.modal {
-    box-shadow: 0 0 4px 5px rgb(129, 62, 129);
+.modal,
+.modal-edit {
+    display: none;
     border: 3px solid black;
     border-radius: 15px;
-    display: none;
     justify-content: center;
     align-items: stretch;
     border: solid;
     border-radius: 15px;
     height: 30rem;
     width: 30rem;
+    box-shadow: 0 0 4px 5px rgb(129, 62, 129);
     background-color: rgba(0, 0, 0, 0.876);
     &-input {
         display: flex;
@@ -235,7 +236,6 @@ input {
                 }
             }
             .btn-save {
-                display: none;
                 background-color: rgb(233, 101, 13);
                 box-shadow: 0 -4px 0 orange;
                 &:hover {
@@ -246,6 +246,13 @@ input {
                 }
             }
         }
+    }
+}
+.modal-edit {
+    box-shadow: 0 0 4px 5px rgb(168, 120, 42);
+    background-color: rgba(124, 84, 10, 0.938);
+    &-head {
+        background-color: rgb(194, 137, 31);
     }
 }
 .overlay {
@@ -262,7 +269,7 @@ input {
     background: rgba(0, 0, 0, 0.8);
 }
 
-#date-label-modal {
+.date-label-modal {
     color: grey;
 }
 
@@ -274,18 +281,18 @@ label {
     user-select: none;
 }
 
-#max-pages,
-#pages {
+.max-pages,
+.pages {
     width: 100px;
     color: rgb(173, 86, 101);
     background: transparent;
 }
 
-#date:focus + label {
+.date:focus + label {
     color: rgb(148, 37, 199);
 }
 
-input:focus:not(#date) + label {
+input:focus:not(.date) + label {
     color: rgb(148, 37, 199);
     transform: rotateX(90deg);
     transform: translate(0.25rem, -1rem);
@@ -308,12 +315,12 @@ input:focus:not(#date) + label {
     &-head,
     &-pages-head,
     &-max-pages-head {
-        font-size: 50px;
-        padding: 0 20px;
+        display: grid;
         margin: 0;
-    }
-    &-title {
-        padding: 20px 15px !important;
+        text-align: center;
+        font-size: 50px;
+        background-color: black;
+        color: white;
     }
     &-date {
         position: fixed;
@@ -331,6 +338,12 @@ input:focus:not(#date) + label {
         justify-content: center;
         align-items: center;
         font-size: 30px;
+    }
+    &-title {
+        padding: 20px 15px;
+    }
+    .btn-container {
+        display: flex;
     }
     .btn-add-pages,
     .btn-add-max-pages,
@@ -386,39 +399,6 @@ input:focus:not(#date) + label {
             background-color: brown;
         }
     }
-}
-
-.content {
-    display: grid;
-}
-
-.hover-remove {
-    border-color: red;
-}
-
-.hover-edit {
-    border-color: orange;
-}
-
-h1 {
-    display: grid;
-    background-color: black;
-    color: white;
-    text-align: center;
-    font-size: 25px;
-    margin-top: 0;
-    border: 0;
-    border-radius: 10px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-.btn-container {
-    display: flex;
-    justify-items: center;
-    justify-content: center;
-    align-content: center;
-    align-items: flex-end;
 }
 
 .wrapper {
@@ -480,104 +460,6 @@ h1 {
         }
     }
 }
-
-/* EDIT ELEMENTS */
-
-.edit-container {
-    position: fixed;
-    display: grid;
-    z-index: 20;
-    transform: scale(1.5);
-    top: 30%;
-    left: 45%;
-    box-shadow: 0 0 4px 5px rgb(168, 120, 42);
-    border: solid;
-    border-radius: 15px;
-    block-size: 10rem;
-    height: 346px;
-    width: 300px;
-    box-sizing: content-box;
-    background-color: rgba(124, 84, 10, 0.938);
-    transition: all 0.5s;
-    opacity: 0;
-    visibility: hidden;
-}
-
-.edit-head {
-    display: grid;
-    text-align: center;
-    height: 50px;
-    font-family: fantasy;
-    font-size: 40px;
-    background-color: rgb(194, 137, 31);
-    border: solid;
-    user-select: none;
-    border-radius: 10px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    margin-bottom: -25px;
-}
-
-#edit-name {
-    border: 0;
-    width: 250px;
-    color: rgb(104, 29, 29);
-    background: transparent;
-    border-bottom: 2px solid rgb(15, 14, 15);
-}
-
-#edit-pages {
-    border: 0;
-    color: rgb(104, 29, 29);
-    width: 100px;
-    background: transparent;
-    border-bottom: 2px solid rgb(15, 14, 15);
-}
-
-#edit-max-pages {
-    border: 0;
-    width: 100px;
-    color: rgb(104, 29, 29);
-    background: transparent;
-    border-bottom: 2px solid rgb(15, 14, 15);
-}
-
-#edit-date {
-    border: 0;
-    color: rgb(104, 29, 29);
-    margin: 0 auto;
-    background: transparent;
-    border-bottom: 2px solid rgb(15, 14, 15);
-}
-.edit-btns {
-    display: flex;
-    align-items: flex-end;
-}
-.edit-container {
-    #edit-date:focus + label,
-    input:not(:placeholder-shown) + label {
-        color: yellow;
-    }
-
-    input:focus + label,
-    input:not(:placeholder-shown) + label {
-        color: yellow;
-        transform: rotateX(90deg);
-        transform: translate(0.25rem, -3rem);
-    }
-}
-
-.edit-labels {
-    color: rgb(5, 3, 4);
-}
-
-#date-label-edit {
-    margin: 0 auto;
-    color: rgb(5, 3, 4);
-    transform: translate(0.25rem, -3.25rem);
-}
-
-/* CONFIRMATION FOR CLEARING STORAGE MESSAGE */
 
 .msg-local-container {
     position: fixed;

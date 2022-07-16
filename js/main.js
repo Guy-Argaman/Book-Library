@@ -4,6 +4,7 @@ $(document).ready(function () {
     let titleValid = false;
     let pagesValid = false;
     let cardID = '';
+    let editBook = {};
     class Book {
         constructor(
             title = 'Unknown',
@@ -22,31 +23,21 @@ $(document).ready(function () {
         }
     }
     $('.plus').on('click', function () {
-        $('.overlay, .modal').fadeIn().css('display', 'flex');
+        $('.overlay, .modal').fadeIn(300).css('display', 'flex');
     });
     $('.btn-cancel').on('click', function () {
-        $('.overlay, .modal').fadeOut(function () {
-            $('.modal-head').text('ADD NEW BOOK');
-            $('#modal-name').val('');
-            $('#modal-title').text('Book Title');
-            $('#pages').val('');
-            $('#max-pages').val('');
-            $('#date').val('');
-            $('.btn-save').hide();
-            $('.btn-add').show();
-        });
+        $('.overlay, .modal-edit,.modal').fadeOut(300);
     });
     $('.btn-add').on('click', function () {
         addCard();
     });
-    $(document).on('click', '.card btn:not(.btn-edit):not(.btn-remove)', function () {
+    $(document).on('click', '.card button:not(.btn-edit):not(.btn-remove)', function () {
         let cardPagesEl = $(this)[0].classList.contains('add') ? $(this).next() : $(this).prev();
         let cardPagesNum = Number($(this).parents('.card').find('.card-pages').text());
         let cardMaxPagesNum = Number($(this).parents('.card').find('.card-max-pages').text());
         let currentNum = Number(cardPagesEl.text());
         if ($(this)[0].classList.contains('add')) {
             currentNum++;
-
         } else {
             currentNum--;
             if (currentNum < 0) { return }
@@ -73,25 +64,34 @@ $(document).ready(function () {
         assignIDs();
     });
     $(document).on('click', '.btn-decline', function () {
-        $('.overlay,.message').fadeOut(300);
+        $('.overlay, .message').fadeOut(300);
     });
     $(document).on('click', '.card .btn-edit', function () {
-        let ID = $(this).parent().closest('.card').attr('data-id');
-        $('.modal-head').text('EDIT BOOK');
-        $('#modal-name').val(myLibrary[ID].title);
-        $('#modal-title').text('Current Book');
-        $('#pages').val(myLibrary[ID].pages);
-        $('#max-pages').val(myLibrary[ID].maxPages);
-        $('#date').val(myLibrary[ID].date);
-        $('.btn-save').show();
-        $('.btn-add').hide();
-        $('.overlay,.modal').fadeIn(300);
+        cardID = $(this).parent().closest('.card').attr('data-id');
+        $('.overlay, .modal-edit').fadeIn(300).css('display', 'flex');
+        // $('.modal-head').text('EDIT BOOK');
+        // $('.modal-name').val(myLibrary[cardID].title);
+        // $('#modal-title').text('Current Book');
+        // $('#pages').val(myLibrary[cardID].pages);
+        // $('#max-pages').val(myLibrary[cardID].maxPages);
+        // $('#date').val(myLibrary[cardID].date);
+        // $('.btn-save').show();
+        // $('.btn-add').hide();
+        console.log(editBook);
     });
     $('.btn-save').on('click', function () {
-        // $('#modal-name').val(myLibrary[ID].title);
-        // $('#pages').val(myLibrary[ID].pages);
-        // $('#max-pages').val(myLibrary[ID].maxPages);
-        // $('#date').val(myLibrary[ID].date);
+        editBook.title = $('.modal-name').val();
+        editBook.pages = $('.pages').val();
+        editBook.maxPages = $('.max-pages').val();
+        editBook.date = $('.date').val();
+        $(`.card[data-id=${cardID}] .card-title`).text(editBook.title);
+        $(`.card[data-id=${cardID}] .card-pages`).text(editBook.pages);
+        $(`.card[data-id=${cardID}] .card-max-pages`).text(editBook.maxPages);
+        $(`.card[data-id=${cardID}] .card-date`).text(editBook.date);
+        myLibrary[cardID] = editBook;
+        $('.overlay, .modal-edit').fadeOut(300);
+        editBook = '';
+        console.log(myLibrary);
     });
     $(document).on('click', '.btn-decline', function () {
         $('.overlay,.message').fadeOut(300);
@@ -108,42 +108,46 @@ $(document).ready(function () {
     }
 
     function checkRepeats() {
+        if ($('.modal-name').val() === '') {
+            $('.modal-title').css('color', 'red').text('Insert Title');
+            return titleValid = false;
+        }
         for (let i = 0; i < myLibrary.length; i++) {
-            if ($('#modal-name').val() === myLibrary[i].title) {
-                $('#modal-title').css('color', 'red').text('Book Exists');
+            if ($('.modal-name').val() === myLibrary[i].title) {
+                $('.modal-title').css('color', 'red').text('Book Exists');
                 titleValid = false;
             }
         }
     }
-    $('#modal-name').on('input', function () {
-        $('#modal-title').css('color', '').text('Book Title');
-        if ($('#modal-name').val() === '') {
-            $('#modal-title').css('color', 'red').text('Insert Title');
+    $('.modal-name, .modal input[type="number"]').on('input', function () {
+        if (Number($('.modal input[type="number"]')[0].value) > Number($('.modal input[type="number"]')[1].value)) {
+            $('.pages-label, .max-pages-label').css('color', 'red');
+            pagesValid = false;
+        } else {
+            $('.pages-label, .max-pages-label').css('color', '');
+            pagesValid = true;
+        }
+        $('.modal-title').css('color', '').text('Book Title');
+        if ($('.modal-name').val() === '') {
+            $('.modal-title').css('color', 'red').text('Insert Title');
             titleValid = false;
         }
         else {
-            $('#modal-title').css('color', '');
+            $('.modal-title').css('color', '');
             titleValid = true;
-        }
-        return titleValid;
-    });
-    $('.modal input[type="number"').on('input', function () {
-        if (Number($('.modal input[type="number"]')[0].value) > Number($('.modal input[type="number"]')[1].value)) {
-            $('#pages-label, #max-pages-label').css('color', 'red');
-            pagesValid = false;
-        } else {
-            $('#pages-label, #max-pages-label').css('color', '');
-            pagesValid = true;
         }
     });
 
     function addCard() {
         checkRepeats();
-        $('#pages, #max-pages').val() === '' ? $('#pages-label, #max-pages-label').css('color', 'red') : '';
+        if ($('.pages, .max-pages').val() === '') {
+            $('.pages-label, .max-pages-label').css('color', 'red');
+            return;
+        }
         if (!titleValid || !pagesValid) {
             return;
         }
-        myLibrary.push(new Book($('#modal-name').val(), Number($('#pages').val()), Number($('#max-pages').val()), false, $('#date').val()));
+        myLibrary.push(new Book($('.modal-name').val(), Number($('.pages').val()), Number($('.max-pages').val()), false, $('.date').val()));
         let newCard = createCard(myLibrary[myLibrary.length - 1]);
         $('.wrapper').append(newCard);
         assignCardToBook(myLibrary[myLibrary.length - 1]);

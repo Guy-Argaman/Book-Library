@@ -203,12 +203,11 @@ input {
   border-bottom: 2px solid #625f5f;
 }
 
-.modal {
-  -webkit-box-shadow: 0 0 4px 5px #813e81;
-          box-shadow: 0 0 4px 5px #813e81;
+.modal,
+.modal-edit {
+  display: none;
   border: 3px solid black;
   border-radius: 15px;
-  display: none;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -219,10 +218,13 @@ input {
   border-radius: 15px;
   height: 30rem;
   width: 30rem;
+  -webkit-box-shadow: 0 0 4px 5px #813e81;
+          box-shadow: 0 0 4px 5px #813e81;
   background-color: rgba(0, 0, 0, 0.876);
 }
 
-.modal-input {
+.modal-input,
+.modal-edit-input {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -240,7 +242,8 @@ input {
   text-indent: 2rem;
 }
 
-.modal-head {
+.modal-head,
+.modal-edit-head {
   text-align: center;
   height: 50px;
   font-family: fantasy;
@@ -256,7 +259,8 @@ input {
   border-bottom-right-radius: 0;
 }
 
-.modal-content {
+.modal-content,
+.modal-edit-content {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -273,7 +277,8 @@ input {
   width: 100%;
 }
 
-.modal-content .button-wrapper {
+.modal-content .button-wrapper,
+.modal-edit-content .button-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -288,7 +293,10 @@ input {
 
 .modal-content .button-wrapper .btn-add,
 .modal-content .button-wrapper .btn-save,
-.modal-content .button-wrapper .btn-cancel {
+.modal-content .button-wrapper .btn-cancel,
+.modal-edit-content .button-wrapper .btn-add,
+.modal-edit-content .button-wrapper .btn-save,
+.modal-edit-content .button-wrapper .btn-cancel {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   padding: 8px 8px;
@@ -312,18 +320,25 @@ input {
 
 .modal-content .button-wrapper .btn-add:hover,
 .modal-content .button-wrapper .btn-save:hover,
-.modal-content .button-wrapper .btn-cancel:hover {
+.modal-content .button-wrapper .btn-cancel:hover,
+.modal-edit-content .button-wrapper .btn-add:hover,
+.modal-edit-content .button-wrapper .btn-save:hover,
+.modal-edit-content .button-wrapper .btn-cancel:hover {
   background-color: #149029;
 }
 
 .modal-content .button-wrapper .btn-add:active,
 .modal-content .button-wrapper .btn-save:active,
-.modal-content .button-wrapper .btn-cancel:active {
+.modal-content .button-wrapper .btn-cancel:active,
+.modal-edit-content .button-wrapper .btn-add:active,
+.modal-edit-content .button-wrapper .btn-save:active,
+.modal-edit-content .button-wrapper .btn-cancel:active {
   -webkit-box-shadow: 0 -2px 0 green;
           box-shadow: 0 -2px 0 green;
 }
 
-.modal-content .button-wrapper .btn-cancel {
+.modal-content .button-wrapper .btn-cancel,
+.modal-edit-content .button-wrapper .btn-cancel {
   background-color: #681212;
   border-bottom-right-radius: 12px;
   border-bottom-left-radius: 0;
@@ -332,29 +347,43 @@ input {
           box-shadow: 0 -4px 0 brown;
 }
 
-.modal-content .button-wrapper .btn-cancel:hover {
+.modal-content .button-wrapper .btn-cancel:hover,
+.modal-edit-content .button-wrapper .btn-cancel:hover {
   background-color: #f11313;
 }
 
-.modal-content .button-wrapper .btn-cancel:active {
+.modal-content .button-wrapper .btn-cancel:active,
+.modal-edit-content .button-wrapper .btn-cancel:active {
   -webkit-box-shadow: 0 -2px 0 brown;
           box-shadow: 0 -2px 0 brown;
 }
 
-.modal-content .button-wrapper .btn-save {
-  display: none;
+.modal-content .button-wrapper .btn-save,
+.modal-edit-content .button-wrapper .btn-save {
   background-color: #e9650d;
   -webkit-box-shadow: 0 -4px 0 orange;
           box-shadow: 0 -4px 0 orange;
 }
 
-.modal-content .button-wrapper .btn-save:hover {
+.modal-content .button-wrapper .btn-save:hover,
+.modal-edit-content .button-wrapper .btn-save:hover {
   background-color: #c48322;
 }
 
-.modal-content .button-wrapper .btn-save:active {
+.modal-content .button-wrapper .btn-save:active,
+.modal-edit-content .button-wrapper .btn-save:active {
   -webkit-box-shadow: 0 -2px 0 #ca750e;
           box-shadow: 0 -2px 0 #ca750e;
+}
+
+.modal-edit {
+  -webkit-box-shadow: 0 0 4px 5px #a8782a;
+          box-shadow: 0 0 4px 5px #a8782a;
+  background-color: rgba(124, 84, 10, 0.938);
+}
+
+.modal-edit-head {
+  background-color: #c2891f;
 }
 
 .overlay {
@@ -375,7 +404,7 @@ input {
   background: rgba(0, 0, 0, 0.8);
 }
 
-#date-label-modal {
+.date-label-modal {
   color: grey;
 }
 
@@ -393,18 +422,18 @@ label {
           user-select: none;
 }
 
-#max-pages,
-#pages {
+.max-pages,
+.pages {
   width: 100px;
   color: #ad5665;
   background: transparent;
 }
 
-#date:focus + label {
+.date:focus + label {
   color: #9425c7;
 }
 
-input:focus:not(#date) + label {
+input:focus:not(.date) + label {
   color: #9425c7;
   -webkit-transform: rotateX(90deg);
           transform: rotateX(90deg);
@@ -434,13 +463,13 @@ input:focus:not(#date) + label {
 }
 
 .card-head, .card-pages-head, .card-max-pages-head {
-  font-size: 50px;
-  padding: 0 20px;
+  display: -ms-grid;
+  display: grid;
   margin: 0;
-}
-
-.card-title {
-  padding: 20px 15px !important;
+  text-align: center;
+  font-size: 50px;
+  background-color: black;
+  color: white;
 }
 
 .card-date {
@@ -465,6 +494,16 @@ input:focus:not(#date) + label {
       -ms-flex-align: center;
           align-items: center;
   font-size: 30px;
+}
+
+.card-title {
+  padding: 20px 15px;
+}
+
+.card .btn-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .card .btn-add-pages,
@@ -544,48 +583,6 @@ input:focus:not(#date) + label {
   -webkit-box-shadow: 0 -3px 0 #572222;
           box-shadow: 0 -3px 0 #572222;
   background-color: brown;
-}
-
-.content {
-  display: -ms-grid;
-  display: grid;
-}
-
-.hover-remove {
-  border-color: red;
-}
-
-.hover-edit {
-  border-color: orange;
-}
-
-h1 {
-  display: -ms-grid;
-  display: grid;
-  background-color: black;
-  color: white;
-  text-align: center;
-  font-size: 25px;
-  margin-top: 0;
-  border: 0;
-  border-radius: 10px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-.btn-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  justify-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -ms-flex-line-pack: center;
-      align-content: center;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
 }
 
 .wrapper {
@@ -671,118 +668,6 @@ h1 {
   background-color: #702626;
 }
 
-/* EDIT ELEMENTS */
-.edit-container {
-  position: fixed;
-  display: -ms-grid;
-  display: grid;
-  z-index: 20;
-  -webkit-transform: scale(1.5);
-          transform: scale(1.5);
-  top: 30%;
-  left: 45%;
-  -webkit-box-shadow: 0 0 4px 5px #a8782a;
-          box-shadow: 0 0 4px 5px #a8782a;
-  border: solid;
-  border-radius: 15px;
-  block-size: 10rem;
-  height: 346px;
-  width: 300px;
-  -webkit-box-sizing: content-box;
-          box-sizing: content-box;
-  background-color: rgba(124, 84, 10, 0.938);
-  -webkit-transition: all 0.5s;
-  transition: all 0.5s;
-  opacity: 0;
-  visibility: hidden;
-}
-
-.edit-head {
-  display: -ms-grid;
-  display: grid;
-  text-align: center;
-  height: 50px;
-  font-family: fantasy;
-  font-size: 40px;
-  background-color: #c2891f;
-  border: solid;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  border-radius: 10px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  margin-bottom: -25px;
-}
-
-#edit-name {
-  border: 0;
-  width: 250px;
-  color: #681d1d;
-  background: transparent;
-  border-bottom: 2px solid #0f0e0f;
-}
-
-#edit-pages {
-  border: 0;
-  color: #681d1d;
-  width: 100px;
-  background: transparent;
-  border-bottom: 2px solid #0f0e0f;
-}
-
-#edit-max-pages {
-  border: 0;
-  width: 100px;
-  color: #681d1d;
-  background: transparent;
-  border-bottom: 2px solid #0f0e0f;
-}
-
-#edit-date {
-  border: 0;
-  color: #681d1d;
-  margin: 0 auto;
-  background: transparent;
-  border-bottom: 2px solid #0f0e0f;
-}
-
-.edit-btns {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
-}
-
-.edit-container #edit-date:focus + label,
-.edit-container input:not(:placeholder-shown) + label {
-  color: yellow;
-}
-
-.edit-container input:focus + label,
-.edit-container input:not(:placeholder-shown) + label {
-  color: yellow;
-  -webkit-transform: rotateX(90deg);
-          transform: rotateX(90deg);
-  -webkit-transform: translate(0.25rem, -3rem);
-          transform: translate(0.25rem, -3rem);
-}
-
-.edit-labels {
-  color: #050304;
-}
-
-#date-label-edit {
-  margin: 0 auto;
-  color: #050304;
-  -webkit-transform: translate(0.25rem, -3.25rem);
-          transform: translate(0.25rem, -3.25rem);
-}
-
-/* CONFIRMATION FOR CLEARING STORAGE MESSAGE */
 .msg-local-container {
   position: fixed;
   z-index: 20;

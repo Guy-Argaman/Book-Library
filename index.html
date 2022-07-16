@@ -37,54 +37,53 @@
                     <div class="modal-content">
                         <div class="modal-head">ADD NEW BOOK</div>
                         <div class="modal-input">
-                            <input type="text" maxlength="33" id="modal-name" placeholder="" required>
-                            <label id="modal-title">Book Title</label>
+                            <input type="text" maxlength="33" class="modal-name" placeholder="">
+                            <label class="modal-title">Book Title</label>
                         </div>
                         <div class="modal-input">
-                            <input type="number" maxlength="9" id="pages" placeholder="" required>
-                            <label id="pages-label" for="pages">Current Page</label>
+                            <input type="number" maxlength="9" class="pages" placeholder="">
+                            <label class="pages-label">Current Page</label>
                         </div>
                         <div class="modal-input">
-                            <input type="number" maxlength="9" id="max-pages" placeholder="" required>
-                            <label id="max-pages-label" for="max-pages">Total Pages</label>
+                            <input type="number" maxlength="9" class="max-pages" placeholder="">
+                            <label class="max-pages-label">Total Pages</label>
                         </div>
                         <div class="modal-input">
-                            <input type="date" id="date" placeholder="" required>
-                            <label id="date-label-modal">Last Updated</label>
+                            <input type="date" class="date" placeholder="">
+                            <label class="date-label-modal">Last Updated</label>
                         </div>
-
                         <div class="button-wrapper">
                             <button class="btn-add">ADD</button>
+                            <button class="btn-cancel">CANCEL</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-edit">
+                    <div class="modal-edit-content">
+                        <div class="modal-edit-head">EDIT BOOK</div>
+                        <div class="modal-edit-input">
+                            <input type="text" maxlength="33" class="modal-name" placeholder="">
+                            <label class="modal-title">Current Title</label>
+                        </div>
+                        <div class="modal-edit-input">
+                            <input type="number" maxlength="9" class="pages" placeholder="">
+                            <label class="pages-label">Current Page</label>
+                        </div>
+                        <div class="modal-edit-input">
+                            <input type="number" maxlength="9" class="max-pages" placeholder="">
+                            <label class="max-pages-label">Total Pages</label>
+                        </div>
+                        <div class="modal-edit-input">
+                            <input type="date" class="date" placeholder="">
+                            <label class="date-label-modal">Last Updated</label>
+                        </div>
+                        <div class="button-wrapper">
                             <button class="btn-save">SAVE</button>
                             <button class="btn-cancel">CANCEL</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- <div class="edit-container">
-                <div class="edit-head">EDIT BOOK</div>
-                <div class="content">
-                    <input type="text" oninput="warnUserEdit()" maxlength="33" id="edit-name" placeholder=" " required>
-                    <label class="edit-labels" id="edit-book-label" for="edit-name">Current Title</label>
-                    <input type="number"
-                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength); warnUserEdit()"
-                        maxlength="9" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="edit-pages"
-                        min="0" placeholder=" " required>
-                    <label class="edit-labels" id="edit-pages-label" for="edit-pages" min="1">Current Page</label>
-                    <input type="number"
-                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength); warnUserEdit()"
-                        maxlength="9" onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                        id="edit-max-pages" min="0" placeholder=" " required>
-                    <label class="edit-labels" id="edit-max-pages-label" for="edit-max-pages" min="1">Total
-                        Pages</label>
-                    <input type="date" id="edit-date" placeholder=" " required>
-                    <label class="edit-labels" id="date-label-edit">Last Updated</label>
-                    <div class="edit-btns">
-                        <button class="btn-save" onclick="saveEdit()">SAVE</button>
-                        <button class="btn-cancel">CANCEL</button>
-                    </div>
-                </div>
-            </div> -->
             <div class="msg-local-container">
                 <div class="msg-local-head">Are you sure you want to clear storage? (Cannot be undone)</div>
                 <div class="msg-local-content">
