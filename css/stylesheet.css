@@ -64,10 +64,15 @@ header {
 
 /* PLUS ADD BUTTON START */
 .plus {
-  display: -ms-grid;
-  display: grid;
-  -webkit-transition: all 0.8s ease-in-out;
-  transition: all 0.8s ease-in-out;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   background-color: #e7dcdc;
   margin: 0 auto;
   margin-top: 70px;
@@ -81,9 +86,18 @@ header {
       -ms-flex-order: 1;
           order: 1;
   cursor: pointer;
+  -webkit-transition-property: border-radius, color, background-color, -webkit-transform, -webkit-box-shadow;
+  transition-property: border-radius, color, background-color, -webkit-transform, -webkit-box-shadow;
+  transition-property: transform, box-shadow, border-radius, color, background-color;
+  transition-property: transform, box-shadow, border-radius, color, background-color, -webkit-transform, -webkit-box-shadow;
+  -webkit-transition-duration: 0.8s;
+          transition-duration: 0.8s;
+  -webkit-transition-timing-function: ease-in-out, ease-out, ease-out, ease-in;
+          transition-timing-function: ease-in-out, ease-out, ease-out, ease-in;
+  -webkit-transition-delay: 0s, 0s, 0s, 0.2s;
+          transition-delay: 0s, 0s, 0s, 0.2s;
 }
 
-/* INNER SYMOBL OF ADD BUTTON */
 .plus span {
   -webkit-transition-duration: 1s;
           transition-duration: 1s;
@@ -100,7 +114,6 @@ header {
           user-select: none;
 }
 
-/* HOVERING OVER THE .PLUS DIV CHANGES THE SCALE ETC */
 .plus:hover {
   border-color: black;
   border-radius: 10px;
@@ -115,12 +128,7 @@ header {
           transition-duration: 0.7s;
 }
 
-/* HOVERING OVER THE .PLUS DIV CHANGES THE INNER TEXT AS WELL */
 .plus:hover span {
-  -webkit-transition: cubic-bezier(0.55, 0.2, 0.8, 0.8);
-  transition: cubic-bezier(0.55, 0.2, 0.8, 0.8);
-  -webkit-transition-duration: 0.7s;
-          transition-duration: 0.7s;
   -webkit-transform: rotateZ(90deg);
           transform: rotateZ(90deg);
 }
@@ -278,8 +286,9 @@ input {
           user-select: none;
 }
 
-.modal-content .button-wrapper .button-add,
-.modal-content .button-wrapper .button-cancel {
+.modal-content .button-wrapper .btn-add,
+.modal-content .button-wrapper .btn-save,
+.modal-content .button-wrapper .btn-cancel {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   padding: 8px 8px;
@@ -295,14 +304,26 @@ input {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   width: 100%;
+  -webkit-transition: background-color 0.2s, -webkit-box-shadow 0.2s;
+  transition: background-color 0.2s, -webkit-box-shadow 0.2s;
+  transition: box-shadow 0.2s, background-color 0.2s;
+  transition: box-shadow 0.2s, background-color 0.2s, -webkit-box-shadow 0.2s;
 }
 
-.modal-content .button-wrapper .button-add:hover,
-.modal-content .button-wrapper .button-cancel:hover {
+.modal-content .button-wrapper .btn-add:hover,
+.modal-content .button-wrapper .btn-save:hover,
+.modal-content .button-wrapper .btn-cancel:hover {
   background-color: #149029;
 }
 
-.modal-content .button-wrapper .button-cancel {
+.modal-content .button-wrapper .btn-add:active,
+.modal-content .button-wrapper .btn-save:active,
+.modal-content .button-wrapper .btn-cancel:active {
+  -webkit-box-shadow: 0 -2px 0 green;
+          box-shadow: 0 -2px 0 green;
+}
+
+.modal-content .button-wrapper .btn-cancel {
   background-color: #681212;
   border-bottom-right-radius: 12px;
   border-bottom-left-radius: 0;
@@ -311,8 +332,29 @@ input {
           box-shadow: 0 -4px 0 brown;
 }
 
-.modal-content .button-wrapper .button-cancel:hover {
+.modal-content .button-wrapper .btn-cancel:hover {
   background-color: #f11313;
+}
+
+.modal-content .button-wrapper .btn-cancel:active {
+  -webkit-box-shadow: 0 -2px 0 brown;
+          box-shadow: 0 -2px 0 brown;
+}
+
+.modal-content .button-wrapper .btn-save {
+  display: none;
+  background-color: #e9650d;
+  -webkit-box-shadow: 0 -4px 0 orange;
+          box-shadow: 0 -4px 0 orange;
+}
+
+.modal-content .button-wrapper .btn-save:hover {
+  background-color: #c48322;
+}
+
+.modal-content .button-wrapper .btn-save:active {
+  -webkit-box-shadow: 0 -2px 0 #ca750e;
+          box-shadow: 0 -2px 0 #ca750e;
 }
 
 .overlay {
@@ -331,10 +373,6 @@ input {
   bottom: 0;
   padding: 1em;
   background: rgba(0, 0, 0, 0.8);
-}
-
-.modal-label {
-  color: grey;
 }
 
 #date-label-modal {
@@ -468,22 +506,23 @@ input:focus:not(#date) + label {
   -webkit-box-shadow: 0 -4px 0 orange;
           box-shadow: 0 -4px 0 orange;
   border: none;
-  -webkit-transition: background-color 0.2s, -webkit-box-shadow 0.2s;
-  transition: background-color 0.2s, -webkit-box-shadow 0.2s;
-  transition: box-shadow 0.2s, background-color 0.2s;
-  transition: box-shadow 0.2s, background-color 0.2s, -webkit-box-shadow 0.2s;
+  -webkit-transition: background-color 0.2s, color 0.2s, -webkit-box-shadow 0.2s;
+  transition: background-color 0.2s, color 0.2s, -webkit-box-shadow 0.2s;
+  transition: box-shadow 0.2s, background-color 0.2s, color 0.2s;
+  transition: box-shadow 0.2s, background-color 0.2s, color 0.2s, -webkit-box-shadow 0.2s;
 }
 
 .card .btn-edit:hover,
 .card .btn-remove:hover {
   color: orange;
-  text-shadow: 0px 0px 3px orange;
+  -webkit-box-shadow: 0 -4px 0 orange;
+          box-shadow: 0 -4px 0 orange;
 }
 
 .card .btn-edit:active,
 .card .btn-remove:active {
-  -webkit-box-shadow: 1px 0px 1px 0px #472727;
-          box-shadow: 1px 0px 1px 0px #472727;
+  -webkit-box-shadow: 0 -2px 0 orange;
+          box-shadow: 0 -2px 0 orange;
   color: orange;
   background-color: #644a19;
 }
@@ -496,11 +535,14 @@ input:focus:not(#date) + label {
 
 .card .btn-remove:hover {
   color: brown;
-  text-shadow: 0px 0px 3px brown;
+  -webkit-box-shadow: 0 -4px 0 brown;
+          box-shadow: 0 -4px 0 brown;
 }
 
 .card .btn-remove:active {
-  color: red;
+  color: #572222;
+  -webkit-box-shadow: 0 -3px 0 #572222;
+          box-shadow: 0 -3px 0 #572222;
   background-color: brown;
 }
 
@@ -549,25 +591,10 @@ h1 {
 .wrapper {
   display: -ms-grid;
   display: grid;
-  grid-area: "card card card";
-  padding-top: 6rem;
-  -webkit-transition: all 2s;
-  transition: all 2s;
+  padding-top: 5rem;
   -ms-grid-columns: (1fr)[3];
       grid-template-columns: repeat(3, 1fr);
   gap: 150px;
-}
-
-.delete-msg {
-  -webkit-transition: all 2s ease-in-out;
-  transition: all 2s ease-in-out;
-  font-size: 15px;
-  color: red;
-  text-align: center;
-  margin-top: -60px;
-  opacity: 1;
-  border: double;
-  width: 250px;
 }
 
 /* CONFIRMATION FOR DELETION MESSAGE */
@@ -719,28 +746,6 @@ h1 {
   margin: 0 auto;
   background: transparent;
   border-bottom: 2px solid #0f0e0f;
-}
-
-.btn-save {
-  display: -ms-grid;
-  display: grid;
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s;
-  -webkit-box-sizing: content-box;
-          box-sizing: content-box;
-  padding: 8px 8px;
-  font-size: 14px;
-  text-align: center;
-  width: 134px;
-  color: #fff;
-  background-color: #e9650d;
-  -webkit-box-shadow: 0 -4px 0 orange;
-          box-shadow: 0 -4px 0 orange;
-  border: none;
-  border-radius: 11px;
-  border-bottom-right-radius: 0;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
 }
 
 .edit-btns {

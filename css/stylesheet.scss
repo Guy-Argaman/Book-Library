@@ -51,8 +51,9 @@ header {
 /* PLUS ADD BUTTON START */
 
 .plus {
-    display: grid;
-    transition: all 0.8s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: rgb(231, 220, 220);
     margin: 0 auto;
     margin-top: 70px;
@@ -63,37 +64,30 @@ header {
     box-shadow: 0 0 5px 5px rgb(128, 110, 128);
     order: 1;
     cursor: pointer;
-}
-
-/* INNER SYMOBL OF ADD BUTTON */
-
-.plus span {
-    transition-duration: 1s;
-    align-self: center;
-    justify-self: center;
-    font-size: 50px;
-    font-family: sans-serif;
-    user-select: none;
-}
-
-/* HOVERING OVER THE .PLUS DIV CHANGES THE SCALE ETC */
-
-.plus:hover {
-    border-color: rgb(0, 0, 0);
-    border-radius: 10px;
-    box-shadow: 0 0 4px 2px rgb(14, 11, 14);
-    transform: scale(2.5);
-    background-color: purple;
-    transition: cubic-bezier(0.55, 0.2, 0.8, 0.8);
-    transition-duration: 0.7s;
-}
-
-/* HOVERING OVER THE .PLUS DIV CHANGES THE INNER TEXT AS WELL */
-
-.plus:hover span {
-    transition: cubic-bezier(0.55, 0.2, 0.8, 0.8);
-    transition-duration: 0.7s;
-    transform: rotateZ(90deg);
+    transition-property: transform, box-shadow, border-radius, color, background-color;
+    transition-duration: 0.8s;
+    transition-timing-function: ease-in-out, ease-out, ease-out, ease-in;
+    transition-delay: 0s, 0s, 0s, 0.2s;
+    & span {
+        transition-duration: 1s;
+        align-self: center;
+        justify-self: center;
+        font-size: 50px;
+        font-family: sans-serif;
+        user-select: none;
+    }
+    &:hover {
+        border-color: rgb(0, 0, 0);
+        border-radius: 10px;
+        box-shadow: 0 0 4px 2px rgb(14, 11, 14);
+        transform: scale(2.5);
+        background-color: purple;
+        transition: cubic-bezier(0.55, 0.2, 0.8, 0.8);
+        transition-duration: 0.7s;
+    }
+    &:hover span {
+        transform: rotateZ(90deg);
+    }
 }
 
 .sidenav {
@@ -203,8 +197,9 @@ input {
             display: flex;
             justify-content: space-between;
             user-select: none;
-            .button-add,
-            .button-cancel {
+            .btn-add,
+            .btn-save,
+            .btn-cancel {
                 box-sizing: border-box;
                 padding: 8px 8px;
                 font-size: 20px;
@@ -218,11 +213,15 @@ input {
                 border-top-left-radius: 0;
                 border-top-right-radius: 0;
                 width: 100%;
+                transition: box-shadow 0.2s, background-color 0.2s;
                 &:hover {
                     background-color: rgb(20, 144, 41);
                 }
+                &:active {
+                    box-shadow: 0 -2px 0 green;
+                }
             }
-            .button-cancel {
+            .btn-cancel {
                 background-color: rgb(104, 18, 18);
                 border-bottom-right-radius: 12px;
                 border-bottom-left-radius: 0;
@@ -230,6 +229,20 @@ input {
                 box-shadow: 0 -4px 0 brown;
                 &:hover {
                     background-color: rgb(241, 19, 19);
+                }
+                &:active {
+                    box-shadow: 0 -2px 0 brown;
+                }
+            }
+            .btn-save {
+                display: none;
+                background-color: rgb(233, 101, 13);
+                box-shadow: 0 -4px 0 orange;
+                &:hover {
+                    background-color: rgb(196, 131, 34);
+                }
+                &:active {
+                    box-shadow: 0 -2px 0 rgb(202, 117, 14);
                 }
             }
         }
@@ -248,9 +261,7 @@ input {
     padding: 1em;
     background: rgba(0, 0, 0, 0.8);
 }
-.modal-label {
-    color: grey;
-}
+
 #date-label-modal {
     color: grey;
 }
@@ -351,13 +362,13 @@ input:focus:not(#date) + label {
         background-color: rgb(233, 101, 13);
         box-shadow: 0 -4px 0 orange;
         border: none;
-        transition: box-shadow 0.2s, background-color 0.2s;
+        transition: box-shadow 0.2s, background-color 0.2s, color 0.2s;
         &:hover {
             color: orange;
-            text-shadow: 0px 0px 3px orange;
+            box-shadow: 0 -4px 0 orange;
         }
         &:active {
-            box-shadow: 1px 0px 1px 0px rgb(71, 39, 39);
+            box-shadow: 0 -2px 0 orange;
             color: orange;
             background-color: rgb(100, 74, 25);
         }
@@ -367,10 +378,11 @@ input:focus:not(#date) + label {
         box-shadow: 0 -4px 0 brown;
         &:hover {
             color: brown;
-            text-shadow: 0px 0px 3px brown;
+            box-shadow: 0 -4px 0 brown;
         }
         &:active {
-            color: red;
+            color: rgb(87, 34, 34);
+            box-shadow: 0 -3px 0 rgb(87, 34, 34);
             background-color: brown;
         }
     }
@@ -401,79 +413,6 @@ h1 {
     border-bottom-right-radius: 0;
 }
 
-// .card-head {
-//     align-items: center;
-//     transition: all 0.3s;
-//     text-shadow: 0px 0px 3px white;
-// }
-
-// .card-pages-head {
-//     border-radius: 0;
-//     align-items: center;
-//     text-shadow: 0px 0px 3px white;
-// }
-
-// .card-max-pages-head {
-//     border-radius: 0;
-//     align-items: center;
-//     text-shadow: 0px 0px 3px white;
-// }
-
-// .card-title {
-//     display: grid;
-//     font-size: 20px;
-//     text-shadow: 1px 1px 1px white;
-//     text-align: center;
-// }
-
-// .card-btns-pages {
-//     display: flex;
-//     gap: 10px;
-//     justify-items: center;
-//     justify-content: center;
-//     justify-self: center;
-//     align-items: center;
-//     margin: 0 auto;
-// }
-
-// .card-btns-max-pages {
-//     display: flex;
-//     gap: 10px;
-//     justify-items: center;
-//     justify-content: center;
-//     justify-self: center;
-//     align-items: center;
-//     margin: 0 auto;
-// }
-
-// .card-pages {
-//     justify-items: center;
-//     justify-content: center;
-//     align-content: center;
-//     align-items: center;
-// }
-
-// .card-max-pages {
-//     justify-items: center;
-//     justify-content: center;
-//     align-content: center;
-//     align-items: center;
-// }
-
-// .btn-add-pages,
-// .btn-reduce-pages,
-// .btn-reduce-max-pages,
-// .btn-add-max-pages {
-//     background-color: #c72020;
-//     border: 0;
-//     transition: background-color 0.5s;
-// }
-
-// .btn-add-pages,
-// .btn-add-max-pages {
-//     background-color: green;
-// }
-
 .btn-container {
     display: flex;
     justify-items: center;
@@ -484,26 +423,9 @@ h1 {
 
 .wrapper {
     display: grid;
-    grid-area: "card card card";
-    padding-top: 6rem;
-    transition: all 2s;
+    padding-top: 5rem;
     grid-template-columns: repeat(3, 1fr);
     gap: 150px;
-}
-
-// .btn-cancel:active {
-// background-color: red;
-// }
-
-.delete-msg {
-    transition: all 2s ease-in-out;
-    font-size: 15px;
-    color: red;
-    text-align: center;
-    margin-top: -60px;
-    opacity: 1;
-    border: double;
-    width: 250px;
 }
 
 /* CONFIRMATION FOR DELETION MESSAGE */
@@ -627,25 +549,6 @@ h1 {
     background: transparent;
     border-bottom: 2px solid rgb(15, 14, 15);
 }
-
-.btn-save {
-    display: grid;
-    transition: all 0.2s;
-    box-sizing: content-box;
-    padding: 8px 8px;
-    font-size: 14px;
-    text-align: center;
-    width: 134px;
-    color: #fff;
-    background-color: rgb(233, 101, 13);
-    box-shadow: 0 -4px 0 orange;
-    border: none;
-    border-radius: 11px;
-    border-bottom-right-radius: 0;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-}
-
 .edit-btns {
     display: flex;
     align-items: flex-end;

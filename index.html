@@ -38,21 +38,15 @@
                         <div class="modal-head">ADD NEW BOOK</div>
                         <div class="modal-input">
                             <input type="text" maxlength="33" id="modal-name" placeholder="" required>
-                            <label id="modal-label">Book Title</label>
+                            <label id="modal-title">Book Title</label>
                         </div>
                         <div class="modal-input">
-                            <input type="number"
-                                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                                maxlength="9" onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                                id="pages" min="0" placeholder=" " required>
-                            <label id="pages-label" for="pages" min="1">Current Page</label>
+                            <input type="number" maxlength="9" id="pages" placeholder="" required>
+                            <label id="pages-label" for="pages">Current Page</label>
                         </div>
                         <div class="modal-input">
-                            <input type="number"
-                                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                                maxlength="9" onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                                id="max-pages" min="0" placeholder=" " required>
-                            <label id="max-pages-label" for="max-pages" min="1">Total Pages</label>
+                            <input type="number" maxlength="9" id="max-pages" placeholder="" required>
+                            <label id="max-pages-label" for="max-pages">Total Pages</label>
                         </div>
                         <div class="modal-input">
                             <input type="date" id="date" placeholder="" required>
@@ -60,13 +54,14 @@
                         </div>
 
                         <div class="button-wrapper">
-                            <button class="button-add">ADD</button>
-                            <button class="button-cancel">CANCEL</button>
+                            <button class="btn-add">ADD</button>
+                            <button class="btn-save">SAVE</button>
+                            <button class="btn-cancel">CANCEL</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="edit-container">
+            <!-- <div class="edit-container">
                 <div class="edit-head">EDIT BOOK</div>
                 <div class="content">
                     <input type="text" oninput="warnUserEdit()" maxlength="33" id="edit-name" placeholder=" " required>
@@ -89,20 +84,19 @@
                         <button class="btn-cancel">CANCEL</button>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="msg-local-container">
-            <div class="msg-local-head">Are you sure you want to clear storage? (Cannot be undone)</div>
-            <div class="msg-local-content">
-                <div class="msg-local-btns">
-                    <button class="btn-local-yes" onclick="deleteLocal(); removeMsgConfrim()">CONFIRM</button>
-                    <button class="btn-local-no" onclick="exitModal()">NO! NO! NO!</button>
+            </div> -->
+            <div class="msg-local-container">
+                <div class="msg-local-head">Are you sure you want to clear storage? (Cannot be undone)</div>
+                <div class="msg-local-content">
+                    <div class="msg-local-btns">
+                        <button class="btn-local-yes" onclick="deleteLocal(); removeMsgConfrim()">CONFIRM</button>
+                        <button class="btn-local-no" onclick="exitModal()">NO! NO! NO!</button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="wrapper">
-            <div class="plus"><span>➕</span></div>
-        </div>
+            <div class="wrapper">
+                <div class="plus"><span>➕</span></div>
+            </div>
         </div>
     </main>
 

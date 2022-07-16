@@ -1,9 +1,9 @@
 'use strict';
 $(document).ready(function () {
     let myLibrary = [];
-    let cardID;
     let titleValid = false;
     let pagesValid = false;
+    let cardID = '';
     class Book {
         constructor(
             title = 'Unknown',
@@ -24,13 +24,22 @@ $(document).ready(function () {
     $('.plus').on('click', function () {
         $('.overlay, .modal').fadeIn().css('display', 'flex');
     });
-    $('.button-cancel').on('click', function () {
-        $('.overlay, .modal').fadeOut(300);
+    $('.btn-cancel').on('click', function () {
+        $('.overlay, .modal').fadeOut(function () {
+            $('.modal-head').text('ADD NEW BOOK');
+            $('#modal-name').val('');
+            $('#modal-title').text('Book Title');
+            $('#pages').val('');
+            $('#max-pages').val('');
+            $('#date').val('');
+            $('.btn-save').hide();
+            $('.btn-add').show();
+        });
     });
-    $('.button-add').on('click', function () {
+    $('.btn-add').on('click', function () {
         addCard();
     });
-    $(document).on('click', '.card button:not(.btn-edit):not(.btn-remove)', function () {
+    $(document).on('click', '.card btn:not(.btn-edit):not(.btn-remove)', function () {
         let cardPagesEl = $(this)[0].classList.contains('add') ? $(this).next() : $(this).prev();
         let cardPagesNum = Number($(this).parents('.card').find('.card-pages').text());
         let cardMaxPagesNum = Number($(this).parents('.card').find('.card-max-pages').text());
@@ -53,61 +62,63 @@ $(document).ready(function () {
         }
         cardPagesEl.text(currentNum);
     });
-    $(document).on('click', '.btn-decline', function () {
-        $('.overlay, .message').fadeOut(300);
-    });
     $(document).on('click', '.card .btn-remove', function () {
-        cardID = $(this).parents('.card').data().id;
+        cardID = $(this).parent().closest('.card').attr('data-id');
         $('.overlay, .message').fadeIn();
     });
     $('.btn-confirm').on('click', function () {
         $('.overlay, .message').fadeOut();
-        let book = getBookByID(cardID);
-        console.log(cardID);
-        $(book.card).remove();
-        // console.log(cardID);
-        delete myLibrary[cardID];
-        if (myLibrary[cardID] === undefined) {
-            myLibrary.splice(cardID, 1);
-        }
-        // console.log(myLibrary[cardID].splice(cardID, 1));
-        // for (let i = 0; i < myLibrary.length; i++) {
-        //     if (card.find('.card-title').text() === myLibrary[i].title) {
-        //         card.remove();
-        //         myLibrary.splice(i, 1);
-        //     }
-        // }
-        console.log(myLibrary, 'after');
+        $(myLibrary[cardID].cardEl).remove();
+        myLibrary.splice(cardID, 1);
+        assignIDs();
     });
-
-    function getBookByID(id) {
-        let bookDetails = {
-            book: '',
-            card: cardID,
-        };
-        if (myLibrary[id]) {
-            bookDetails.book = myLibrary[id];
-            bookDetails.card = $(`.card[data-id="${id}"]`)[0];
+    $(document).on('click', '.btn-decline', function () {
+        $('.overlay,.message').fadeOut(300);
+    });
+    $(document).on('click', '.card .btn-edit', function () {
+        let ID = $(this).parent().closest('.card').attr('data-id');
+        $('.modal-head').text('EDIT BOOK');
+        $('#modal-name').val(myLibrary[ID].title);
+        $('#modal-title').text('Current Book');
+        $('#pages').val(myLibrary[ID].pages);
+        $('#max-pages').val(myLibrary[ID].maxPages);
+        $('#date').val(myLibrary[ID].date);
+        $('.btn-save').show();
+        $('.btn-add').hide();
+        $('.overlay,.modal').fadeIn(300);
+    });
+    $('.btn-save').on('click', function () {
+        // $('#modal-name').val(myLibrary[ID].title);
+        // $('#pages').val(myLibrary[ID].pages);
+        // $('#max-pages').val(myLibrary[ID].maxPages);
+        // $('#date').val(myLibrary[ID].date);
+    });
+    function assignIDs() {
+        let newId = '';
+        for (let i = 0; i < myLibrary.length; i++) {
+            myLibrary[i].bookId = i;
+            newId = i;
+            $(myLibrary[i].cardEl).attr('data-id', i);
         }
-        console.log(bookDetails);
-        return bookDetails;
+        return newId;
     }
+
     function checkRepeats() {
         for (let i = 0; i < myLibrary.length; i++) {
             if ($('#modal-name').val() === myLibrary[i].title) {
-                $('#modal-label').css('color', 'red').text('Book Exists');
+                $('#modal-title').css('color', 'red').text('Book Exists');
                 titleValid = false;
             }
         }
     }
     $('#modal-name').on('input', function () {
-        $('#modal-label').css('color', '').text('Book Title');
+        $('#modal-title').css('color', '').text('Book Title');
         if ($('#modal-name').val() === '') {
-            $('#modal-label').css('color', 'red').text('Insert Title');
+            $('#modal-title').css('color', 'red').text('Insert Title');
             titleValid = false;
         }
         else {
-            $('#modal-label').css('color', '');
+            $('#modal-title').css('color', '');
             titleValid = true;
         }
         return titleValid;
@@ -128,19 +139,31 @@ $(document).ready(function () {
         if (!titleValid || !pagesValid) {
             return;
         }
-        myLibrary.push(new Book($('#modal-name').val(), Number($('#pages').val()), Number($('#max-pages').val()), false, $('#date').val(), myLibrary.length));
+        myLibrary.push(new Book($('#modal-name').val(), Number($('#pages').val()), Number($('#max-pages').val()), false, $('#date').val()));
         let newCard = createCard(myLibrary[myLibrary.length - 1]);
         $('.wrapper').append(newCard);
+        assignCardToBook(myLibrary[myLibrary.length - 1]);
         $('.overlay, .modal').fadeOut(300).promise().done(function () {
             clearInputs();
         });
+        assignIDs();
     }
+
+    function assignCardToBook(currentBook) {
+        $('.card-title').each(function () {
+            if ($(this).text() === currentBook.title) {
+                let card = $(this).parent().closest('.card')[0];
+                currentBook.cardEl = card;
+            }
+        });
+        return { book: currentBook, cardEl: currentBook.cardEl, };
+    }
+
     function clearInputs() {
         $('.modal input').val('');
     }
-
     function createCard(book) {
-        let strHTML = `<div class="card" data-id="${book.bookId}">
+        let strHTML = `<div class="card" data-id="">
     <div class="content">
     <h1 class="card-head">BOOK TITLE</h1>
     <div class="card-title">${book.title}</div>
