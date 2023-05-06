@@ -1,10 +1,7 @@
 'use strict';
 $(document).ready(function () {
     let myLibrary = [];
-    let titleValid = false;
-    let pagesValid = false;
     let cardID = '';
-    let editBook = {};
     class Book {
         constructor(
             title = 'Unknown',
@@ -65,34 +62,24 @@ $(document).ready(function () {
         $('.overlay, .message').fadeOut(300);
     });
     $(document).on('click', '.card .btn-edit', function () {
-        cardID = $(this).parent().closest('.card').attr('data-id');
-        let bookValue = $('.book-value');
-        let modalInput = $('.modal-edit input');
-        modalInput.each(function (index, el) {
-            bookValue.each(function (i, element) {
-                if (index === i) {
-                    console.log(index, i);
-                    console.log(element, 'element');
-                    console.log($(el).val($(element).text()));
-                }
-            });
-        });
+        cardID = parseInt($(this).parent().closest('.card').attr('data-id'));
+        $('.modal-edit .modal-name').val(myLibrary[cardID].title);
+        $('.modal-edit .pages').val(myLibrary[cardID].pages);
+        $('.modal-edit .max-pages').val(myLibrary[cardID].maxPages);
         $('.overlay, .modal-edit').fadeIn(300).css('display', 'flex');
-        console.log(editBook);
     });
     $('.btn-save').on('click', function () {
-        editBook.title = $('.modal-name').val();
-        editBook.pages = $('.pages').val();
-        editBook.maxPages = $('.max-pages').val();
-        editBook.date = $('.date').val();
-        $(`.card[data-id=${cardID}] .card-title`).text(editBook.title);
-        $(`.card[data-id=${cardID}] .card-pages`).text(editBook.pages);
-        $(`.card[data-id=${cardID}] .card-max-pages`).text(editBook.maxPages);
-        $(`.card[data-id=${cardID}] .card-date`).text(editBook.date);
-        myLibrary[cardID] = editBook;
+        if (!checkRepeats()) return;
+        let newBookTitle = $('.modal-edit .modal-name').val();
+        let newBookPages = $('.modal-edit .pages').val();
+        let newBookMaxPages = $('.modal-edit .max-pages').val();
+        myLibrary[cardID].title = newBookTitle;
+        myLibrary[cardID].pages = newBookPages;
+        myLibrary[cardID].maxPages = newBookMaxPages;
+        $(myLibrary[cardID].cardEl).find('.card-title').text(newBookTitle);
+        $(myLibrary[cardID].cardEl).find('.card-pages').text(newBookPages);
+        $(myLibrary[cardID].cardEl).find('.card-max-pages').text(newBookMaxPages);
         $('.overlay, .modal-edit').fadeOut(300);
-        editBook = '';
-        console.log(myLibrary);
     });
     $(document).on('click', '.btn-decline', function () {
         $('.overlay,.message').fadeOut(300);
@@ -101,7 +88,6 @@ $(document).ready(function () {
     function assignIDs() {
         let newId = '';
         for (let i = 0; i < myLibrary.length; i++) {
-            myLibrary[i].bookId = i;
             newId = i;
             $(myLibrary[i].cardEl).attr('data-id', i);
         }
@@ -109,45 +95,37 @@ $(document).ready(function () {
     }
 
     function checkRepeats() {
-        if ($('.modal-name').val() === '') {
-            $('.modal-title').css('color', 'red').text('Insert Title');
-            return titleValid = false;
+        let modal = $('.modal').is(':visible') ? $('.modal') : $('.modal-edit');
+        if (modal.find('.modal-name').val() === '') {
+            $('.modal-title').addClass('invalid').text('Insert Title');
+            return false;
         }
         for (let i = 0; i < myLibrary.length; i++) {
-            if ($('.modal-name').val() === myLibrary[i].title) {
-                $('.modal-title').css('color', 'red').text('Book Exists');
-                titleValid = false;
+            if (modal.find('.modal-name').val() === myLibrary[i].title) {
+                $('.modal-title').addClass('invalid').text('Book Exists');
+                return false;
             }
         }
+        $('.modal-title').removeClass('invalid').text('Book Title');
+        return true;
     }
-    $('.modal-name, .modal input[type="number"]').on('input', function () {
-        if (Number($('.modal input[type="number"]')[0].value) > Number($('.modal input[type="number"]')[1].value)) {
-            $('.pages-label, .max-pages-label').css('color', 'red');
-            pagesValid = false;
-        } else {
-            $('.pages-label, .max-pages-label').css('color', '');
-            pagesValid = true;
+
+    function checkFormValid() {
+        if (Number($('.modal .pages').val()) > Number($('.modal .max-pages').val())) {
+            $('.pages-label, .max-pages-label').addClass('invalid');
+            return false;
         }
-        $('.modal-title').css('color', '').text('Book Title');
-        if ($('.modal-name').val() === '') {
-            $('.modal-title').css('color', 'red').text('Insert Title');
-            titleValid = false;
-        }
-        else {
-            $('.modal-title').css('color', '');
-            titleValid = true;
-        }
-    });
+        $('.pages-label,.max-pages-label').removeClass('invalid');
+        return true;
+    }
 
     function addCard() {
-        checkRepeats();
+        if (!checkRepeats()) return;
         if ($('.pages, .max-pages').val() === '') {
             $('.pages-label, .max-pages-label').css('color', 'red');
             return;
         }
-        if (!titleValid || !pagesValid) {
-            return;
-        }
+        if (!checkFormValid()) return;
         myLibrary.push(new Book($('.modal-name').val(), Number($('.pages').val()), Number($('.max-pages').val()), $('.date').val()));
         let newCard = createCard(myLibrary[myLibrary.length - 1]);
         $('.wrapper').append(newCard);
@@ -171,6 +149,7 @@ $(document).ready(function () {
     function clearInputs() {
         $('.modal input').val('');
     }
+
     function createCard(book) {
         let strHTML = `<div class="card" data-id="">
     <div class="content">

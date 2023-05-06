@@ -3,6 +3,9 @@ body {
     margin: 0;
     background-size: cover;
 }
+html {
+    font-size: 10px;
+}
 .container {
     width: 120rem;
     margin: 0 auto;
@@ -80,7 +83,7 @@ header {
         border-color: rgb(0, 0, 0);
         border-radius: 10px;
         box-shadow: 0 0 4px 2px rgb(14, 11, 14);
-        transform: scale(2.5);
+        transform: scaleX(2) scaleY(3);
         background-color: purple;
         transition: cubic-bezier(0.55, 0.2, 0.8, 0.8);
         transition-duration: 0.7s;
@@ -164,8 +167,8 @@ input {
     align-items: stretch;
     border: solid;
     border-radius: 15px;
-    height: 30rem;
-    width: 30rem;
+    height: 45rem;
+    width: 50rem;
     box-shadow: 0 0 4px 5px rgb(129, 62, 129);
     background-color: rgba(0, 0, 0, 0.876);
     &-input {
@@ -276,9 +279,12 @@ input {
 label {
     font-family: fantasy;
     color: #999;
-    font-size: 25px;
+    font-size: 24px;
     transition: transform 0.5s ease-out, color 0.5s ease-out;
     user-select: none;
+}
+.invalid {
+    color: red;
 }
 
 .max-pages,
@@ -311,7 +317,7 @@ input:focus:not(.date) + label {
     transition: background-color 0.5s;
     user-select: none;
     overflow: hidden;
-    max-width: 30rem;
+    width: 100%;
     &-head,
     &-pages-head,
     &-max-pages-head {
@@ -403,9 +409,10 @@ input:focus:not(.date) + label {
 
 .wrapper {
     display: grid;
-    padding-top: 5rem;
+    padding-top: 10rem;
     grid-template-columns: repeat(3, 1fr);
-    gap: 150px;
+    gap: 5rem;
+    align-items: center;
 }
 
 /* CONFIRMATION FOR DELETION MESSAGE */

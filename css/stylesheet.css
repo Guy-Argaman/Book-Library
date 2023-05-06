@@ -4,6 +4,10 @@ body {
   background-size: cover;
 }
 
+html {
+  font-size: 10px;
+}
+
 .container {
   width: 120rem;
   margin: 0 auto;
@@ -119,8 +123,8 @@ header {
   border-radius: 10px;
   -webkit-box-shadow: 0 0 4px 2px #0e0b0e;
           box-shadow: 0 0 4px 2px #0e0b0e;
-  -webkit-transform: scale(2.5);
-          transform: scale(2.5);
+  -webkit-transform: scaleX(2) scaleY(3);
+          transform: scaleX(2) scaleY(3);
   background-color: purple;
   -webkit-transition: cubic-bezier(0.55, 0.2, 0.8, 0.8);
   transition: cubic-bezier(0.55, 0.2, 0.8, 0.8);
@@ -216,8 +220,8 @@ input {
           align-items: stretch;
   border: solid;
   border-radius: 15px;
-  height: 30rem;
-  width: 30rem;
+  height: 45rem;
+  width: 50rem;
   -webkit-box-shadow: 0 0 4px 5px #813e81;
           box-shadow: 0 0 4px 5px #813e81;
   background-color: rgba(0, 0, 0, 0.876);
@@ -411,7 +415,7 @@ input {
 label {
   font-family: fantasy;
   color: #999;
-  font-size: 25px;
+  font-size: 24px;
   -webkit-transition: color 0.5s ease-out, -webkit-transform 0.5s ease-out;
   transition: color 0.5s ease-out, -webkit-transform 0.5s ease-out;
   transition: transform 0.5s ease-out, color 0.5s ease-out;
@@ -420,6 +424,10 @@ label {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
+}
+
+.invalid {
+  color: red;
 }
 
 .max-pages,
@@ -459,7 +467,7 @@ input:focus:not(.date) + label {
       -ms-user-select: none;
           user-select: none;
   overflow: hidden;
-  max-width: 30rem;
+  width: 100%;
 }
 
 .card-head, .card-pages-head, .card-max-pages-head {
@@ -588,10 +596,13 @@ input:focus:not(.date) + label {
 .wrapper {
   display: -ms-grid;
   display: grid;
-  padding-top: 5rem;
+  padding-top: 10rem;
   -ms-grid-columns: (1fr)[3];
       grid-template-columns: repeat(3, 1fr);
-  gap: 150px;
+  gap: 5rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 /* CONFIRMATION FOR DELETION MESSAGE */
