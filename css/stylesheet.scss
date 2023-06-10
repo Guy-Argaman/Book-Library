@@ -13,17 +13,30 @@ html {
 button {
     cursor: pointer;
 }
-.title {
+.app-header {
+    position: relative;
+    z-index: 9;
     transition-duration: 1s;
     display: flex;
     font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
     justify-content: space-between;
     background-color: rgb(0, 0, 0);
-    height: 50px;
-    font-size: 35px;
+    font-size: 3.5rem;
     text-align: left;
     letter-spacing: 4px;
     user-select: none;
+    padding: 1rem 0;
+    ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 5rem;
+        li {
+            font-size: 1.5rem;
+        }
+    }
 }
 
 .title span {
@@ -61,20 +74,20 @@ header {
     margin: 0 auto;
     border: solid;
     border-color: grey;
-    height: 150px;
-    width: 150px;
+    height: 15rem;
+    width: 15rem;
     box-shadow: 0 0 5px 5px rgb(128, 110, 128);
     order: 1;
     cursor: pointer;
     transition-property: transform, box-shadow, border-radius, color, background-color;
-    transition-duration: 0.8s;
+    transition-duration: 0.3s;
     transition-timing-function: ease-in-out, ease-out, ease-out, ease-in;
     transition-delay: 0s, 0s, 0s, 0.2s;
     & span {
-        transition-duration: 1s;
+        transition-duration: 0.5s;
         align-self: center;
         justify-self: center;
-        font-size: 50px;
+        font-size: 5rem;
         font-family: sans-serif;
         user-select: none;
     }
@@ -82,65 +95,15 @@ header {
         border-color: rgb(0, 0, 0);
         border-radius: 10px;
         box-shadow: 0 0 4px 2px rgb(14, 11, 14);
-        transform: scaleX(2) scaleY(3);
+        transform: scaleX(1.21) scaleY(1.51);
         background-color: purple;
-        transition: cubic-bezier(0.55, 0.2, 0.8, 0.8);
-        transition-duration: 0.7s;
+        transition-property: all;
+        transition-duration: 0.3s;
     }
     &:hover span {
-        transform: rotateZ(90deg);
+        transform: scale(1.11) rotateZ(90deg);
+        transition: 0.3s ease-in-out;
     }
-}
-
-.sidenav {
-    position: fixed;
-    transition: all 1.5s ease-in-out;
-    height: 100%;
-    width: 35px;
-    color: transparent;
-    float: left;
-    z-index: 1;
-    top: 6.2%;
-    right: 0;
-    background-color: transparent;
-    overflow-x: hidden;
-    padding-top: 20px;
-    user-select: none;
-}
-
-.sidenav header {
-    text-align: left;
-    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-}
-
-.sidenav:hover {
-    transition: all 1s ease-in-out;
-    width: 160px;
-    background-color: #111;
-    color: grey;
-    cursor: default;
-}
-
-/* The navigation menu links */
-
-.sidenav .item {
-    padding: 6px 8px 6px 16px;
-    text-decoration: none;
-    text-align: left;
-    font-size: 20px;
-}
-
-.sidenav .item:hover {
-    color: white;
-}
-
-.sidenav .hr {
-    display: none;
-}
-
-.sidenav #item4 {
-    margin-top: 540px;
-    font-size: 15px;
 }
 
 /* NEW BOOK ELEMENTS / PARAMETERS */
@@ -412,6 +375,7 @@ input:focus:not(.date) + label {
     grid-template-columns: repeat(3, 1fr);
     gap: 5rem;
     align-items: center;
+    width: 100%;
 }
 
 /* CONFIRMATION FOR DELETION MESSAGE */
@@ -428,7 +392,7 @@ input:focus:not(.date) + label {
         text-align: center;
         font-family: fantasy;
         font-size: 40px;
-        padding: 10px 0 0;
+        padding: 3rem;
         background-color: navajowhite;
         border: solid;
         user-select: none;
@@ -447,7 +411,7 @@ input:focus:not(.date) + label {
             background-color: rgb(20, 75, 37);
             box-shadow: 0 -8px 0 green;
             border: 0;
-            transition: background-color 0.2s, box-shadow 0.2s;
+            transition: background-color 0.2s, box-shadow 0.2s, color 0.2s;
             &:hover {
                 color: rgb(1, 255, 1);
                 background-color: rgb(36, 87, 52);
@@ -459,6 +423,7 @@ input:focus:not(.date) + label {
         .btn-decline {
             background-color: rgb(104, 18, 18);
             box-shadow: 0px -8px 0px 0px brown;
+            transition: box-shadow 0.2s linear, color 0.2s linear, background-color 0.2s linear;
             &:hover {
                 color: red;
                 background-color: rgb(112, 38, 38);

@@ -69,7 +69,7 @@ $(document).ready(function () {
         $('.overlay, .modal-edit').fadeIn(300).css('display', 'flex');
     });
     $('.btn-save').on('click', function () {
-        if (!checkRepeats()) return;
+        if (!checkRepeats() && myLibrary[cardID].title !== $('.modal-edit .modal-name').val()) return;
         let newBookTitle = $('.modal-edit .modal-name').val();
         let newBookPages = $('.modal-edit .pages').val();
         let newBookMaxPages = $('.modal-edit .max-pages').val();
@@ -122,7 +122,7 @@ $(document).ready(function () {
     function addCard() {
         if (!checkRepeats()) return;
         if ($('.pages, .max-pages').val() === '') {
-            $('.pages-label, .max-pages-label').css('color', 'red');
+            $('.pages-label, .max-pages-label').addClass('invalid');
             return;
         }
         if (!checkFormValid()) return;
